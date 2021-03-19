@@ -14,7 +14,8 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Co-Voiturage';
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
 
@@ -36,13 +41,60 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="#">Co-Voiturages</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <form class="navbar-form navbar-left" action="/action_page.php">
+                    <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Rechercher personne">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                    </div>
+                </form>
+                <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
+                <!-- Notifications : -->
+                <li><a href="#" class="glyphicon glyphicon-bell"></a></li>
+                    <!-- Afficher que si il y a quelqu'un de connecté -->
+                    <?php
+                    if(!empty($_SESSION['login'])){
+                ?>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="VisuProfil.html">Visualiser son profil</a></li>
+                                <li><a href="VisuGroupe.html">Afficher les groupes d'amis</a></li>
+                                <li><a href="#">Visualiser mes offres</a></li>
+                                <li><a href="#">Visualiser mes offres en cours</a></li>
+                            </ul>
+                        </li>
+                <?php
+                    }
+                ?>
+                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <?php
+                    if(!empty($_SESSION['login'])){
+                ?><!--Affiche que si une personne est connecté -->
+                        <button class="btn btn-danger navbar-btn">Deconnexion</button>
+                <?php
+                    }else{
+                        ?>
+                        <!--afficher s'il n'y personne de connecté-->
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>-->
+                <?php
+                    }
+                ?>
+                
+            </ul>
         </div>
     </nav>
     <main class="main">
@@ -51,7 +103,5 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <footer>
-    </footer>
 </body>
 </html>
