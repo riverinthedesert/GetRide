@@ -104,7 +104,7 @@
 
             <?php
 
-                //Affichage d'une erreur lorque le nom ou le mot de passe saisi est incorrect
+                //Affichage d'une erreur lorque le nom saisi est déjà utilisé
                 if(isset($_GET['erreur'])){
                     $err = $_GET['erreur'];
                     if($err==1)
