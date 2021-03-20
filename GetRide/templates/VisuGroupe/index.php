@@ -1,6 +1,27 @@
 <!-- Affichage des différents groupes
     Le menu se trouve dans layout/default.php -->
 
+<?php
+
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'getride');
+
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+ 
+// Vérifier la connexion
+if($conn === false){
+    die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
+}
+
+	$username = 'leon@gaml.com';
+	
+	$_SESSION['email'] = $username;
+
+	if(!empty($_SESSION['email'])){
+?>
+
 <div class="container">
 	<div class="text-center">
 		<h1>Mon Groupes d'amis</h1>
@@ -10,23 +31,25 @@
 	<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </button>
 	
     <?php
-	// Recherche dans la BDD des Groupes
-	// Si la bbd de la personne connecté est vide : 
-    if(!empty($_SESSION['login']))
-    {
-        
-    }
-    //si elle n'est pas vide
-    else
-    {
-    
-    }
- 
-?>
+		$admOuMembr = 0;
+		// Recherche dans la BDD des groupes
+		$idMembre = $conn->query("SELECT idMembre FROM `membre` WHERE email='".$_SESSION['email']."'");
+		$_SESSION['idMembre'] = $idMembre;
+		echo $_SESSION['idMembre'];
+		$groupe = $conn->query("SELECT * FROM `groupemembre` WHERE idUtilisateur='".$_SESSION['idMembre']."'");
+		while($donnees = $groupe->fetch_assoc()){
+			$admOuMembr++;
+		}
+		if($admOuMembr == 0){ 
+	?>
 	<div class="text-center">
 	<br><br>
 		<div class="p-3 mb-2 bg-info text-white">Aucun groupe d'amis créé !</div>
 	</div>
+	<?php	
+		}
+		else{
+	?>
 	
 	<!-- Sinon :  -->
 		<!-- Boucle pour de :  -->
@@ -67,6 +90,13 @@
 			<!-- Commentaire donné (optionnel) -->
 			<div class="panel-footer">C'est le meilleur groupe !</div>
 		</div> 
-	
+	<?php
+		}
+	?>
 </div>
-
+<?php
+	}
+	else{
+		//Retour à la page de connexion
+	}
+?>
