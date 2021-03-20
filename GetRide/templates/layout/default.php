@@ -61,13 +61,13 @@ session_start();
                 <li><a href="#" class="glyphicon glyphicon-bell"></a></li>
                     <!-- Afficher que si il y a quelqu'un de connecté -->
                     <?php
-                    if(!empty($_SESSION['login'])){
+                    if(!empty($_SESSION['email'])){
                 ?>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="VisuProfil.html">Visualiser son profil</a></li>
-                                <li><a href="VisuGroupe.html">Afficher les groupes d'amis</a></li>
+                                <li><a href="#">Visualiser son profil</a></li>
+                                <li><a href="#">Afficher les groupes d'amis</a></li>
                                 <li><a href="#">Visualiser mes offres</a></li>
                                 <li><a href="#">Visualiser mes offres en cours</a></li>
                             </ul>
@@ -81,7 +81,7 @@ session_start();
                 
                 
                 <?php
-                    if(!empty($_SESSION['login'])){
+                    if(!empty($_SESSION['email'])){
                 ?><!--Affiche que si une personne est connecté -->
                         <button class="btn btn-danger navbar-btn">Deconnexion</button>
                 <?php

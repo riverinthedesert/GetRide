@@ -28,7 +28,7 @@ if($conn === false){
 	</div>
 	
 	<!-- Boutton pour ajouter un groupe d'ami !-->
-	<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </button>
+	<a href="AjoutGroupe" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </a>
 	
     <?php
 		$admOuMembr = 0;
@@ -94,7 +94,7 @@ if($conn === false){
 								while($idMemb = $idUtil->fetch_assoc()){
 
 						?>
-									<li><?php echo $idMemb['nom']; echo $idMemb['prenom'];?> </li>
+									<li><?php echo $idMemb['nom']; echo ' '; echo $idMemb['prenom'];?> </li>
 						<?php
 								}
 							}
