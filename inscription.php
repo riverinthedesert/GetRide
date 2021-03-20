@@ -104,11 +104,11 @@
 
             <?php
 
-                //Affichage d'une erreur lorque le login ou le mot de passe saisi est incorrect
+                //Affichage d'une erreur lorque le nom ou le mot de passe saisi est incorrect
                 if(isset($_GET['erreur'])){
                     $err = $_GET['erreur'];
                     if($err==1)
-                        echo "<p style='color:red'>Le login est déjà utilisé";
+                        echo "<p style='color:red'>Le nom est déjà utilisé";
                 }
             ?>
 
