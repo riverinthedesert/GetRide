@@ -1,17 +1,14 @@
-
 <h1>Offres filtrées </h1>
-
-<h2>Offres</h2>
 <table>
     <tr>
-        <th>idOffre</th>
-        <th>horaireDepart</th>
-        <th>horaireArrivee</th>
-        <th>nbPassagersMax</th>
-        <th>idVilleDepart</th>
-        <th>idVilleArrive</th>
-        <th>idConducteur</th>
-        <th>prix</th>
+        <th>N°</th>
+        <th>Horaire de départ</th>
+        <th>Horaire d'arrivée</th>
+        <th>Nombre de passager maximum</th>
+        <th>Ville de départ</th>
+        <th>Ville d'arrivée</th>
+        <th>Conducteur</th>
+        <th>Prix</th>
     </tr>
 <?php
     foreach ($offre_filtres_applied as $item){
@@ -33,7 +30,9 @@
 ?>
 </table></br>
 <div>
-    <form action="../offre" method="get">
+    <form action="../offre" method="get" class="pull-left">
         <input type="submit" value="Filtres">
     </form>
 </div>
+
+<div class="pull-right"><strong>Filtres appliqués :  </strong> <?php echo $string_filtre; ?></div>
