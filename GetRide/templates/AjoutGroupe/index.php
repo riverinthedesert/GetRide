@@ -102,7 +102,7 @@ if(!empty($_SESSION['mail'])){
 			</div>
             <div>
                 <input type="submit" name="submit" value="Creer Groupe"/>
-                <a href="VisuGroupe" role="button" class="btn btn-warning "><span class="glyphicon glyphicon-remove"></span>  Creer un nouveau groupe d'amis </a>
+                <a href="VisuGroupe" role="button" class="btn btn-warning "><span class="glyphicon glyphicon-remove"></span> Annuler</a>
             </div>
         </fieldset>
 	</form>
