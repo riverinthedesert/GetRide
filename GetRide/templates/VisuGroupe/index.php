@@ -15,11 +15,11 @@ if($conn === false){
     die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 }
 
-	$username = 'leon@gaml.com';
+	$username = 'trice@gogl.com';
 	
-	$_SESSION['email'] = $username;
+	$_SESSION['mail'] = $username;
 
-	if(!empty($_SESSION['email'])){
+	if(!empty($_SESSION['mail'])){
 ?>
 
 <div class="container">
@@ -33,9 +33,10 @@ if($conn === false){
     <?php
 		$admOuMembr = 0;
 		// Recherche dans la BDD des groupes
-		$idMembre = $conn->query("SELECT idMembre FROM `membre` WHERE email='".$_SESSION['email']."'");
-		$_SESSION['idMembre'] = $idMembre;
-		echo $_SESSION['idMembre'];
+		$idMembre = $conn->query("SELECT idMembre FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+		while($i = $idMembre->fetch_assoc()){
+			$_SESSION['idMembre'] = $i['idMembre'];
+		}
 		$groupe = $conn->query("SELECT * FROM `groupemembre` WHERE idUtilisateur='".$_SESSION['idMembre']."'");
 		while($donnees = $groupe->fetch_assoc()){
 			$admOuMembr++;
