@@ -58,59 +58,61 @@ if($conn === false){
 		<!-- Boucle pour de :  -->
 		<?php 
 			foreach($tabl as $element){
-				$name = $conn->query("SELECT * FROM `groupe` WHERE idGroupe='".$element."'");
-				$nom = $name->fetch_assoc();
-		?>
-				<p><br></p>
-				<div class="panel panel-default">
-					<!-- Entete :  -->
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<?php echo $nom['nom']; ?> 
-							<div class="pull-right">
-								<div class="dropdown">
-									<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-										<span class="glyphicon glyphicon-menu-hamburger"></span>
-									</button>
-									<ul class="dropdown-menu" role="menu" >
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-plus"></span>  Ajouter un ami</a></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span>  Supprimer un ami</a></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-pencil"></span>  Modifier le groupe</a></li>
-										<li role="presentation" class="divider"></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><p style="color:#FF0000";>Supprimer le groupe</p></a></li>
-									</ul>
+				if($element != 0){
+					$name = $conn->query("SELECT * FROM `groupe` WHERE idGroupe='".$element."'");
+					$nom = $name->fetch_assoc();
+			?>
+					<p><br></p>
+					<div class="panel panel-default">
+						<!-- Entete :  -->
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<?php echo $nom['nom']; ?> 
+								<div class="pull-right">
+									<div class="dropdown">
+										<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-menu-hamburger"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu" >
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-plus"></span>  Ajouter un ami</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-trash"></span>  Supprimer un ami</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-pencil"></span>  Modifier le groupe</a></li>
+											<li role="presentation" class="divider"></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><p style="color:#FF0000";>Supprimer le groupe</p></a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Contenu du panneau : -->
-					<div class="panel-body">
-						<!-- Visualiser la BDD du groupe et afficher les nom et prénom de chaque personne : -->
-						<ul>
-						<?php
-							$groupe = $conn->query("SELECT * FROM `groupemembre` WHERE idGroupe='".$element."'");
-							
-							while($donnees = $groupe->fetch_assoc()){
-								$idUtil = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$donnees['idUtilisateur']."'");
-								while($idMemb = $idUtil->fetch_assoc()){
+						<!-- Contenu du panneau : -->
+						<div class="panel-body">
+							<!-- Visualiser la BDD du groupe et afficher les nom et prénom de chaque personne : -->
+							<ul>
+							<?php
+								$groupe = $conn->query("SELECT * FROM `groupemembre` WHERE idGroupe='".$element."'");
+								
+								while($donnees = $groupe->fetch_assoc()){
+									$idUtil = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$donnees['idUtilisateur']."'");
+									while($idMemb = $idUtil->fetch_assoc()){
 
-						?>
-									<li><?php echo $idMemb['nom']; echo ' '; echo $idMemb['prenom'];?> </li>
-						<?php
+							?>
+										<li><?php echo $idMemb['nom']; echo ' '; echo $idMemb['prenom'];?> </li>
+							<?php
+									}
 								}
-							}
-						?>
-						</ul>
-					</div>
-					<!-- Commentaire donné (optionnel) -->
-					<div class="panel-footer">
-						<?php 
-							if($nom['commentaire'] != 'NULL')
-								echo $nom['commentaire']; 
-						?> 
-					</div>
-				</div> 
-	<?php
+							?>
+							</ul>
+						</div>
+						<!-- Commentaire donné (optionnel) -->
+						<div class="panel-footer">
+							<?php 
+								if($nom['commentaire'] != 'NULL')
+									echo $nom['commentaire']; 
+							?> 
+						</div>
+					</div> 
+		<?php
+				}
 			}
 		}
 	?>

@@ -35,6 +35,7 @@ if(!empty($_SESSION['mail'])){
         $res = mysqli_query($conn, $query);
 
         $idGroupe = $conn->query("SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'");
+        $idGrp;
         while($i = $idGroupe->fetch_assoc()){
             $idGrp = $i['idGroupe'];
         }
@@ -86,15 +87,16 @@ if(!empty($_SESSION['mail'])){
                         
                         $name = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$donnees['idMembreFavo']."'");
 				        while($nom = $name->fetch_assoc()){
-                            
+                            if($nom['mail'] != $_SESSION['mail']){
                 ?>
 
-                            <div class="form-group">
-                                <label for="nom" ><?php echo $nom['nom']; echo ' '; echo $nom['prenom']; ?></label>
-                                <a href="#" role="button" class="btn btn-info "><span class="glyphicon glyphicon-plus"></span> Envoyer une notification</a>
-                            </div>
-                            <p><br></p>
-                            <?php
+                                <div class="form-group">
+                                    <label for="nom" ><?php echo $nom['nom']; echo ' '; echo $nom['prenom']; ?></label>
+                                    <a href="#" role="button" class="btn btn-info "><span class="glyphicon glyphicon-plus"></span> Envoyer une notification</a>
+                                </div>
+                                <p><br></p>
+                                <?php
+                            }
                         }
                     }
 
