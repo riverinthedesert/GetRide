@@ -1,21 +1,23 @@
-<?php
-
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'getride');
-
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-session_start();
-// Vérifier la connexion
-if($conn === false){
-    die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
-}
-
-
+<?php 
+	session_start(); 
+	define('DB_SERVER', 'localhost');
+	define('DB_USERNAME', 'root');
+	define('DB_PASSWORD', '');
+	define('DB_NAME', 'getride');
+	$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+	// Vérifier la connexion
+	if($conn === false){
+		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
+	}
+	$username = 'leon@gaml.com';
+	$_SESSION['mail'] = $username;
+	if($_SESSION['mail'] != $username){
+		session_destroy();
+		session_start();
+		$_SESSION['mail'] = $username;
+	}
 	if(!empty($_SESSION['mail'])){
 ?>
-
 <div class="container">
 	<div class="text-center">
 		<h1>Mon Profil</h1>
@@ -27,8 +29,9 @@ if($conn === false){
 		<!-- Si genre = femme mettre Madame ... sinon Monsieur...-->
         <?php
             $membre = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+
             while($i = $membre->fetch_assoc()){
-                if($i['genre'] == 'm'){
+                if($i['genre'] == "Hom"){
                     echo 'Monsieur ';
                 }
                 else{
@@ -37,7 +40,6 @@ if($conn === false){
                 echo $i['nom'];
                 echo ' ';
                 echo $i['prenom'];
-                
         ?>
 	</div>
 	<div class="input-group">
@@ -52,15 +54,14 @@ if($conn === false){
             echo $i['telephone'];
         ?>
 	</div>
-	
-    <a href="#" role="button" class="btn btn-warning "></span>Modifier mot de passe</a>
+    <a href="#" role="button" class="btn btn-warning "></span>Modifier vos informations personnelles</a>
 	&emsp;&emsp;
-    <a href="#" role="button" class="btn btn-warning "></span>Modifier profil</a>
 	<br><br>
-    <a href="#" role="button" class="btn btn-danger "><span class="glyphicon glyphicon-remove"></span> Fermer mon compte</a>
-	La suppression du compte est définitive !
+	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
+	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer']) ?>
+		Attention: La suppression du compte est définitive !
 </div>
-
 <?php
     }}
+
 ?>
