@@ -11,13 +11,10 @@ define('DB_NAME', 'getride');
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // Vérifier la connexion
+session_start();
 if($conn === false){
     die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 }
-
-	$username = 'trice@gogl.com';
-	
-	$_SESSION['mail'] = $username;
 
 	if(!empty($_SESSION['mail'])){
 ?>

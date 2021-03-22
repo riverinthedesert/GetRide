@@ -15,8 +15,6 @@
  */
 
 $cakeDescription = 'Co-Voiturage';
-session_start();
-$_SESSION['mail'] = 'trice@gogl.com';
 
 ?>
 <!DOCTYPE html>
@@ -90,7 +88,7 @@ $_SESSION['mail'] = 'trice@gogl.com';
                     }else{
                         ?>
                         <!--afficher s'il n'y personne de connecté-->
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                        <li><a href="/GetRide/GetRide/membre/add"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                     }
