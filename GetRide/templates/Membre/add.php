@@ -7,9 +7,13 @@
             <fieldset>
                 <legend align="center"><?= __('Inscription') ?></legend>
                 <?php
-                    echo $this->Form->control('nom');
-                    echo $this->Form->control('prenom');
-                    echo $this->Form->control('motDePasse', ['type' => 'password']);
+                    echo $this->Form->control('nom', ['pattern' => '[a-zA-Z\-]*',
+                                                      'required title' => "Ce champ doit être rempli uniquement avec des lettres"]);
+                    echo $this->Form->control('prenom', ['pattern' => '[a-zA-Z\-]*',
+                                                         'required title' => "Ce champ doit être rempli uniquement avec des lettres"]);
+                    echo $this->Form->control('motDePasse', ['type' => 'password',
+                                                             'pattern' => '(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,30}',
+                                                             'required title' => "au moins une majuscule, un chiffre et un caractère spécial"]);
                     echo $this->Form->control('mail', ['type' => 'mail']);
                     echo $this->Form->control('telephone');
                     echo $this->Form->control('naissance', ['type' => 'date']);
