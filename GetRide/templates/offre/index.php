@@ -1,74 +1,40 @@
-<html>
+<h1>Offres filtrées </h1>
+<table>
+    <tr>
+        <th>N°</th>
+        <th>Horaire départ</th>
+        <th>Horaire arrivée</th>
+        <th>Nb passager maximum</th>
+        <th>Ville départ</th>
+        <th>Ville arrivée</th>
+        <th>Conducteur</th>
+        <th>Prix</th>
+        <th></th>
+    </tr>
+<?php
+    foreach ($offre_filtres_applied as $item){
+        echo "<tr>";
+        echo "<td>"; echo $item["idOffre"]; echo "</td>";
+        echo "<td>"; echo $item["horaireDepart"]; echo "</td>";
+        echo "<td>"; echo $item["horaireArrivee"]; echo "</td>";
+        echo "<td>"; echo $item["nbPassagersMax"]; echo "</td>";
+        echo "<td>"; echo ucfirst($item["nomVilleDepart"]); echo "</td>";
+        echo "<td>"; echo ucfirst($item["nomVilleArrivee"]); echo "</td>";
+        echo "<td>"; echo ucfirst($item["nom"])." ".ucfirst($item["prenom"]); echo "</td>";
+        echo "<td>"; echo $item["prix"];echo "</td>";
+        $idOffre = $item["idOffre"];
+        echo "<td>";echo "<a role='button' class='btn btn-info' href = 'VisuOffre?idOffre=$idOffre'>Détails</a>"; echo"</td>";
+        echo "</tr>";
+    }
+  /*  foreach ($utilisateur as $user){
+        echo $user["idMembre"];
+    }*/
+?>
+</table></br>
+<div>
+    <form action="offre/view" method="get" class="pull-left">
+        <input type="submit" value="Filtres">
+    </form>
+</div>
 
-<style>
-  button {
-    height: auto;
-    font-style: normal;
-    text-transform: unset !important;
-
-  }
-
-  label {
-    font-size: medium;
-    font-weight: normal;
-    display: inline;
-  }
-</style>
-
-
-
-<h1> Filtres recherche de offres </h1>
-
-<form action="offre/view" method="GET">
-  <h2>Trier par</h2>
-  <div class="form-group">
-    <input type="radio" id="depart" name="tri" value="2">
-    <label class="label_filtre" for="depart">Départ le plus tôt</label>
-
-    </br>
-
-    <input type="radio" id="prix" name="tri" value="1">
-    <label for="prix">Prix le plus bas</label>
-
-  </div>
-
-  <div class="form-group">
-    <h2>Heure de départ</h2>
-
-    <input type="radio" id="6heures" name="depart" value="6">
-    <label for="heure6">06:00-12:00</label>
-
-    </br>
-
-    <input type="radio" id="12heures" name="depart" value="12">
-    <label for="heure12">12:01-18:00</label>
-
-    </br>
-
-    <input type="radio" id="18heures" name="depart" value="18">
-    <label for="heure18">Après 18:00</label>
-
-  </div>
-
-  <div class="form-group">
-
-    <h2>Services et équipements (TODO)</h2>
-
-    <input type="radio" id="service1" name="eau" value="eau1">
-    <label for="eau1">Bouteille d'eau Evian offerte</label>
-
-    </br>
-
-    <input type="radio" id="service2" name="eau" value="eau2">
-    <label for="eau2">Bouteille d'eau Fuji offerte</label>
-
-  </div>
-
-  <div>
-    <button class="btn btn-info" action="view.php" type="submit">Rechercher</button>
-    <a href="offre/view" class="btn btn-info" role="button">Annuler</a>
-  </div>
-
-</form>
-
-</html>
+<div class="pull-right"><strong>Filtres appliqués :  </strong> <?php echo $string_filtre; ?></div>

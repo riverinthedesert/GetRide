@@ -7,13 +7,13 @@ use Cake\Datasource\ConnectionManager;
 class OffreController extends AppController{
 
 
-    public function index(){
+    public function view(){
 
        
     }
 
 
-    public function view(){
+    public function index(){
 
         
         $conn = ConnectionManager::get('default');
