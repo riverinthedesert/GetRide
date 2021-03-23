@@ -9,6 +9,7 @@
         <th>Ville d'arrivée</th>
         <th>Conducteur</th>
         <th>Prix</th>
+        <th>Visu</th>
     </tr>
 <?php
     foreach ($offre_filtres_applied as $item){
@@ -20,8 +21,9 @@
         echo "<td>"; echo ucfirst($item["nomVilleDepart"]); echo "</td>";
         echo "<td>"; echo ucfirst($item["nomVilleArrivee"]); echo "</td>";
         echo "<td>"; echo ucfirst($item["nom"])." ".ucfirst($item["prenom"]); echo "</td>";
-        echo "<td>"; echo $item["prix"];
-        echo "</td>";
+        echo "<td>"; echo $item["prix"]; echo "</td>";
+        $idOffre = $item["idOffre"];
+        echo "<td>"; echo "<a  role='button' class='btn btn-info' href='../VisuOffre?idOffre=$idOffre'>Visualiser l'offre</a>"; echo "</td>";
         echo "</tr>";
     }
   /*  foreach ($utilisateur as $user){

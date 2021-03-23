@@ -9,13 +9,7 @@
 	if($conn === false){
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
-	$username = 'leon@gaml.com';
-	$_SESSION['mail'] = $username;
-	if($_SESSION['mail'] != $username){
-		session_destroy();
-		session_start();
-		$_SESSION['mail'] = $username;
-	}
+	
 	if(!empty($_SESSION['mail'])){
 ?>
 <div class="container">
