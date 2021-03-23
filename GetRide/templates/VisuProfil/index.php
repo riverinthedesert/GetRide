@@ -25,7 +25,7 @@
             $membre = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
 
             while($i = $membre->fetch_assoc()){
-                if($i['genre'] == "Hom"){
+                if($i['genre'] == "m"){
                     echo 'Monsieur ';
                 }
                 else{

@@ -62,6 +62,7 @@ class MembreTable extends Table
         $validator
             ->integer('telephone')
             ->maxLength('telephone', 10)
+            ->minLength('telephone', 10)
             ->requirePresence('telephone', 'create')
             ->notEmptyString('telephone');
 

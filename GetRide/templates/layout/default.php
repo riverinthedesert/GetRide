@@ -83,7 +83,7 @@ $cakeDescription = 'Co-Voiturage';
                 <?php
                     if(!empty($_SESSION['mail'])){
                 ?><!--Affiche que si une personne est connecté -->
-                        <button class="btn btn-danger navbar-btn">Deconnexion</button>
+                        <button  class="btn btn-danger navbar-btn">Deconnexion</button>
                 <?php
                     }else{
                         ?>
