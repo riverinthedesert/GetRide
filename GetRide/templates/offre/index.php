@@ -23,7 +23,7 @@
         echo "<td>"; echo ucfirst($item["nom"])." ".ucfirst($item["prenom"]); echo "</td>";
         echo "<td>"; echo $item["prix"];echo "</td>";
         $idOffre = $item["idOffre"];
-        echo "<td>";echo "<a role='button' class='btn btn-info' href = 'VisuOffre?idOffre=$idOffre'>Détails</a>"; echo"</td>";
+        echo "<td>";echo "<a role='button' class='btn btn-info' href = 'offre/details?idOffre=$idOffre'>Détails</a>"; echo"</td>";
         echo "</tr>";
     }
   /*  foreach ($utilisateur as $user){
