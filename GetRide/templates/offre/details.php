@@ -84,7 +84,7 @@ echo "</br>"
 
     <br>
 
-    <div>
+    <div style="margin-left:0.38em;">
 
         <h3>Arrivée</h3>
 
@@ -118,9 +118,7 @@ echo "</br>"
                 <h3>Passagers autorisés</h3>
 
                 <p>
-
-                    <?php echo ("<strong>" . $offre[0]["nbPassagersMax"] . "</strong>"); ?>
-
+                    <?php echo ("<strong>" . $offre[0]["nbPassagersMax"] . " personnes </strong>"); ?>
                 </p>
             </div>
         </div>
@@ -168,8 +166,16 @@ echo "</br>"
 
     <div>
 
-        <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
+        <?php // A voir plus tard pour prendre part à un trajet
 
+        if(!empty($_SESSION['mail'])){
+            echo '<a  class="btn btn-info" role="button">Postuler</a>';
+        }
+
+        ?>
+
+        <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
+       
 
     </div>
 

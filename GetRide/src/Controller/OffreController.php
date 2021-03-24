@@ -59,6 +59,9 @@ class OffreController extends AppController{
     public function index(){
 
         
+        setlocale(LC_TIME, 'fr_FR');
+        date_default_timezone_set('Europe/Paris');
+        
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');  
 
