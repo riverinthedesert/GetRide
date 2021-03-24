@@ -61,7 +61,7 @@ class OffreController extends AppController{
         
         setlocale(LC_TIME, 'fr_FR');
         date_default_timezone_set('Europe/Paris');
-        
+
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');  
 
@@ -71,6 +71,7 @@ class OffreController extends AppController{
         $ville = $conn->execute('SELECT * FROM ville')->fetchAll('assoc');
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
 
+        // Ici on a les paramètres qui sont passés par l'url, donc &depart et &tri sous forme de String
         $test_depart=$this->request->getQuery("depart");
         $test_tri=$this->request->getQuery("tri");
 
@@ -84,7 +85,7 @@ class OffreController extends AppController{
         LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
         WHERE idOffre>=0";
         
-        // FILTRE HEURE_DEPART
+        // FILTRE HEURE_DEPART (on test les paramètres URL)
         if ($test_depart=="6"){
             $string_filtre.=" Départ de 6h à 12h |";
             $requete.= " AND (DATE_FORMAT(horaireDepart ,'%H:%i:%s')>= '06:00:00' 
@@ -103,7 +104,7 @@ class OffreController extends AppController{
             AND DATE_FORMAT(horaireDepart ,'%H:%i:%s') <= '05:59:59')";
         }
 
-        // FILTRE CONCERNANT LE ORDER BY
+        // FILTRE CONCERNANT LE ORDER BY (on test les paramètres URL)
         if ($test_tri=="1"){ // A FAIRE APRES LES FILTRES AND
             $string_filtre.=" Trié par prix le plus bas |";
             $requete.= " ORDER BY prix ASC";
