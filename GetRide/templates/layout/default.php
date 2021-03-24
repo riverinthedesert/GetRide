@@ -40,11 +40,20 @@ $cakeDescription = 'Co-Voiturage';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+<style>
+footer{
+	position:static;
+	bottom:0;
+	width:100%;
+	padding-top:100px;
+	height:100px;
+}
+</style>
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-            <a class="navbar-brand" href="#">Co-Voiturages</a>
+            <a class="navbar-brand" href="Accueil">Co-Voiturages</a>
             </div>
             <ul class="nav navbar-nav">
                 <form class="navbar-form navbar-left" action="/action_page.php">
@@ -103,5 +112,24 @@ $cakeDescription = 'Co-Voiturage';
             <?= $this->fetch('content') ?>
         </div>
     </main>
+
+
+    <footer>
+        <div class="text-center" style="background-color:#cecece;">
+            <br>
+            <label><a href="Comment_ca_marche.html" style="color:#000000;">Comment ça marche ?</a></label>
+            <label><a href="Comment_ca_marche.html" style="color:#000000;">Nous contacter</a></label>
+            <label>Langue : Française</label>
+            <br>
+        </div>
+
+        <div style="background-color:#c1c1c1;">
+            <div class="container">
+                <font size="2pt">
+                <p>Le site a été réalisé par des étudiant en informatique pour un premier pas vers l'ingénérie du logicielle. Ce site est accessible à tous et permet d'organiser des déplacement de ville en ville sans frais suplémentaire.</p>
+                </font>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
