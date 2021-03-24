@@ -57,7 +57,6 @@ echo "</br>"
                 $etape_horaire = strftime("%Hh%M", strtotime(($etape[0]["horaire"])));
 
                 echo "<h3>Étapes</h3>";
-
             }
 
             if (sizeof($etape) > 1) { // 2 étapes ou plus
@@ -169,16 +168,22 @@ echo "</br>"
 
     <div>
 
-      <a href="../offre" class="btn btn-info" role="button">Retour</a>
+        <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
 
 
     </div>
 
-    
+
 
     </br>
 
 
 </body>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 </html>
