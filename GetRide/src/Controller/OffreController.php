@@ -7,6 +7,49 @@ use Cake\Datasource\ConnectionManager;
 class OffreController extends AppController{
 
 
+    public function details(){
+
+        setlocale(LC_TIME, 'fr_FR');
+        date_default_timezone_set('Europe/Paris');
+
+        $conn = ConnectionManager::get('default');
+        $this->loadComponent('Paginator');  
+
+
+        $test_offre=$this->request->getQuery("idOffre");
+
+        // BASE DE LA REQUETE
+        $requete = "SELECT offre.idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
+        ville_depart.nomVille as nomVilleDepart,ville_arrivee.nomVille as nomVilleArrivee,nom,prenom
+        ,prix,note 
+        FROM offre
+        INNER JOIN membre ON membre.idMembre=offre.idConducteur 
+        INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
+        INNER JOIN notation ON notation.idUtilisateur=offre.idConducteur  
+        LEFT OUTER JOIN ville ville_depart ON offre.idVilleDepart=ville_depart.idVille 
+        LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
+        WHERE offre.idOffre=";
+
+        $requete2 = "SELECT * FROM etape,ville WHERE etape.idVille=Ville.idVille AND idOffre=";
+
+        
+        if ($test_offre!=""){ // On rajoute l'id dans le where
+            $requete.= $test_offre;
+            $requete2.= $test_offre;
+        }else{
+            die("T'es mort mon pote");
+        }
+
+        // On execute la requête
+        $offre = $conn->execute($requete)->fetchAll('assoc');
+        $etape = $conn->execute($requete2)->fetchAll('assoc');
+    
+        // On transmet les variables à la vue.
+        $this->set(compact('offre'));
+        $this->set(compact('etape'));
+
+    }
+
     public function view(){
 
        
@@ -22,7 +65,6 @@ class OffreController extends AppController{
         $string_filtre = "";
 
         // SELECT ALL UTILISATEUR
-        $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
         $ville = $conn->execute('SELECT * FROM ville')->fetchAll('assoc');
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
 
