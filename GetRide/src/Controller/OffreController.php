@@ -20,17 +20,16 @@ class OffreController extends AppController{
 
         // BASE DE LA REQUETE
         $requete = "SELECT offre.idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
-        ville_depart.nomVille as nomVilleDepart,ville_arrivee.nomVille as nomVilleArrivee,nom,prenom
-        ,prix,note 
+        ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
+        ,prix,membre.noteMoyenne as note
         FROM offre
         INNER JOIN membre ON membre.idMembre=offre.idConducteur 
         INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
-        INNER JOIN notation ON notation.idUtilisateur=offre.idConducteur  
-        LEFT OUTER JOIN ville ville_depart ON offre.idVilleDepart=ville_depart.idVille 
-        LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
+        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id
+        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
         WHERE offre.idOffre=";
 
-        $requete2 = "SELECT * FROM etape,ville WHERE etape.idVille=Ville.idVille AND idOffre=";
+        $requete2 = "SELECT * FROM etape,villes_france_free WHERE etape.idVille=villes_france_free.ville_id AND idOffre=";
 
         
         if ($test_offre!=""){ // On rajoute l'id dans le where
@@ -68,7 +67,7 @@ class OffreController extends AppController{
         $string_filtre = "";
 
         // SELECT ALL UTILISATEUR
-        $ville = $conn->execute('SELECT * FROM ville')->fetchAll('assoc');
+
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
 
         // Ici on a les paramètres qui sont passés par l'url, donc &depart et &tri sous forme de String
@@ -77,12 +76,12 @@ class OffreController extends AppController{
 
         // BASE DE LA REQUETE
         $requete = "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
-        ville_depart.nomVille as nomVilleDepart,ville_arrivee.nomVille as nomVilleArrivee,nom,prenom
+        ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
         ,prix 
         FROM offre
         INNER JOIN membre ON membre.idMembre=offre.idConducteur 
-        LEFT OUTER JOIN ville ville_depart ON offre.idVilleDepart=ville_depart.idVille 
-        LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
+        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
+        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
         WHERE idOffre>=0";
         
         // FILTRE HEURE_DEPART (on test les paramètres URL)
@@ -122,7 +121,6 @@ class OffreController extends AppController{
         $this->set(compact('string_filtre'));
         $this->set(compact('offre_filtres_applied'));
         $this->set(compact('conducteur'));
-        $this->set(compact('ville'));
 
     
 
