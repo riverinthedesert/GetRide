@@ -1,5 +1,6 @@
 <html>
 <?php
+
     session_start(); 
    	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
@@ -15,6 +16,9 @@
 		$ancienPass = $i['motDePasse'];
 	}	
 	?>
+	
+	
+	
 
 <script src="https://lig-membres.imag.fr/donsez/cours/exemplescourstechnoweb/js_securehash/md5.js"></script>
 <script>
@@ -32,7 +36,8 @@
 		var oldPass = document.getElementById("oldpass").value;
 		var newPass = document.getElementById("newpass").value;
 		var confPass = document.getElementById("confpass").value;	
-		if(oldPassConf==calcMD5(oldPass)){
+		//Un des deux à enlever quand les mots de passe seront hashés en md5!
+		if(oldPassConf==calcMD5(oldPass)||oldPassConf==oldPass){
 			if(newPass==confPass){
 			} else {
 				appendMessageToErrorDiv(error_div, "Votre mot de passe de confirmation est incorrect !");

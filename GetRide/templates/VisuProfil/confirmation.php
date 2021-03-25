@@ -5,9 +5,9 @@
     session_start(); 
 	
 	
-
-	$newPass = md5($_GET["confpass"]);
-
+	//A mettre dans les mots de passe seront hashés en md5!
+	//$newPass = md5($_GET["confpass"]);
+	$newPass = $_GET["confpass"];
 
 	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
