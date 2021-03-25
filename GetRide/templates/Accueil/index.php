@@ -5,22 +5,40 @@ body {
 
 </style>
 
-<body>
+</div>
 
-<div class="container">
 	<div class="text-center">
-        <font size="10"><p>Bienvenue sur notre site de co-voiturage</p></font>
-		<a href="#" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('Recherche.jpg', ['alt' => 'Recherche']); ?><font size="5">Rechercher une offre de trajet</font></a>
+        <font size="10"><p><span style="color:Navy">Où souhaitez-vous aller ?</span></p></font>
+        <div style="background-color:#AFEEEE;">
+            <div class="container">
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" value="Départ" style="background-color:DarkCyan; color:white">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" value="Destination" style="background-color:DarkCyan; color:white">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="date" id="start" name="trip-start" value="" style="background-color:DarkCyan; color:white">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="number" id="tentacles" name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="Submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
-</div>
 
 
-</body>
-</div>
 <body>
 <br>
-<?php echo $this->Html->image('Accueil.jpg', ['alt' => 'Accueil']); ?>
+
 <div class="text-center">
+<?php echo $this->Html->image('Accueil2.jpg', ['alt' => 'Accueil']); ?>
 	<br>
 	<div class="panel panel-primary">
 		<div class="panel-body">
@@ -67,7 +85,11 @@ body {
                         vous et profitez des <b><span style="color:SteelBlue">meilleurs prix</span></b> de voyage.</p></font>
 </div>
 
-
+<div  style="background-color:#AFEEEE;">
+    <div class="text-center">
+        <p> <font size="5">Vous n'avez pas encore de compte ? <a href="/GetRide/GetRide/membre/add">Inscrivez-vous</a> ! </font></p>
+    </div>
+</div>
 
 
 
