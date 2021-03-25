@@ -30,23 +30,26 @@ if(!empty($_SESSION['mail'])){
 
         //Lancer la requete sur la bdd
         $res = mysqli_query($conn, $query);
+        if (!$res) {
+            echo "Problème de requete";
+        }else{
+            $idGroupe = $conn->query("SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'");
+            $idGrp;
+            while($i = $idGroupe->fetch_assoc()){
+                $idGrp = $i['idGroupe'];
+            }
 
-        $idGroupe = $conn->query("SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'");
-        $idGrp;
-        while($i = $idGroupe->fetch_assoc()){
-            $idGrp = $i['idGroupe'];
-        }
-
-        //Faire une modification s'il y a des amis en plus d'ajouté
-        $query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
-        
-         //Lancer la requete sur la bdd
-         $res2 = mysqli_query($conn, $query2);
-        
-        if($res){
-            if($res2){
-                header('Location: VisuGroupe');
-                exit();
+            //Faire une modification s'il y a des amis en plus d'ajouté
+            $query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
+            
+            //Lancer la requete sur la bdd
+            $res2 = mysqli_query($conn, $query2);
+            
+            if($res){
+                if($res2){
+                    header('Location: VisuGroupe');
+                    exit();
+                }
             }
         }
     }

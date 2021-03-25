@@ -54,6 +54,12 @@ class MembreTable extends Table
             ->notEmptyString('motDePasse');
 
         $validator
+            ->add('confirmerMotDePasse', 'no-misspelling', [
+                'rule' => ['compareWith', 'motDePasse'],
+                'message' => 'Les mot de passe sont différents',
+            ]);
+
+        $validator
             ->scalar('mail')
             ->maxLength('mail', 50)
             ->requirePresence('mail', 'create')
@@ -94,8 +100,6 @@ class MembreTable extends Table
     }
     // Règles du formulaire
     public function buildRules(RulesChecker $rules): RulesChecker{
-        $regexp = '(^07|06)[0-9]*';
-        $test = 'fbgtr';
         $rules->add($rules->isUnique(['mail'], 'L\'adresse mail est déjà utilisée.', 'color:red' ));
         $rules->add($rules->isUnique(['nom', 'prenom'], 'Votre nom est déjà associé à un compte.'));
         return $rules;

@@ -81,6 +81,7 @@ footer{
                                 <li><a href="#">Visualiser mes offres en cours</a></li>
                             </ul>
                         </li>
+                <li><a href="Menu">Menu</a></li>
                 <?php
                     }
                 ?>

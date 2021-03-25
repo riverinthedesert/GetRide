@@ -1,5 +1,6 @@
 <html>
 <?php
+
     session_start(); 
    	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
@@ -15,6 +16,9 @@
 		$ancienPass = $i['motDePasse'];
 	}	
 	?>
+	
+	
+	
 
 <script src="https://lig-membres.imag.fr/donsez/cours/exemplescourstechnoweb/js_securehash/md5.js"></script>
 <script>
@@ -32,7 +36,8 @@
 		var oldPass = document.getElementById("oldpass").value;
 		var newPass = document.getElementById("newpass").value;
 		var confPass = document.getElementById("confpass").value;	
-		if(oldPassConf==calcMD5(oldPass)){
+		//Un des deux à enlever quand les mots de passe seront hashés en md5!
+		if(oldPassConf==calcMD5(oldPass)||oldPassConf==oldPass){
 			if(newPass==confPass){
 			} else {
 				appendMessageToErrorDiv(error_div, "Votre mot de passe de confirmation est incorrect !");
@@ -48,11 +53,11 @@
 </script>
   <form name="myForm" action="confirmation" method="get">
 		<label for="fname">Ancien mot de passe:</label><br>
-		<input type="text" id="oldpass" name="oldpass" required><br>
+		<input type="password" id="oldpass" name="oldpass" required><br>
 		<label for="lname">Nouveau mot de passe:</label><br>
-		<input type="text" id="newpass" name="newpass" required>
+		<input type="password" id="newpass" name="newpass" required>
 		<label for="lname">Confirmation nouveau mot de passe:</label><br>
-		<input type="text" id="confpass" name="confpass" required>
+		<input type="password" id="confpass" name="confpass" required>
 		<input onclick = "Confirm()" type="button" value="Envoyer">
 		<div style="color:red;" id="submission_errors"/>
 	</form>

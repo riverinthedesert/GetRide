@@ -57,5 +57,22 @@ class MenuController extends AppController
         return $this->redirect(['action' => 'index']);
 	}
 	
+	/*
+	 * deplacer à page accueil
+	 */
+	public function accueil(){
+		
+		$redirect = $this->request->getQuery('redirect', [
+				'controller' => 'Accueil',
+				'action' => 'index',
+			]);
+
+			return $this->redirect($redirect);
+
+        return $this->redirect(['action' => 'index']);
+	}
+
+
+	
 }
 ?>
