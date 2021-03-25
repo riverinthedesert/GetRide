@@ -48,11 +48,11 @@
 </script>
   <form name="myForm" action="confirmation" method="get">
 		<label for="fname">Ancien mot de passe:</label><br>
-		<input type="text" id="oldpass" name="oldpass" required><br>
+		<input type="password" id="oldpass" name="oldpass" required><br>
 		<label for="lname">Nouveau mot de passe:</label><br>
-		<input type="text" id="newpass" name="newpass" required>
+		<input type="password" id="newpass" name="newpass" required>
 		<label for="lname">Confirmation nouveau mot de passe:</label><br>
-		<input type="text" id="confpass" name="confpass" required>
+		<input type="password" id="confpass" name="confpass" required>
 		<input onclick = "Confirm()" type="button" value="Envoyer">
 		<div style="color:red;" id="submission_errors"/>
 	</form>
