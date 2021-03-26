@@ -16,7 +16,7 @@
                     url: 'notification/delete',
                     type: 'GET',
                     data: {
-                        message: deleteid
+                        id: deleteid
                     },
                     success: function(response) {
 
@@ -25,7 +25,7 @@
                                 $(this).remove();
                             });
                         } else {
-                            alert('Invalid message.');
+                            alert('Mauvais id.');
                         }
 
                     }
@@ -43,19 +43,27 @@
 
     foreach ($not as $item) {
 
+        $date_creation = $item["DateCreation"]; // Date en pleine lettre
+        $date_creation_string = ucwords(utf8_encode(strftime("%A %d %B %G", strtotime(($date_creation)))));
+
+        $date_depart = $item["horaireDepart"]; // Date en pleine lettre
+        $date_depart_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_depart)))));
+
         if ($item["estLue"] == "0") { // lu 
-            echo '<div id="' . $item["message"] . '" class="list-group-item list-group-item-action ">';
+            echo '<div id="' . $item["idNotification"] . '" class="list-group-item list-group-item-action ">';
             echo $item["message"];
         } else { // Pas encore lu
-            echo '<div id="' . $item["message"] . '" class="list-group-item list-group-item-action list-group-item-info ">';
+            echo '<div id="' . $item["idNotification"] . '" class="list-group-item list-group-item-action list-group-item-info ">';
             echo $item["message"]."<p style='margin-left:1em;' class='glyphicon glyphicon-eye-open'></p>";
         }
-        echo "<a data-id='" . $item["message"] . "'style='text-decoration:none;'class='glyphicon glyphicon-remove float-right delete'></a>";
-        echo '</br>';
+        echo "<a data-id='" . $item["idNotification"] . "'style='text-decoration:none;'class='glyphicon glyphicon-remove float-right delete'></a>";
+        echo "<p style='margin-right:2em;'class='float-right'>".$date_creation_string."</p>";
 
         if ($item["necessiteReponse"] == "1") { // A voir plus tard 
+            echo '</br>';
             echo '<a class="btn btn-primary" href="#" role="button">Accepter</a> ';
             echo '<a class="btn btn-danger" href="#" role="button">Refuser</a> ';
+            echo  '<span style="margin-left:1em;">Offre du <strong>'.$date_depart_string.'</strong></span> départ à <strong>'.ucfirst($item["ville_nom_simple"]).'</strong>';
         }
         echo '</div>';
     }
