@@ -82,18 +82,20 @@ $cakeDescription = 'Co-Voiturage';
 
                     $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, NAME);
                     $id_utilisateur=0; // 0 A REMPLACER AVEC VARIABLE SESSION ID UTILISATEUR
-                    $notifications = $conn->query("SELECT * FROM notification WHERE idMembre =".$id_utilisateur);
+                    $notifications = $conn->query("SELECT * FROM notification WHERE idMembre =".$id_utilisateur." AND estLue=0");
                     $not = $notifications->fetch_all();
 
+                    echo '<li><a href="#" class="glyphicon glyphicon-bell dropdown" data-toggle="dropdown">';
+                    if (sizeof($not)!=0) echo'<span style="margin-top:-2em;background-color:red;"class="badge">'.sizeof($not).'</span>';
+                    echo'</a> <ul class="dropdown-menu">';
                     if (sizeof($not) != 0) {
-                        echo '<li><a href="#" class="glyphicon glyphicon-bell dropdown" data-toggle="dropdown"></a> <ul class="dropdown-menu">';
                         if (sizeof($not) > 5) $limite = 5;
                         else $limite = sizeof($not);
                         for ($i = 0; $i < $limite; $i++) {
                             echo '<li class="text-center"><a href="notification#'.$not[$i][1].'">' . $not[$i][1] . '</a></ </li>';
                         }
-                    } else echo '<li><a href="#" class="glyphicon glyphicon-bell dropdown"></a> <ul class="dropdown-menu">';
-                    
+                    }
+               
                     echo '<li role="separator" class="divider"></li>';
                     echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>';
                     echo '</ul> </li>';
