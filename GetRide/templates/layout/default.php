@@ -95,7 +95,7 @@ $cakeDescription = 'Co-Voiturage';
                     } else echo '<li><a href="#" class="glyphicon glyphicon-bell dropdown"></a> <ul class="dropdown-menu">';
                     
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="#"><strong>Voir le reste</strong></a></li>';
+                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>';
                     echo '</ul> </li>';
                 }
 
