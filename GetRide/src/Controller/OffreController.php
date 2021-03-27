@@ -7,6 +7,24 @@ use Cake\Datasource\ConnectionManager;
 class OffreController extends AppController
 {
 
+    public function participer(){
+        $conn = ConnectionManager::get('default');
+        $this->loadComponent('Paginator');
+        
+        $id_utilisateur=0;
+        $offre_id = $this->request->getQuery("id"); // GET message
+        
+        $requete2="SELECT MAX(idNotification) as id FROM notification";
+        $notif2 = $conn->execute($requete2)->fetchAll('assoc');
+        
+        $id=$notif2[0]["id"]; // Id nouvelle notif
+        if ($id=="") $id="0";
+       
+        $requete="INSERT INTO notification VALUES (".$id_utilisateur.", 'Vous avez fait une demande de participation',0,0,".$id.",".$offre_id.",NOW())";
+        $notif1 = $conn->execute($requete);
+
+        echo 1;
+    }
 
     public function details()
     {

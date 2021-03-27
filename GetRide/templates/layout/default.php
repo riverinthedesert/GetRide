@@ -67,13 +67,13 @@ $cakeDescription = 'Co-Voiturage';
                         </div>
                     </div>
                 </form>
-                <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
                 <!-- Notifications : -->
 
                 <?php
 
-                if (empty($_SESSION['mail'])) {
+                if (empty($_SESSION['mail'])) { // A CHANGE
 
                     define('SERVER', 'localhost');
                     define('USERNAME', 'root');
@@ -81,7 +81,9 @@ $cakeDescription = 'Co-Voiturage';
                     define('NAME', 'getride');
 
                     $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, NAME);
+
                     $id_utilisateur=0; // 0 A REMPLACER AVEC VARIABLE SESSION ID UTILISATEUR
+                    
                     $notifications = $conn->query("SELECT * FROM notification WHERE idMembre =".$id_utilisateur." AND estLue=0");
                     $not = $notifications->fetch_all();
 
@@ -97,7 +99,7 @@ $cakeDescription = 'Co-Voiturage';
                     }
                
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>';
+                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
                     echo '</ul> </li>';
                 }
 

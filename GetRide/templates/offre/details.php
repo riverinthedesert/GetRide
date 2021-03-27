@@ -6,6 +6,36 @@
     }
 </style>
 
+<script>
+    $(document).ready(function() {
+        // ajouter notif
+        $('.participer').click(function() {
+            var el = this;
+            var addid = $(this).data('id');
+            // AJAX Request
+            $.ajax({
+                url: 'participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
+                type: 'GET',
+                data: {
+                    id: addid
+                },
+                success: function(response) {
+
+                    if (response == 1) { // Enleve le HTML
+                        $(el).closest('a').css('background-color', 'red');
+                        $(el).closest('a').text("Ne plus participer");
+                    } else {
+                        alert('Mauvais id.');
+                    }
+
+                }
+            });
+
+        });
+
+    });
+</script>
+
 <h1 class="text-center font-weight-bold"> Détails de l'offre</h1>
 
 <?php
@@ -60,19 +90,19 @@ echo "</br>"
 
                 echo "<div>";
 
-                    echo "<strong>" . ucfirst($etape[0]["ville_nom_simple"]) . "</strong>";
+                echo "<strong>" . ucfirst($etape[0]["ville_nom_simple"]) . "</strong>";
 
-                    echo " à <strong>" . $etape_horaire . "</strong>";
+                echo " à <strong>" . $etape_horaire . "</strong>";
 
-                    echo "</br>";
+                echo "</br>";
 
-                    echo "</div>";
+                echo "</div>";
             }
 
             if (sizeof($etape) > 1) { // 2 étapes ou plus
 
                 for ($i = 1; $i < sizeof($etape); $i++) {
-                    
+
                     $etape_horaire = strftime("%Hh%M", strtotime(($etape[$i]["horaire"])));
 
                     echo "<div>";
@@ -180,14 +210,17 @@ echo "</br>"
 
         <?php // A voir plus tard pour prendre part à un trajet
 
-        if(!empty($_SESSION['mail'])){
-            echo '<a  class="btn btn-info" role="button">Postuler</a>';
+        if (empty($_SESSION['mail']) /* && $_SESSION['id'] != $offre[0]['idConducteur'] */) {
+
+            // Condition à voir si un utilisateur n'est pas l'auteur de l'offre et si l'utilisateur n'a pas déjà postulé.
+            
+            echo '<a data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info participer" role="button">Participer au trajet</a>';
         }
 
         ?>
 
         <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
-       
+
 
     </div>
 

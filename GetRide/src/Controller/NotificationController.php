@@ -12,7 +12,9 @@
            
             $conn = ConnectionManager::get('default');
             $this->loadComponent('Paginator');
-            $id_utilisateur=0;
+
+            $id_utilisateur=0;  // A CHANGE AVEC SESSION
+
             $requete="SELECT * FROM notification 
             LEFT OUTER JOIN offre ON offre.idOffre=notification.idOffre 
             LEFT OUTER JOIN villes_france_free ON villes_france_free.ville_id=offre.idVilleDepart
@@ -29,7 +31,9 @@
 
             $conn = ConnectionManager::get('default');
             $this->loadComponent('Paginator');
-            $id_utilisateur=0;
+
+            $id_utilisateur=0; // A CHANGE AVEC SESSION
+            
             $url_id = $this->request->getQuery("id"); // GET message
 
             $requete="DELETE FROM notification WHERE idMembre=".$id_utilisateur." AND idNotification='".$url_id."'";
