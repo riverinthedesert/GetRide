@@ -31,11 +31,13 @@ class MembreController extends AppController
                 $_SESSION['login'] = $nom_user;
                 $_SESSION['mail'] = $mail_user;
                 $_SESSION['idMembre'] = $id_user;
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             }
             $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
         }
         $this->set(compact('membre'));
     }
+
+
 
 }

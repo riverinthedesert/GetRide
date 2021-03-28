@@ -9,8 +9,17 @@
 	if($conn === false){
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
-	
+
+	if(empty($_SESSION['mail'])){
+		// maintanant just tester
+		$_SESSION['mail'] = "htrrthfefezhtr@rgrrg";
+	}
+	if(empty($_SESSION['mailDeProfil'])){
+		// maintanant just tester
+		$_SESSION['mailDeProfil'] = $_SESSION['mail'];
+	}
 	if(!empty($_SESSION['mail'])){
+		
 ?>
 <div class="container">
 	<div class="text-center">
@@ -34,6 +43,16 @@
                 echo $i['nom'];
                 echo ' ';
                 echo $i['prenom'];
+			
+			$_SESSION['idMembre'] = $i['idMembre'];
+
+			$membreDeProfil = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+			while($nuplet = $membreDeProfil->fetch_assoc())
+			{ 
+				$_SESSION['idMembreProfil'] = $nuplet['idMembre'];
+				$_SESSION['mailDeProfil'] = $nuplet['mail'];
+			}
+
         ?>
 	</div>
 	<div class="input-group">
@@ -54,6 +73,7 @@
 	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
 	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer']) ?>
 		Attention: La suppression du compte est définitive !
+	<?= $this->Form->postButton(__('Ajouter dans Favolist'), ['action' => 'ajouterFavo',$_SESSION['idMembre'] ,$_SESSION['idMembreProfil']]) ?>
 </div>
 <?php
     }}

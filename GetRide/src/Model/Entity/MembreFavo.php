@@ -24,28 +24,12 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property int|null $idNotation
  * @property float|null $noteMoyenne
  */
-class VisuProfil extends Entity
+class MembreFavo extends Entity
 {
 
     protected $_accessible = [
-        'nom' => true,
-        'prenom' => true,
-        'motDePasse' => true,
-        'mail' => true,
-        'telephone' => true,
-        'naissance' => true,
-        'genre' => true,
-        'pathPhoto' => true,
-        'estConducteur' => true,
-        'idUtilisateurFavo' => true,
-        'idHistoriqueTrajet' => true,
-        'idHistoriqueRecherche' => true,
-        'idNotation' => true,
-        'noteMoyenne' => true,
+        'idMembre' => true,
+        'idMembreFavo' => true
     ];
 
-    //Hash le mot de passe
-    protected function _setmotDePasse($motDePasse){
-        return (new DefaultPasswordHasher)->hash($motDePasse);
-    }
 }
