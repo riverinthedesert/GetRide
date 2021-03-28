@@ -20,8 +20,11 @@ class OffreController extends AppController
 
         $offre_id = $this->request->getQuery("id"); // GET message
         
-        $requete="SELECT MAX(idNotification) as id FROM notification";
+        // Id nouvelle notif
+        $requete="SELECT MAX(idNotification+1) as id FROM notification";
         $notif2 = $conn->execute($requete)->fetchAll('assoc');
+        $id=$notif2[0]["id"];
+        if ($id=="") $id="0";
 
         // On cherche l'id du créateur de cette offre
         $requete="SELECT * FROM conducteur,offre WHERE conducteur.idMembre=idConducteur AND offre.idOffre=".$offre_id;
@@ -29,11 +32,14 @@ class OffreController extends AppController
 
         $id_createur_offre = $requete_offre[0]["idMembre"];
         
-        $id=$notif2[0]["id"]; // Id nouvelle notif
-        if ($id=="") $id="0";
-       
         $requete="INSERT INTO notification VALUES (".$id_utilisateur.", 'Vous avez fait une demande de participation',0,0,".$id.",".$offre_id.",NOW(),NULL)";
         $notif = $conn->execute($requete);
+
+        // Id nouvelle notif
+        $requete="SELECT MAX(idNotification+1) as id FROM notification";
+        $notif2 = $conn->execute($requete)->fetchAll('assoc');
+        $id=$notif2[0]["id"];
+        if ($id=="") $id="0";
 
         $requete="INSERT INTO notification VALUES (".$id_createur_offre.", 'L\'utilisateur ".ucfirst($nom)." ".ucfirst($prenom)." veut rejoindre votre trajet',0,1,".$id.",".$offre_id.",NOW(),".$id_utilisateur.")";
         $notif = $conn->execute($requete);
