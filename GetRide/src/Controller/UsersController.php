@@ -1,0 +1,96 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use Cake\Event\EventInterface;
+
+class UsersController extends AppController
+{
+
+    public function index()
+    {
+    }
+
+
+    /* Permet d'autoriser l'accès à la connexion et à l'inscription 
+       pour les utilisateurs non connectés */ 
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        
+        // Exceptions à l'authentification nécessaire (seulement pour ce contrôleur)
+        $this->Authentication->addUnauthenticatedActions(['connexion', 'add']);
+    }
+
+
+    public function add()
+    {
+        $membre = $this->Users->newEmptyEntity();
+
+        // Récupération des informations du formulaire
+        if ($this->request->is('post')) {
+            $membre = $this->Users->patchEntity($membre, $this->request->getData());
+            $nom_user = $membre->get('nom') . " " . $membre->get('prenom');
+            $mail_user = $membre->get('mail');
+            $id_user = $membre->get('idMembre');
+            //Sauvegarde dans la base de données
+            if ($this->Users->save($membre)) {
+                $this->Flash->success(__('Votre compte a bien été crée.'));
+                //session_start();
+                $_SESSION['connect'] = true;
+                $_SESSION['login'] = $nom_user;
+                $_SESSION['mail'] = $mail_user;
+                $_SESSION['idMembre'] = $id_user;
+                return $this->redirect(['action' => 'add']);
+            }
+            $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
+        }
+        $this->set(compact('membre'));
+    }
+
+
+    /* Gestion de la connexion à un compte déjà créé */
+    public function connexion()
+    {
+        $this->request->allowMethod(['get', 'post']);
+
+        // gestion de la connexion par le plugin Authentication
+        $resultat = $this->Authentication->getResult();
+
+        // si le compte existe et que la connexion s'est bien passée...
+        if ($resultat->isValid()) {
+            
+            // ... on redirige l'utilisateur vers la page d'accueil du site
+            $redirection = $this->request->getQuery('redirect', [
+                'controller' => 'Accueil',
+                'action' => 'index',
+            ]);
+
+            return $this->redirect($redirection);
+        }
+        
+        // si une erreur s'est produite, la page ne change pas et un mesage d'erreur s'affiche
+        if ($this->request->is('post') && !$resultat->isValid()) {
+            debug($resultat->getData()); 
+            debug($resultat->getErrors());
+            $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
+        }
+    }
+
+
+    /* Gestion de la déconnexion pour un utilisateur connecté */
+    public function deconnexion()
+    {
+        // on vérifie que la session de l'utilisateur est toujours active
+        $resultat = $this->Authentication->getResult();
+        
+        if ($resultat->isValid()) {
+
+            $this->Authentication->logout();
+
+            // redirection vers la page d'accueil
+            return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
+        }
+    }
+}

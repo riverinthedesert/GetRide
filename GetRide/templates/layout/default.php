@@ -136,8 +136,8 @@ $cakeDescription = 'Co-Voiturage';
                 } else {
                 ?>
                     <!--afficher s'il n'y personne de connecté-->
-                    <li><a href="/GetRide/GetRide/membre/add"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
-                    <li><a href="/GetRide/connexion.php"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                    <li><a href="/GetRide/GetRide/users/add"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                    <li><a href="/GetRide/GetRide/users/connexion><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                 }
                 ?>

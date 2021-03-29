@@ -29,13 +29,22 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Identifier\IdentifierInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+
+use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
+
 /**
  * Application setup class.
  *
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -64,7 +73,8 @@ class Application extends BaseApplication
             $this->addPlugin('DebugKit');
         }
 
-        // Load more plugins here
+        // charge le plugion permettant la gestion de l'authentification
+        $this->addPlugin('Authentication');
     }
 
     /**
@@ -96,7 +106,10 @@ class Application extends BaseApplication
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
-            ->add(new BodyParserMiddleware());
+            ->add(new BodyParserMiddleware())
+            
+            // pour l'authentification
+            ->add(new AuthenticationMiddleware($this));
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
@@ -107,6 +120,45 @@ class Application extends BaseApplication
 
         return $middlewareQueue;
     }
+
+
+    /* Gestion de l'authentification pour le site :
+            - redirection lors de l'accès aux pages nécessitant une authentification,
+            - champs du formulaire à vérifier lors de la demande de connexion.
+        */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+
+       /* On redirige un utilisateur non connecté vers la page de connexion
+          si celui-ci tente d'accéder à une page où l'authentification est nécessaire */
+       $authenticationService = new AuthenticationService([
+           'unauthenticatedRedirect' => '/GetRide/GetRide/users/connexion',
+           'queryParam' => 'redirect',
+       ]);
+
+       // chargement des champs à vérifier pour la connexion
+       $authenticationService->loadIdentifier('Authentication.Password', [
+           'fields' => [
+               'username' => 'mail',
+               'password' => 'motDePasse',
+           ]
+       ]);
+
+       // charge l'outil de gestion de session
+       $authenticationService->loadAuthenticator('Authentication.Session');
+
+       // définition des champs à vérifier pour la connexion à un compte
+       $authenticationService->loadAuthenticator('Authentication.Form', [
+           'fields' => [
+               'username' => 'mail',
+               'password' => 'motDePasse',
+           ],
+           'loginUrl' => '/GetRide/GetRide/users/connexion',
+       ]);
+
+       return $authenticationService;
+    }
+
 
     /**
      * Register application container services.

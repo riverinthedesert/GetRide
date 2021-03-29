@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\App;
+use Cake\Event\EventInterface;
 
 class MenuController extends AppController
 {
@@ -13,6 +14,15 @@ class MenuController extends AppController
 	 */
     public function index(){
     }
+
+	
+	/* Permet aux utilisateurs non connectés d'afficher le menu */
+	public function beforeFilter(EventInterface $event)
+	{
+		parent::beforeFilter($event);
+		
+		$this->Authentication->addUnauthenticatedActions(['index']);
+	}
 	
 	/*
 	 * deplacer à page VisuGroupe
