@@ -17,6 +17,7 @@
 
 $cakeDescription = 'Co-Voiturage';
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,7 +57,7 @@ $cakeDescription = 'Co-Voiturage';
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="Accueil">Co-Voiturages</a>
+                <a class="navbar-brand" href="/GetRide/GetRide/Accueil">Co-Voiturages</a>
             </div>
             <ul class="nav navbar-nav">
                 <form class="navbar-form navbar-left" action="/action_page.php">
@@ -73,19 +74,15 @@ $cakeDescription = 'Co-Voiturage';
 
                 <?php
 
-                if (empty($_SESSION['mail'])) { // A CHANGE
+                use Cake\Datasource\ConnectionManager;
 
-                    define('SERVER', 'localhost');
-                    define('USERNAME', 'root');
-                    define('PASSWORD', '');
-                    define('NAME', 'getride');
+                if (!empty($_SESSION['mail'])) { // A CHANGE
 
-                    $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, NAME);
+                    $conn = ConnectionManager::get('default');
 
                     $id_utilisateur=0; // 0 A REMPLACER AVEC VARIABLE SESSION ID UTILISATEUR
-                    
-                    $notifications = $conn->query("SELECT * FROM notification WHERE idMembre =".$id_utilisateur." AND estLue=0");
-                    $not = $notifications->fetch_all();
+
+                    $not = $conn->execute("SELECT * FROM notification WHERE idMembre =".$id_utilisateur." AND estLue=0")->fetchAll('assoc');
 
                     echo '<li><a href="#" class="glyphicon glyphicon-bell dropdown" data-toggle="dropdown">';
                     if (sizeof($not)!=0) echo'<span style="margin-top:-2em;background-color:red;"class="badge">'.sizeof($not).'</span>';
@@ -94,12 +91,12 @@ $cakeDescription = 'Co-Voiturage';
                         if (sizeof($not) > 5) $limite = 5;
                         else $limite = sizeof($not);
                         for ($i = 0; $i < $limite; $i++) {
-                            echo '<li class="text-center"><a href="notification#'.$not[$i][1].'">' . $not[$i][1] . '</a></ </li>';
+                            echo '<li class="text-center"><a href="/GetRide/GetRide/notification#'.$not[$i]["message"].'">' . $not[$i]["message"] . '</a></ </li>';
                         }
                     }
                
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
+                    echo '<li><a href="/GetRide/GetRide/notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
                     echo '</ul> </li>';
                 }
 
@@ -137,7 +134,7 @@ $cakeDescription = 'Co-Voiturage';
                 ?>
                     <!--afficher s'il n'y personne de connecté-->
                     <li><a href="/GetRide/GetRide/users/add"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
-                    <li><a href="/GetRide/GetRide/users/connexion><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                    <li><a href="/GetRide/GetRide/users/connexion"> <span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                 }
                 ?>

@@ -7,30 +7,57 @@
 </style>
 
 <script>
-    $(document).ready(function() {
+    // FONCTION PARTICIPER
+    $(document).on("click", ".participer", function() {
         // ajouter notif
-        $('.participer').click(function() {
-            var el = this;
-            var addid = $(this).data('id');
-            // AJAX Request
-            $.ajax({
-                url: 'participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
-                type: 'GET',
-                data: {
-                    id: addid
-                },
-                success: function(response) {
+        var el = this;
+        var addid = $(this).data('id');
+        // AJAX Request
+        $.ajax({
+            url: 'participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
+            type: 'GET',
+            data: {
+                id: addid
+            },
+            success: function(response) {
 
-                    if (response == 1) { // Enleve le HTML
-                        $(el).closest('a').css('background-color', 'red');
-                        $(el).closest('a').text("Ne plus participer");
-                    } else {
-                        alert('Mauvais id.');
-                    }
-
+                if (response == 1) { // Enleve le HTML
+                    $(el).closest('a').css('background-color', 'red');
+                    $(el).closest('a').text("Ne plus participer");
+                    document.getElementById("participer").classList.replace('participer', 'no_participer');
+                } else {
+                    alert('Mauvais id.');
                 }
-            });
 
+            }
+        });
+
+
+    });
+
+    // FONCTION NE PAS PARTICIPER
+    $(document).on("click", ".no_participer", function() {
+        // ajouter notif
+        var el = this;
+        var deleteid = $(this).data('id');
+        // AJAX Request
+        $.ajax({
+            url: 'no_participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
+            type: 'GET',
+            data: {
+                id: deleteid
+            },
+            success: function(response) {
+
+                if (response == 1) { // Enleve le HTML
+                    $(el).closest('a').css('background-color', '#5bc0de');
+                    $(el).closest('a').text("Participer au trajet");
+                    document.getElementById("participer").classList.replace('no_participer', 'participer');
+                } else {
+                    alert('Mauvais id.');
+                }
+
+            }
         });
 
     });
@@ -210,11 +237,11 @@ echo "</br>"
 
         <?php // A voir plus tard pour prendre part à un trajet
 
-        if (empty($_SESSION['mail']) /* && $_SESSION['id'] != $offre[0]['idConducteur'] */) {
-
+        if (!empty($_SESSION['mail']) /* && $_SESSION['id'] != $offre[0]['idConducteur'] */) {
             // Condition à voir si un utilisateur n'est pas l'auteur de l'offre et si l'utilisateur n'a pas déjà postulé.
-            
-            echo '<a data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info participer" role="button">Participer au trajet</a>';
+            if ($notif_test==0)
+            echo '<a id="participer" data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info participer" role="button">Participer au trajet</a>';
+            else echo '<a style="background-color:red" id="participer" data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info no_participer" role="button">Ne plus participer</a>';
         }
 
         ?>
