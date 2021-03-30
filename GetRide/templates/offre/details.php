@@ -6,63 +6,6 @@
     }
 </style>
 
-<script>
-    // FONCTION PARTICIPER
-    $(document).on("click", ".participer", function() {
-        // ajouter notif
-        var el = this;
-        var addid = $(this).data('id');
-        // AJAX Request
-        $.ajax({
-            url: 'participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
-            type: 'GET',
-            data: {
-                id: addid
-            },
-            success: function(response) {
-
-                if (response == 1) { // Enleve le HTML
-                    $(el).closest('a').css('background-color', 'red');
-                    $(el).closest('a').text("Ne plus participer");
-                    document.getElementById("participer").classList.replace('participer', 'no_participer');
-                } else {
-                    alert('Mauvais id.');
-                }
-
-            }
-        });
-
-
-    });
-
-    // FONCTION NE PAS PARTICIPER
-    $(document).on("click", ".no_participer", function() {
-        // ajouter notif
-        var el = this;
-        var deleteid = $(this).data('id');
-        // AJAX Request
-        $.ajax({
-            url: 'no_participer', // Participer.php ne fait que ajouter une notification à l'utilisateur qui postule pour l'instant
-            type: 'GET',
-            data: {
-                id: deleteid
-            },
-            success: function(response) {
-
-                if (response == 1) { // Enleve le HTML
-                    $(el).closest('a').css('background-color', '#5bc0de');
-                    $(el).closest('a').text("Participer au trajet");
-                    document.getElementById("participer").classList.replace('no_participer', 'participer');
-                } else {
-                    alert('Mauvais id.');
-                }
-
-            }
-        });
-
-    });
-</script>
-
 <h1 class="text-center font-weight-bold"> Détails de l'offre</h1>
 
 <?php
@@ -114,27 +57,15 @@ echo "</br>"
                 $etape_horaire = strftime("%Hh%M", strtotime(($etape[0]["horaire"])));
 
                 echo "<h3>Étapes</h3>";
-
-                echo "<div>";
-
-                echo "<strong>" . ucfirst($etape[0]["ville_nom_simple"]) . "</strong>";
-
-                echo " à <strong>" . $etape_horaire . "</strong>";
-
-                echo "</br>";
-
-                echo "</div>";
             }
 
             if (sizeof($etape) > 1) { // 2 étapes ou plus
 
-                for ($i = 1; $i < sizeof($etape); $i++) {
-
-                    $etape_horaire = strftime("%Hh%M", strtotime(($etape[$i]["horaire"])));
+                for ($i = 0; $i < sizeof($etape); $i++) {
 
                     echo "<div>";
 
-                    echo "<strong>" . ucfirst($etape[$i]["ville_nom_simple"]) . "</strong>";
+                    echo "<strong>" . ucfirst($etape[$i]["nomVille"]) . "</strong>";
 
                     echo " à <strong>" . $etape_horaire . "</strong>";
 
@@ -153,7 +84,7 @@ echo "</br>"
 
     <br>
 
-    <div style="margin-left:0.38em;">
+    <div>
 
         <h3>Arrivée</h3>
 
@@ -187,7 +118,9 @@ echo "</br>"
                 <h3>Passagers autorisés</h3>
 
                 <p>
-                    <?php echo ("<strong>" . $offre[0]["nbPassagersMax"] . " personnes </strong>"); ?>
+
+                    <?php echo ("<strong>" . $offre[0]["nbPassagersMax"] . "</strong>"); ?>
+
                 </p>
             </div>
         </div>
@@ -234,19 +167,6 @@ echo "</br>"
     <hr>
 
     <div>
-
-        <?php // A voir plus tard pour prendre part à un trajet
-
-            $session_active = $this->request->getAttribute('identity');
-
-            if (!is_null($session_active) && $session_active->idMembre != $offre[0]['idConducteur']) {
-            // Condition à voir si un utilisateur n'est pas l'auteur de l'offre et si l'utilisateur n'a pas déjà postulé.
-            if ($notif_test==0)
-            echo '<a id="participer" data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info participer" role="button">Participer au trajet</a>';
-            else echo '<a style="background-color:red" id="participer" data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info no_participer" role="button">Ne plus participer</a>';
-        }
-
-        ?>
 
         <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
 

@@ -12,22 +12,11 @@
         <th></th>
     </tr>
 <?php
-
-
     foreach ($offre_filtres_applied as $item){
-
-        $date_depart = $item["horaireDepart"];
-        $date_depart_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_depart)))));
-        $heure_depart_string = strftime("%Hh%M", strtotime(($date_depart)));
-
-        $date_arrivee = $item["horaireArrivee"];
-        $date_arrivee_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_arrivee)))));
-        $heure_arrivee_string = strftime("%Hh%M", strtotime(($date_arrivee)));
-
         echo "<tr>";
         echo "<td>"; echo $item["idOffre"]; echo "</td>";
-        echo "<td class='col-md-2'>"; echo $date_depart_string." ".$heure_depart_string ; echo "</td>";
-        echo "<td class='col-md-2'>"; echo $date_arrivee_string." ".$heure_arrivee_string ; echo "</td>";
+        echo "<td>"; echo $item["horaireDepart"]; echo "</td>";
+        echo "<td>"; echo $item["horaireArrivee"]; echo "</td>";
         echo "<td>"; echo $item["nbPassagersMax"]; echo "</td>";
         echo "<td>"; echo ucfirst($item["nomVilleDepart"]); echo "</td>";
         echo "<td>"; echo ucfirst($item["nomVilleArrivee"]); echo "</td>";
@@ -45,6 +34,9 @@
 <div>
     <form action="offre/view" method="get" class="pull-left">
         <input type="submit" value="Filtres">
+    </form>
+    <form action="offre/view2" method="get" class="pull-left">
+        <input type="submit" value="Filtres Avancés">
     </form>
 </div>
 

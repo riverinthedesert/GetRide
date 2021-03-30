@@ -69,8 +69,8 @@ $cakeDescription = 'Co-Voiturage';
 							</div>
                     </div>
                 </form>
-                <li><a href="offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
+                <li><a href="/GetRide/GetRide/offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="/GetRide/GetRide/offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
                 <!-- Notifications : -->
 
                 <?php
