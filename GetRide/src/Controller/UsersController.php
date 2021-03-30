@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -9,6 +10,7 @@ use Cake\Event\EventInterface;
 /* Gestion des utilisateurs et des autorisations d'accès aux pages.
    Remplace la table Membre dans la modélisation par souci de convention 
    avec le plugin utilisé (Authentication) */
+
 class UsersController extends AppController
 {
 
@@ -18,13 +20,23 @@ class UsersController extends AppController
 
 
     /* Permet d'autoriser l'accès à la connexion et à l'inscription 
-       pour les utilisateurs non connectés */ 
+       pour les utilisateurs non connectés */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        
-        // Exceptions à l'authentification nécessaire (seulement pour ce contrôleur)
-        $this->Authentication->addUnauthenticatedActions(['connexion', 'add']);
+
+        /* Redirection d'un utilisateur connecté vers l'accueil 
+           si celui-ci tente d'accéder à la connexion ou à l'inscription via leur URL */
+
+        // test d'une connexion active
+        $session_active = $this->Authentication->getIdentity();
+
+        if (!is_null($session_active))
+            $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
+
+        else
+            // Exceptions à l'authentification nécessaire (seulement pour ce contrôleur)
+            $this->Authentication->addUnauthenticatedActions(['connexion', 'add', 'recuperation']);
     }
 
 
@@ -64,7 +76,7 @@ class UsersController extends AppController
 
         // si le compte existe et que la connexion s'est bien passée...
         if ($resultat->isValid()) {
-            
+
             // ... on redirige l'utilisateur vers la page d'accueil du site
             $redirection = $this->request->getQuery('redirect', [
                 'controller' => 'Accueil',
@@ -73,11 +85,11 @@ class UsersController extends AppController
 
             return $this->redirect($redirection);
         }
-        
+
         // si une erreur s'est produite, la page ne change pas et un mesage d'erreur s'affiche
         if ($this->request->is('post') && !$resultat->isValid()) {
-            debug($resultat->getData()); 
-            debug($resultat->getErrors());
+            /*debug($resultat->getData());
+            debug($resultat->getErrors());*/
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
         }
     }
@@ -88,7 +100,7 @@ class UsersController extends AppController
     {
         // on vérifie que la session de l'utilisateur est toujours active
         $resultat = $this->Authentication->getResult();
-        
+
         if ($resultat->isValid()) {
 
             $this->Authentication->logout();
@@ -96,5 +108,11 @@ class UsersController extends AppController
             // redirection vers la page d'accueil
             return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
         }
+    }
+
+
+    /* Récupération du mot de passe pour un utlisateur non connecté mais disposant d'un compte */
+    public function recuperation()
+    {
     }
 }

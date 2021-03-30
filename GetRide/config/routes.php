@@ -57,6 +57,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 
     $builder->connect('deconnexion', ['controller' => 'users', 'action' => 'deconnexion']);
 
+    $builder->connect('recuperation', ['controller' => 'users', 'action' => 'recuperation']);
 
 
     
