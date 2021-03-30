@@ -1,57 +1,40 @@
 <?php
+use Cake\Datasource\ConnectionManager;
+$conn = ConnectionManager::get('default');
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'getride');
-
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-session_start();
-// Vérifier la connexion
-if($conn === false){
-    die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
-}
-
-$idMembre = $conn->query("SELECT idMembre FROM `membre` WHERE mail='".$_SESSION['mail']."'");
-while($i = $idMembre->fetch_assoc()){
-    $_SESSION['idMembre'] = $i['idMembre'];
-}
-
-if(!empty($_SESSION['mail'])){
+$session_active = $this->request->getAttribute('identity');
+if(!is_null($session_active)){
     if (isset($_REQUEST['nom'])){
         $nom = $_REQUEST['nom'];
-        $idAdmin = $_SESSION['idMembre'];
         if (isset($_REQUEST['comment'])){
             $comment = $_REQUEST['comment'];
-            $query = "INSERT into `groupe` (nom, idAdmin, commentaire) VALUES ('$nom', '$idAdmin', '$comment')";
+            //insertion du groupe avec commentaire
+            $conn->insert('groupe', [
+                'nom' => $nom,
+                'idAdmin' => $idMembre,
+                'commentaire' => $comment ]);
+            //$query = "INSERT into `groupe` (nom, idAdmin, commentaire) VALUES ('$nom', '$idMembre', '$comment')";
         }
         else
-            $query = "INSERT into `groupe` (nom, idAdmin) VALUES ('$nom', '$idAdmin')";
+            $conn->insert('groupe', [
+                'nom' => $nom,
+                'idAdmin' => $idMembre]);
+            //$query = "INSERT into `groupe` (nom, idAdmin) VALUES ('$nom', '$idMembre')";
 
-        //Lancer la requete sur la bdd
-        $res = mysqli_query($conn, $query);
-        if (!$res) {
-            echo "Problème de requete";
-        }else{
-            $idGroupe = $conn->query("SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'");
-            $idGrp;
-            while($i = $idGroupe->fetch_assoc()){
-                $idGrp = $i['idGroupe'];
-            }
+       // On cherche l'id du créateur de cette offre
+       $requete="SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'";
+       $reqidG = $conn->execute($requete)->fetchAll('assoc');
 
-            //Faire une modification s'il y a des amis en plus d'ajouté
-            $query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
-            
-            //Lancer la requete sur la bdd
-            $res2 = mysqli_query($conn, $query2);
-            
-            if($res){
-                if($res2){
-                    header('Location: VisuGroupe');
-                    exit();
-                }
-            }
-        }
+       $idGrp = $reqidG[0]["idGroupe"];
+
+        //Faire une modification s'il y a des amis en plus d'ajouté
+        $conn->insert('groupeMembre', [
+            'idGroupe' => $idGrp,
+            'idUtilisateur' => $idMembre]);
+        //$query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
+        
+        header('Location: VisuGroupe');
+        exit();
     }
 
 ?>
@@ -81,13 +64,20 @@ if(!empty($_SESSION['mail'])){
                 <?php
                     $membref = 0;
 
-                    $membreFavori = $conn->query("SELECT * FROM `membrefavo` WHERE idMembre='".$_SESSION['idMembre']."'");
-                    while($donnees = $membreFavori->fetch_assoc()){
+                    $membreFavori="SELECT * FROM `membrefavo` WHERE idMembre=".$idMembre;
+                    $mF = $conn->execute($membreFavori)->fetchAll('assoc');
+
+
+                    //$membreFavori = $conn->query("SELECT * FROM `membrefavo` WHERE idMembre='".$_SESSION['idMembre']."'");
+                    while($mF){
                         $membref++;
                         
-                        $name = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$donnees['idMembreFavo']."'");
-				        while($nom = $name->fetch_assoc()){
-                            if($nom['mail'] != $_SESSION['mail']){
+                        $name="SELECT * FROM `membre` WHERE idMembre=".$mF['idMembreFavo'];
+                        $nom = $conn->execute($name)->fetchAll('assoc');
+
+                        //$name = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$mF['idMembreFavo']."'");
+				        while($nom){
+                            if($nom['mail'] != $mail){
                 ?>
 
                                 <div class="form-group">
