@@ -36,11 +36,11 @@ class OffreController extends AppController{
         INNER JOIN users ON users.idMembre=offre.idConducteur 
         INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
         INNER JOIN notation ON notation.idUtilisateur=offre.idConducteur  
-        LEFT OUTER JOIN ville ville_depart ON offre.idVilleDepart=ville_depart.idVille 
-        LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
+        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.idVille 
+        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
         WHERE offre.idOffre=";
 
-        $requete2 = "SELECT * FROM etape,ville WHERE etape.idVille=Ville.idVille AND idOffre=";
+        $requete2 = "SELECT * FROM etape,villes_france_free WHERE etape.idVille=Ville.idVille AND idOffre=";
 
         
         if ($test_offre!=""){ // On rajoute l'id dans le where
@@ -96,7 +96,7 @@ class OffreController extends AppController{
         $string_filtre = "";
 
         // SELECT ALL UTILISATEUR
-        $ville = $conn->execute('SELECT * FROM ville')->fetchAll('assoc');
+        $ville = $conn->execute('SELECT * FROM villes_france_free')->fetchAll('assoc');
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
         $test_depart=$this->request->getQuery("depart");
         $test_tri=$this->request->getQuery("tri");
@@ -111,8 +111,8 @@ class OffreController extends AppController{
         ,prix 
         FROM offre
         INNER JOIN users ON users.idMembre=offre.idConducteur 
-        LEFT OUTER JOIN ville ville_depart ON offre.idVilleDepart=ville_depart.idVille 
-        LEFT OUTER JOIN ville ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
+        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.idVille 
+        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.idVille
         WHERE idOffre>=0";
         
         if(!isset($test_view2))
