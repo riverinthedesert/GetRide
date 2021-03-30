@@ -5,7 +5,8 @@
 	use Cake\Datasource\ConnectionManager;
 	$conn = ConnectionManager::get('default');
 
-	if(!empty($_SESSION['mail'])){
+	$session_active = $this->request->getAttribute('identity');
+	if(!is_null($session_active)){
 ?>
 
 <div class="container">

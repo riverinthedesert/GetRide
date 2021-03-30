@@ -1,43 +1,37 @@
 <?php
-session_start();
+use Cake\Datasource\ConnectionManager;
+$conn = ConnectionManager::get('default');
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'getride');
+$session_active = $this->request->getAttribute('identity');
 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+//Vérification si un idMembre a été donné
+//Si c'est le cas alors suppression de ce membre du groupe
+$idm = $this->request->getQuery('idMembre');
+$idg = $this->request->getQuery('idGroupe');
+if(!empty($idm) && !is_null($session_active) && !empty($idg)){
+    
+    $groupe="SELECT * FROM `groupe` WHERE idGroupe=".$idg;
+    $group = $conn->execute($groupe)->fetchAll('assoc');
 
+    $groupeMembre="SELECT * FROM `users` WHERE idMembre=".$idm;
+    $groupM = $conn->execute($groupeMembre)->fetchAll('assoc');
 
-// Vérifier la connexion
-if($conn === false){
-    die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
-}
-
-if(!empty($_SESSION['mail']) && !empty($_GET['idGroupe']) && !empty($_GET['idMembre'])){
-    $idg = $_GET['idGroupe'];
-    $idm = $_GET['idMembre'];
-        $groupe = $conn->query("SELECT * FROM `groupe` WHERE idGroupe='".$_GET['idGroupe']."'");
-        $group= $groupe->fetch_assoc();
-
-        $groupeMembre = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$_GET['idMembre']."'");
-        $groupM = $groupeMembre->fetch_assoc();
     ?>
 
     <div class="container">
         <div class="text-center">
-            <h1>Supprimer un membre du groupe : <br><b><?php echo $group['nom'];  ?></b></h1>
+            <h1>Supprimer un membre du groupe : <br><b><?php echo $group[0]['nom'];  ?></b></h1>
         </div>
         <h4>Êtes-vous sûre de vouloir supprimer <b><?php 
-            if($groupM['genre'] == "m"){
+            if($groupM[0]['genre'] == "m"){
                 echo 'Monsieur ';
             }
-            else if($groupM['genre'] == "f"){
+            else if($groupM[0]['genre'] == "f"){
                 echo 'Madame ';
             }
-            echo $groupM['nom'];
+            echo $groupM[0]['nom'];
             echo ' ';
-            echo $groupM['prenom'];
+            echo $groupM[0]['prenom'];
            ?></b> de votre groupe ? </h4>
 
         <div class="row">

@@ -1,49 +1,39 @@
 <?php
-session_start();
+use Cake\Datasource\ConnectionManager;
+$conn = ConnectionManager::get('default');
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'getride');
+$session_active = $this->request->getAttribute('identity');
 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Vérifier la connexion
-if($conn === false){
-    die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
-}
-
-if(isset($_GET['idMembre'])){    
+//Vérification si un idMembre a été donné
+//Si c'est le cas alors suppression de ce membre du groupe
+$idMbr = $this->request->getQuery('idMembre');
+$idGp = $this->request->getQuery('idGroupe');
+if(!empty($idMbr) && !is_null($session_active) && !empty($idGp)){    
 
     //Supprimer le membre du groupe
-    $query = "DELETE FROM `groupemembre` WHERE idUtilisateur='".$_GET['idMembre']."' AND idGroupe='".$_GET['idGroupe']."'";
+    $conn->delete('groupemembre', ['idUtilisateur' => $idMbr,
+                                    'idGroupe' => $idGp]);
+        //$query = "DELETE FROM `groupemembre` WHERE idUtilisateur='".$_GET['idMembre']."' AND idGroupe='".$_GET['idGroupe']."'";
     
     //Lancer la requete sur la bdd
-    $res = mysqli_query($conn, $query);
-    
-    if($res){
+    //$res = mysqli_query($conn, $query);
         echo "<div class='alert alert-success'>
             L'utilisateur a été retiré du groupe avec <strong>Succes</strong>
         </div>";
-    }
-    else{
-        echo "<div class='alert alert-danger'>
-        L'utilisateur n'a pas été retiré du groupe... Un problème est survenu, veuillez recommencer !
-    </div>";
-    }
 }
 
 
-if(!empty($_SESSION['mail'] && !empty($_GET['idGroupe']))){
-        $groupe = $conn->query("SELECT * FROM `groupe` WHERE idGroupe='".$_GET['idGroupe']."'");
-        $group= $groupe->fetch_assoc();
+if(!is_null($session_active) && !empty($idGp)){
+        $groupe="SELECT * FROM `groupe` WHERE idGroupe=".$idGp;
+        $group = $conn->execute($groupe)->fetchAll('assoc');
 
-        $groupeMembre = $conn->query("SELECT * FROM `groupemembre` WHERE idGroupe='".$_GET['idGroupe']."'");
+        $groupeMembre="SELECT * FROM `groupemembre` WHERE idGroupe=".$idGp;
+        $groupM = $conn->execute($groupeMembre)->fetchAll('assoc');
     ?>
 
     <div class="container">
         <div class="text-center">
-            <h1>Supprimer un membre du groupe : <br><b><?php echo $group['nom'];  ?></b></h1>
+            <h1>Supprimer un membre du groupe : <br><b><?php echo $group[0]['nom'];  ?></b></h1>
         </div>
         <h4>Qui souhaitez-vous retirer de votre groupe privé ?</h4>
                 
@@ -53,11 +43,13 @@ if(!empty($_SESSION['mail'] && !empty($_GET['idGroupe']))){
 
 <?php
     $i = 0;
-    while($groupM = $groupeMembre->fetch_assoc()){
-        $membre = $conn->query("SELECT * FROM `membre` WHERE idMembre ='".$groupM['idUtilisateur']."'");
+    foreach($groupM as $GM){
+        $membre="SELECT * FROM `users` WHERE idMembre =".$GM['idUtilisateur'];
+        $me = $conn->execute($membre)->fetchAll('assoc');
         
-        while($m = $membre->fetch_assoc()){
-            if($m['mail'] != $_SESSION['mail']){
+        foreach($me as $m){
+            $mail=$session_active->mail;
+            if($m['mail'] != $mail){
                 $idG = $_GET['idGroupe'];
                 $idM = $m['idMembre'];
     
@@ -92,9 +84,16 @@ if(!empty($_SESSION['mail'] && !empty($_GET['idGroupe']))){
             }
         }
     }
-    ?>
+    if($i == 3){
+
+    ?> 
+    </div>       
 <?php
-    }
+    }}
 ?>
+
+<div class="text-right">
+        <a href='VisuGroupe' role="button" class="btn btn-success "><span class="glyphicon glyphicon-repeat"></span> Retour</a>
+    </div>
 
 
