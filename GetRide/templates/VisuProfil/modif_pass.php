@@ -11,7 +11,7 @@
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
 
-	$membre = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+	$membre = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
 	while($i = $membre->fetch_assoc()){
 		$ancienPass = $i['motDePasse'];
 	}	

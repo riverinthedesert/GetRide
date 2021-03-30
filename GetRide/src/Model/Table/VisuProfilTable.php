@@ -16,7 +16,7 @@ class VisuProfilTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('membre');
+        $this->setTable('users');
         $this->setDisplayField('idMembre');
         $this->setPrimaryKey('idMembre');
     }

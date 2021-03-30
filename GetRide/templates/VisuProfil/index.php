@@ -31,7 +31,7 @@
 		<img src="profil.jpg"  height="100" width="100" >
 		<!-- Si genre = femme mettre Madame ... sinon Monsieur...-->
         <?php
-            $membre = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+            $membre = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
 
             while($i = $membre->fetch_assoc()){
                 if($i['genre'] == "m"){
@@ -46,7 +46,7 @@
 			
 			$_SESSION['idMembre'] = $i['idMembre'];
 
-			$membreDeProfil = $conn->query("SELECT * FROM `membre` WHERE mail='".$_SESSION['mail']."'");
+			$membreDeProfil = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
 			while($nuplet = $membreDeProfil->fetch_assoc())
 			{ 
 				$_SESSION['idMembreProfil'] = $nuplet['idMembre'];

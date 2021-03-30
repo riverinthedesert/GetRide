@@ -18,10 +18,10 @@
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
 	
-	//Update membre set motDePasse = "12345" where mail IN (SELECT mail FROM membre where mail = "leon@gaml.com")
+	//Update users set motDePasse = "12345" where mail IN (SELECT mail FROM membre where mail = "leon@gaml.com")
 	
-	$query = "Update membre set motDePasse = '$newPass' where mail IN 
-	(SELECT mail FROM membre where mail='".$_SESSION['mail']."');";
+	$query = "Update users set motDePasse = '$newPass' where mail IN 
+	(SELECT mail FROM users where mail='".$_SESSION['mail']."');";
 	if ($conn->query($query) === TRUE) {
 		echo "Mot de passe modifié avec succés!";
 		echo '<script type="text/javascript">
