@@ -5,6 +5,10 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 
+
+/* Gestion des utilisateurs et des autorisations d'accès aux pages.
+   Remplace la table Membre dans la modélisation par souci de convention 
+   avec le plugin utilisé (Authentication) */
 class UsersController extends AppController
 {
 

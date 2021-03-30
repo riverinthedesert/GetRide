@@ -8,7 +8,17 @@ body {
 </div>
 
 	<div class="text-center">
-        <font size="10"><p><span style="color:Navy">Où souhaitez-vous aller ?</span></p></font>
+        <font size="10"><p><span style="color:Navy">Où souhaitez-vous aller<?php 
+        
+        // on vérifie si l'utilisateur est connecté
+        $session_active = $this->request->getAttribute('identity');
+    
+        // ajout du prénom
+        if (!is_null($session_active))
+            echo ', ' . $session_active->prenom;
+        ?>
+        
+        ?</span></p></font>
         <div style="background-color:#AFEEEE;">
             <div class="container">
                 <br>
@@ -87,7 +97,7 @@ body {
 
 <div  style="background-color:#AFEEEE;">
     <div class="text-center">
-        <p> <font size="5">Vous n'avez pas encore de compte ? <a href="/GetRide/GetRide/membre/add">Inscrivez-vous</a> ! </font></p>
+        <p> <font size="5">Vous n'avez pas encore de compte ? <a href="/GetRide/GetRide/inscription">Inscrivez-vous</a> ! </font></p>
     </div>
 </div>
 

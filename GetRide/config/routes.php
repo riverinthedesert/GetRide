@@ -45,13 +45,21 @@ use Cake\Routing\RouteBuilder;
 $routes->setRouteClass(DashedRoute::class);
 
 $routes->scope('/', function (RouteBuilder $builder) {
-    /*
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, templates/Pages/home.php)...
-     */
-    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    
+    /* On fixe les alias d'URLS: ne rien saisir après GetRide/GetRide revient
+       à accéder à l'accueil */ 
+    $builder->connect('/', ['controller' => 'Accueil', 'action' => 'index']);
 
+    // saisir getride/connexion au lieu de getride/users/connexion
+    $builder->connect('connexion', ['controller' => 'users', 'action' => 'connexion']);
+
+    $builder->connect('inscription', ['controller' => 'users', 'action' => 'add']);
+
+    $builder->connect('deconnexion', ['controller' => 'users', 'action' => 'deconnexion']);
+
+
+
+    
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */

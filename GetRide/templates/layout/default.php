@@ -128,16 +128,27 @@ $cakeDescription = 'Co-Voiturage';
 
 
                 <?php
-                if (!empty($_SESSION['mail'])) {
+
+                // on vérifie que quelqu'un est connecté 
+                $session_active = $this->request->getAttribute('identity');
+               
+                if (!is_null($session_active)){
+
+                    // message de bienvenue en haut à droite
+                    echo 'Bonjour ' . $session_active->prenom . ' !  ';
+            
                 ?>
                     <!--Affiche que si une personne est connecté -->
-                    <button class="btn btn-danger navbar-btn">Deconnexion</button>
+                    
+                    <a href="/GetRide/GetRide/deconnexion">
+                    <button class="btn btn-danger navbar-btn">Déconnexion</button>
+                    </a>
                 <?php
                 } else {
                 ?>
                     <!--afficher s'il n'y personne de connecté-->
-                    <li><a href="/GetRide/GetRide/users/add"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
-                    <li><a href="/GetRide/GetRide/users/connexion><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                    <li><a href="/GetRide/GetRide/inscription"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                    <li><a href="/GetRide/GetRide/connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                 }
                 ?>
