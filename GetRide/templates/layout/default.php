@@ -75,12 +75,13 @@ $cakeDescription = 'Co-Voiturage';
                 <?php
 
                 use Cake\Datasource\ConnectionManager;
+                $session_active = $this->request->getAttribute('identity');
 
-                if (!empty($_SESSION['mail'])) { // A CHANGE
-
+                     if (!is_null($session_active)) {
+                         
                     $conn = ConnectionManager::get('default');
 
-                    $id_utilisateur=0; // 0 A REMPLACER AVEC VARIABLE SESSION ID UTILISATEUR
+                    $id_utilisateur=$session_active->idMembre; // 0 A REMPLACER AVEC VARIABLE SESSION ID UTILISATEUR
 
                     $not = $conn->execute("SELECT * FROM notification WHERE idMembre =".$id_utilisateur." AND estLue=0")->fetchAll('assoc');
 
@@ -104,7 +105,7 @@ $cakeDescription = 'Co-Voiturage';
 
                 <!-- Afficher que si il y a quelqu'un de connecté -->
                 <?php
-                if (!empty($_SESSION['mail'])) {
+                if (!is_null($session_active)) {
                 ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>

@@ -12,7 +12,6 @@
 	define('DB_NAME', 'getride');
 	
 	$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-	session_start();
 	// Vérifier la connexion
 	if($conn === false){
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());

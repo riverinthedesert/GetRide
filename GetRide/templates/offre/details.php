@@ -237,7 +237,9 @@ echo "</br>"
 
         <?php // A voir plus tard pour prendre part à un trajet
 
-        if (!empty($_SESSION['mail']) /* && $_SESSION['id'] != $offre[0]['idConducteur'] */) {
+            $session_active = $this->request->getAttribute('identity');
+
+            if (!is_null($session_active) && $session_active->idMembre != $offre[0]['idConducteur']) {
             // Condition à voir si un utilisateur n'est pas l'auteur de l'offre et si l'utilisateur n'a pas déjà postulé.
             if ($notif_test==0)
             echo '<a id="participer" data-id="' . $offre[0]["idOffre"] . '" class="btn btn-info participer" role="button">Participer au trajet</a>';

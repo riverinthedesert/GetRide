@@ -11,7 +11,7 @@ class OffreController extends AppController
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');
         
-        $id_utilisateur=0; // A CHANGE (à remplacer par $_session['id'])
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE (à remplacer par $_session['id'])
 
         $offre_id = $this->request->getQuery("id"); // GET message
         
@@ -40,7 +40,7 @@ class OffreController extends AppController
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');
         
-        $id_utilisateur=0; // A CHANGE ()
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE ()
 
         $requete="SELECT * FROM users WHERE idMembre=".$id_utilisateur;
         $requete_id = $conn->execute($requete)->fetchAll('assoc');
@@ -89,7 +89,7 @@ class OffreController extends AppController
 
         $test_offre = $this->request->getQuery("idOffre");
 
-        $id_utilisateur=0; // A CHANGE
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE
 
         // BASE DE LA REQUETE
         $requete = "SELECT offre.idOffre,horaireDepart,horaireArrivee,nbPassagersMax,

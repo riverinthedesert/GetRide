@@ -13,7 +13,7 @@
             $conn = ConnectionManager::get('default');
             $this->loadComponent('Paginator');
 
-            $id_utilisateur=0;  // A CHANGE AVEC SESSION
+            $id_utilisateur=$this->Authentication->getIdentity()->idMembre;  // A CHANGE AVEC SESSION
 
             $requete="SELECT * FROM notification 
             LEFT OUTER JOIN offre ON offre.idOffre=notification.idOffre 
@@ -32,7 +32,7 @@
             $conn = ConnectionManager::get('default');
             $this->loadComponent('Paginator');
 
-            $id_utilisateur=0; // A CHANGE AVEC SESSION
+            $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE AVEC SESSION
             
             $url_id = $this->request->getQuery("id"); // GET message
 
