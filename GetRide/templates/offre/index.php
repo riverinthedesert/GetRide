@@ -32,7 +32,7 @@
 ?>
 </table></br>
 <div>
-    <form action="offre/view" method="get" class="pull-left">
+    <form style="margin-right:2em;" action="offre/view" method="get" class="pull-left">
         <input type="submit" value="Filtres">
     </form>
     <form action="offre/view2" method="get" class="pull-left">
