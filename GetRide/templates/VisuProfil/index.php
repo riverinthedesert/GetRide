@@ -15,7 +15,6 @@
 
     $session_active = $this->request->getAttribute('identity');
 	$mail = $session_active->mail;
-	$idMembreProfil = $session_active->idMembreProfil;
 	$idMembre = $session_active->idMembre;
 		
 ?>
@@ -44,11 +43,11 @@
 			
 			$_SESSION['idMembre'] = $i['idMembre'];
 
-			$membreDeProfil = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
+			$membreDeProfil = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 			while($nuplet = $membreDeProfil->fetch_assoc())
 			{ 
-				$_SESSION['idMembreProfil'] = $nuplet['idMembre'];
-				$_SESSION['mailDeProfil'] = $nuplet['mail'];
+				$idMembreProfil =  $nuplet['idMembre'];
+				$mailDeProfil = $nuplet['mail'];
 			}
 
         ?>
