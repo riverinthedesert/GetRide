@@ -1,7 +1,6 @@
 <html>
 <?php
 
-    session_start(); 
    	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
 	define('DB_PASSWORD', '');
@@ -10,12 +9,22 @@
 	if($conn === false){
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
+	
+	use Cake\Datasource\ConnectionManager;
+	use Cake\Event\EventInterface;
+	use Cake\Mailer\Email;
 
-	$membre = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
+    $session_active = $this->request->getAttribute('identity');
+	$mail = $session_active->mail;
+	
+	
+
+	$membre = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 	while($i = $membre->fetch_assoc()){
 		$ancienPass = $i['motDePasse'];
 	}	
 	?>
+	
 	
 	
 	
