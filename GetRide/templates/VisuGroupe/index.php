@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="text-center">
-		<h1>Mon Groupes d'amis</h1>
+		<h1>Mes Groupes d'amis</h1>
 	</div>
 	
 	<!-- Boutton pour ajouter un groupe d'ami !-->
@@ -71,7 +71,7 @@
 											<span class="glyphicon glyphicon-menu-hamburger"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu" >
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-plus"></span>  Ajouter un ami</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='AjoutMembreGroupe?idGroupe=$element' "?>><span class="glyphicon glyphicon-plus"></span>  Ajouter un ami</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='SupprimMembre?idGroupe=$element' "?> ><span class="glyphicon glyphicon-trash"></span>  Supprimer un ami</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-pencil"></span>  Modifier le groupe</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" href=<?php echo "/GetRide/GetRide/VisuGroupe/quitterGroupe/$element"?>><span class="glyphicon glyphicon-remove"></span>  Quitter le groupe</a></li>
