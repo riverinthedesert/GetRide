@@ -12,7 +12,7 @@
 		$query = "DELETE FROM users WHERE mail='".$_SESSION['mail']."';";
 	if ($conn->query($query) === TRUE) {
 		echo '<script type="text/javascript">
-			window.location.replace("http://localhost/GetRide/GetRide/membre/add");
+			window.location.replace("http://localhost/GetRide/GetRide/users/add");
 		</script>';
 	} 
 ?>

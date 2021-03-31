@@ -53,12 +53,12 @@ class UsersController extends AppController
             //Sauvegarde dans la base de données
             if ($this->Users->save($membre)) {
                 $this->Flash->success(__('Votre compte a bien été crée.'));
-                //session_start();
+                session_start();
                 $_SESSION['connect'] = true;
                 $_SESSION['login'] = $nom_user;
                 $_SESSION['mail'] = $mail_user;
                 $_SESSION['idMembre'] = $id_user;
-                return $this->redirect(['action' => 'add']);
+                return $this->redirect(['action' => '/GetRide/GetRide/Accueil']);
             }
             $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
         }

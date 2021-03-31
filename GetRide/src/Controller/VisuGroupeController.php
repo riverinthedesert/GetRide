@@ -26,4 +26,31 @@
             }
             
         }
+
+
+        public function quitterGroupe($idGroupe)
+        {
+            // on récupère l'id de l'utilisateur a supprimé
+            $session_active = $this->request->getAttribute('identity');
+            $idUser = $session_active->idMembre;
+
+            //si l'utilisateur a bien confirmé qu'il voulait quitter le groupe
+            if (isset($_POST['Oui'])) {
+                //on supprime l'utilisateur dans le groupe choisi
+                $conn = ConnectionManager::get('default');
+                $requete="DELETE FROM `groupemembre` WHERE idUtilisateur=".$idUser." AND idGroupe=".$idGroupe;
+                $donnees = $conn->execute($requete);
+                $this->Flash->success(__('Vous avez bien quitté le groupe.'));
+                 //on redirige l'utilisateur sur sa page de groupe
+                return $this->redirect(['controller' => 'VisuGroupe', 'action' => 'index']);
+            }else if(isset($_POST['Non'])){
+                
+                //Si il ne veut pas quitter le groupe, on le renvoit juste sur la page des groupes
+                return $this->redirect(['controller' => 'VisuGroupe', 'action' => 'index']);
+            }
+
+            
+        }
     }
+
+    

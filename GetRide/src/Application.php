@@ -132,7 +132,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
        /* On redirige un utilisateur non connecté vers la page de connexion
           si celui-ci tente d'accéder à une page où l'authentification est nécessaire */
        $authenticationService = new AuthenticationService([
-           'unauthenticatedRedirect' => '/GetRide/GetRide/connexion',
+           'unauthenticatedRedirect' => '/GetRide/GetRide/users/connexion',
            'queryParam' => 'redirect',
        ]);
 
@@ -153,7 +153,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                'username' => 'mail',
                'password' => 'motDePasse',
            ],
-           'loginUrl' => '/GetRide/GetRide/connexion',
+           'loginUrl' => '/GetRide/GetRide/users/connexion',
        ]);
 
        return $authenticationService;
