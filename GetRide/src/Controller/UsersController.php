@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\ConnectionManager;
 use Cake\Event\EventInterface;
-
+use Cake\Mailer\Email;
 
 /* Gestion des utilisateurs et des autorisations d'accès aux pages.
    Remplace la table Membre dans la modélisation par souci de convention 
@@ -52,13 +53,13 @@ class UsersController extends AppController
             $id_user = $membre->get('idMembre');
             //Sauvegarde dans la base de données
             if ($this->Users->save($membre)) {
-                $this->Flash->success(__('Votre compte a bien été crée.'));
-                session_start();
-                $_SESSION['connect'] = true;
-                $_SESSION['login'] = $nom_user;
-                $_SESSION['mail'] = $mail_user;
-                $_SESSION['idMembre'] = $id_user;
-                return $this->redirect(['action' => '/GetRide/GetRide/Accueil']);
+                $this->Flash->success(__('Votre compte a bien été créé.'));
+              
+                // connecte automatiquement l'utilisateur
+                $this->Authentication->setIdentity($membre);
+            
+                // redirection vers l'accueil
+                return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
             }
             $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
         }
@@ -83,6 +84,8 @@ class UsersController extends AppController
                 'action' => 'index',
             ]);
 
+            $this->Flash->success(__('Connexion réussie !'));
+
             return $this->redirect($redirection);
         }
 
@@ -99,11 +102,17 @@ class UsersController extends AppController
     public function deconnexion()
     {
         // on vérifie que la session de l'utilisateur est toujours active
-        $resultat = $this->Authentication->getResult();
+        $session_active = $this->request->getAttribute('identity');
+    
+        if (!is_null($session_active)){
 
-        if ($resultat->isValid()) {
+            $prenom = $session_active->prenom;
 
+            // déconnexion
             $this->Authentication->logout();
+            
+            // message de confirmation de la déconnexion
+            $this->Flash->success(__('À bientôt ' . $prenom .' !'));
 
             // redirection vers la page d'accueil
             return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
