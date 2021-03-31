@@ -30,9 +30,8 @@
 	                    echo $this->Form->control('idVilleArrivee', ['type' => 'number']);
 	                    echo $this->Form->control('prix', ['type' => 'number']);
 	                    echo $this->Form->control('estPrivee', ['type' => 'checkbox']);
-	               	    echo $this->Form->control('idConducteur', ['type' => 'number']);
-
-
+	                    print_r($_SESSION['Auth']['idMembre']);
+                		echo "ok";
 	                ?>
 	            </fieldset>
 	            <?= $this->Form->button(__('Submit')) ?>
