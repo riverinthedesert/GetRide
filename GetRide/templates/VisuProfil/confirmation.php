@@ -2,8 +2,12 @@
 
 
 	
-    session_start(); 
-	
+	use Cake\Datasource\ConnectionManager;
+	use Cake\Event\EventInterface;
+	use Cake\Mailer\Email;
+
+    $session_active = $this->request->getAttribute('identity');
+	$mail = $session_active->mail;
 	
 	//A mettre dans les mots de passe seront hashés en md5!
 	//$newPass = md5($_GET["confpass"]);
@@ -21,7 +25,7 @@
 	//Update users set motDePasse = "12345" where mail IN (SELECT mail FROM membre where mail = "leon@gaml.com")
 	
 	$query = "Update users set motDePasse = '$newPass' where mail IN 
-	(SELECT mail FROM users where mail='".$_SESSION['mail']."');";
+	(SELECT mail FROM users where mail='".$mail."');";
 	if ($conn->query($query) === TRUE) {
 		echo "Mot de passe modifié avec succés!";
 		echo '<script type="text/javascript">

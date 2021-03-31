@@ -1,5 +1,4 @@
 <?php 
-	session_start(); 
 	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
 	define('DB_PASSWORD', '');
@@ -10,15 +9,13 @@
 		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 	}
 
-	if(empty($_SESSION['mail'])){
-		// maintanant just tester
-		$_SESSION['mail'] = "htrrthfefezhtr@rgrrg";
-	}
-	if(empty($_SESSION['mailDeProfil'])){
-		// maintanant just tester
-		$_SESSION['mailDeProfil'] = $_SESSION['mail'];
-	}
-	if(!empty($_SESSION['mail'])){
+	use Cake\Datasource\ConnectionManager;
+	use Cake\Event\EventInterface;
+	use Cake\Mailer\Email;
+
+    $session_active = $this->request->getAttribute('identity');
+	$mail = $session_active->mail;
+	$idMembre = $session_active->idMembre;
 		
 ?>
 <div class="container">
@@ -31,7 +28,7 @@
 		<img src="profil.jpg"  height="100" width="100" >
 		<!-- Si genre = femme mettre Madame ... sinon Monsieur...-->
         <?php
-            $membre = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
+            $membre = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 
             while($i = $membre->fetch_assoc()){
                 if($i['genre'] == "m"){
@@ -46,11 +43,11 @@
 			
 			$_SESSION['idMembre'] = $i['idMembre'];
 
-			$membreDeProfil = $conn->query("SELECT * FROM `users` WHERE mail='".$_SESSION['mail']."'");
+			$membreDeProfil = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 			while($nuplet = $membreDeProfil->fetch_assoc())
 			{ 
-				$_SESSION['idMembreProfil'] = $nuplet['idMembre'];
-				$_SESSION['mailDeProfil'] = $nuplet['mail'];
+				$idMembreProfil =  $nuplet['idMembre'];
+				$mailDeProfil = $nuplet['mail'];
 			}
 
         ?>
@@ -73,9 +70,9 @@
 	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
 	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer']) ?>
 		Attention: La suppression du compte est définitive !
-	<?= $this->Form->postButton(__('Ajouter dans Favolist'), ['action' => 'ajouterFavo',$_SESSION['idMembre'] ,$_SESSION['idMembreProfil']]) ?>
+	<?= $this->Form->postButton(__('Ajouter dans Favolist'), ['action' => 'ajouterFavo',$idMembre ,$idMembreProfil]) ?>
 </div>
 <?php
-    }}
+    }
 
 ?>
