@@ -140,7 +140,7 @@ $cakeDescription = 'Co-Voiturage';
                     <!--Affiche que si une personne est connecté -->
                     
                     <a href="/GetRide/GetRide/deconnexion">
-                    <button class="btn btn-danger navbar-btn">Déconnexion</button>
+                    <button style="margin-right:1em;margin-left:1em;" class="btn btn-danger navbar-btn">Déconnexion</button>
                     </a>
                 <?php
                 } else {
