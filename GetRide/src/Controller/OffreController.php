@@ -76,20 +76,23 @@ class OffreController extends AppController{
                 $horaireDepart = $offre->get('horaireDepart') . " " . $offre->get('horaireDepart');
                 $horaireArrivee = $offre->get('horaireArrivee');
                 $nombrePassagers = $offre->get('nbPassagersMax');
+                $offre->set('idConducteur',$_SESSION['Auth']['idMembre']);
+
+
                 //Sauvegarde dans la base de données
                 if ($this->Offre->save($offre)) {
                     $this->Flash->success(__('Votre offre a bien été crée.'));
-                   
-                    return $this->redirect(['action' => 'index']);
                 }
+                else
+                {	
                 $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
+            	}
             }
             $this->set(compact('offre'));
     }
 
     public function index(){
 
-        
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');  
 
