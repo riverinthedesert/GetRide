@@ -60,7 +60,7 @@ $cakeDescription = 'Co-Voiturage';
                 <a class="navbar-brand" href="/GetRide/GetRide/Accueil">Co-Voiturages</a>
             </div>
             <ul class="nav navbar-nav">
-                <form class="navbar-form navbar-left" action="search" method="post">
+                <form class="navbar-form navbar-left" action="/GetRide/GetRide/search" method="post">
                     <div class="input-group input-group-sm">
 						   <input name="text" type="text" class="form-control" placeholder="Rechercher personne">
 						   
