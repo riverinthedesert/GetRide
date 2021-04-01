@@ -175,13 +175,6 @@ class OffreController extends AppController{
 
     public function index(){
 
-<<<<<<< HEAD
-=======
-        
-        setlocale(LC_TIME, 'fr_FR');
-        date_default_timezone_set('Europe/Paris');
-
->>>>>>> 18ac43cc1b4950b0a1e36aeec108d7c0ec09e044
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');
 
@@ -202,6 +195,7 @@ class OffreController extends AppController{
           ,prix 
           FROM offre
           INNER JOIN users ON users.idMembre=offre.idConducteur 
+          INNER JOIN conducteur ON conducteur.idMembre=users.idMembre
           LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
           LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
           WHERE idOffre>=0";
