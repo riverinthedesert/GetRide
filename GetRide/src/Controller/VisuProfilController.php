@@ -18,6 +18,7 @@ use Cake\Datasource\ConnectionManager;
 		public function view(){
 			$this->Form->postButton(__('button1'), ['action' => 'supprimer']);
 			$this->Form->postButton(__('button1'), ['action' => 'modifPass']);
+			$this->Form->postButton(__('button1'), ['action' => 'modifInfos']);
 
 		}
 		
@@ -34,6 +35,18 @@ use Cake\Datasource\ConnectionManager;
 	
 		}
 		
+		public function confirmInfos()
+		{
+
+		}
+		
+
+			
+		
+		public function modifInfos()
+		{
+	
+		}
 		public function ajouterFavo($idMembre = null,$idMembreFavo = null)
 		{
 			if ($this->request->is('post')) {
