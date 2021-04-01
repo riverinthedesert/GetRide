@@ -10,4 +10,10 @@ class ProfileController extends AppController
     {
 
     }
+	
+	public function ajouterFavo()
+    {
+		
+
+    }
 }

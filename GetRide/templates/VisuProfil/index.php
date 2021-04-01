@@ -73,9 +73,7 @@
 	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['action' => 'modifInfos']) ?>
 	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
 	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer']) ?>
-
 		Attention: La suppression du compte est définitive !
-	<?= $this->Form->postButton(__('Ajouter dans Favolist'), ['action' => 'ajouterFavo',$idMembre ,$idMembreProfil]) ?>
 </div>
 <?php
     }
