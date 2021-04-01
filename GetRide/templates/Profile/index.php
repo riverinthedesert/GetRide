@@ -15,35 +15,40 @@
 	}
 	
 	
+	echo "<h1>Profil</h1>";
+
 	
-	echo "Profile";
-	echo "</br>";
 	$id = $_GET["id"];
 
 	$searchQuery = $conn->query("SELECT * FROM `users` WHERE idMembre='".$id."'");
+	
+	echo"<div class='container'>";
+
 	while($i = $searchQuery->fetch_assoc()){
+		if($i['pathPhoto']!=null){
+			echo "<img src='".$i['pathPhoto']."'  height='100' width='100' >";
+		}
+
+
 		if($i['genre']=='m'){
-			echo "M. ";
+			echo "<b>M. </b>";
 		} else {
-			echo "Mme ";
+			echo "<b>Mme </b>";
 		}
 		echo $i['nom']." ".$i['prenom'];
 		
 		echo "<br>";
-		
-		echo "Mail: ".$i['mail'];
-		
-		echo "<br>";
-		echo "Numéro de téléphone : ".$i['telephone'];
+		echo "<b>Mail : </b>".$i['mail'];
 		
 		echo "<br>";
-		echo "Date de naissance: : ".$i['naissance'];
+		echo "<b>Numéro de téléphone : </b>".$i['telephone']."</b>";
 		
 		echo "<br>";
-		echo "Conducteur: ".$i['estConducteur'];
-
-
+		echo "<b>Date de naissance</b> : ".$i['naissance'];
 		
-
+		echo "<br>";
+		echo "<b>Conducteur :</b>".$i['estConducteur'];
 	}
+	
+	echo "</div>";
 ?>

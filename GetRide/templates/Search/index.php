@@ -22,7 +22,7 @@
 									");
 		while($i = $searchQuery->fetch_assoc()){
 			echo "<a href=profile?id=".$i['idMembre']."> ";
-			echo $i['mail'];
+			echo $i['nom']." ".$i['prenom']." ".$i['mail'];
 			echo "</a>";
 			$compteur++;
 			echo "</br>";
