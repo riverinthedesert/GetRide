@@ -22,7 +22,24 @@
 	$membre = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 	while($i = $membre->fetch_assoc()){
 		$ancienPass = $i['motDePasse'];
-	}	
+	}
+	
+	
+	if(isset($_COOKIE['password'])){
+		if($_COOKIE['password']=='query'){
+			echo "<font color='red'> <b> Erreur dans la Database !</font> </b>";
+		} else if ($_COOKIE['password']=='regex'){
+			echo "<font color='red'> <b> Votre mot de passe doit avoir 8 charactères, une majuscule, un chiffre, une minuscule</b> </font>";
+		} else if ($_COOKIE['password']=='confirm'){
+			echo "<font color='red'> <b> Mot de passe de confirmation incorrect! </b> </font>";
+	
+		} else if($_COOKIE['password']=='hash') {
+			echo "<font color='red'> <b> Ancien mot de passe incorrect! </b> </font>";
+		} else {
+			//Reset du cookie;
+			setcookie('password');
+		}
+	}
 	?>
 	
 	
@@ -39,25 +56,7 @@
   }
   
 	function Confirm(){
-		var error_div = document.getElementById("submission_errors");
-		error_div.innerHTML = "";
-		var oldPassConf = <?php echo json_encode($ancienPass); ?>;
-		var oldPass = document.getElementById("oldpass").value;
-		var newPass = document.getElementById("newpass").value;
-		var confPass = document.getElementById("confpass").value;	
-		//Un des deux à enlever quand les mots de passe seront hashés en md5!
-		if(oldPassConf==calcMD5(oldPass)||oldPassConf==oldPass){
-			if(newPass==confPass){
-			} else {
-				appendMessageToErrorDiv(error_div, "Votre mot de passe de confirmation est incorrect !");
-			}
-		} else {
-			appendMessageToErrorDiv(error_div, "Votre mot de passe actuel est incorrect !");
-		}
-		/*   submit form if form validates without any error   */
-		if (error_div.innerHTML == "") {
 			document.myForm.submit();
-		}
 	}
 </script>
   <form name="myForm" action="confirmation" method="get">
