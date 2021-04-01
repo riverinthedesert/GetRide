@@ -69,10 +69,25 @@
         ?>
 	</div>
 	&emsp;&emsp;
+	
+	
 	<br><br>
 	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['action' => 'modifInfos']) ?>
 	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
-	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer']) ?>
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	<?= $this->Form->postLink(__('Supprimer votre compte'), ['action' => 'supprimer'], ['class'=>'your_class', 'confirm' => __('Voulez-vous confirmer la suppression de compte?')]) ?>
+	
+
+
 		Attention: La suppression du compte est définitive !
 </div>
 <?php
