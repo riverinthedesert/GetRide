@@ -37,6 +37,18 @@
 
   </div>
 
+  <h2>Offre privée</h2>
+  <div class="form-group">
+    <input type="radio" id="nonpr" name="privee" value="0">
+    <label class="label_filtre" for="nonpr">Afficher les offres publics</label>
+
+    </br>
+
+    <input type="radio" id="pr" name="privee" value="1">
+    <label for="pr">Afficher les offres privées</label>
+
+  </div>
+
   <div class="form-group">
     <h2>Heure de départ</h2>
 

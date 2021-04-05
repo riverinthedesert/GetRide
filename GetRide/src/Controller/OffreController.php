@@ -234,16 +234,24 @@ class OffreController extends AppController{
 
         $test_filtre="1";
 
+        
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
+
         // SELECT ALL UTILISATEUR
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
         $test_depart=$this->request->getQuery("depart");
         $test_tri=$this->request->getQuery("tri");
+        $test_privee=$this->request->getQuery("privee");
+
 
         // On teste si l'un des champs obligatoires de view2 a été rempli
         $test_view2 = $this->request->getQuery("villeDepart");
         
 
           // BASE DE LA REQUETE
+
+          if ($test_privee!="1"){
+
           $requete = "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
           ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
           ,prix,noteMoyenne
@@ -252,7 +260,21 @@ class OffreController extends AppController{
           INNER JOIN conducteur ON conducteur.idMembre=users.idMembre
           LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
           LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
-          WHERE idOffre>=0";
+          WHERE estPrivee=0";
+
+          }else{
+          $string_filtre.= " Offres privées |";
+          $requete =  "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
+          ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
+          ,prix,noteMoyenne
+          FROM offre
+          INNER JOIN users ON users.idMembre=offre.idConducteur 
+          INNER JOIN conducteur ON conducteur.idMembre=users.idMembre
+          INNER JOIN groupemembre ON groupemembre.idGroupe=offre.idGroupe
+          LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
+          LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
+          WHERE estPrivee=1 AND groupemembre.idUtilisateur=".$id_utilisateur;
+          }
         
         if(!isset($test_view2))
         {    
