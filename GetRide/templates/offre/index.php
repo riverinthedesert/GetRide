@@ -1,8 +1,9 @@
+<div style="margin-left:-1em;">
 <div class="row"> 
-<h1 class="col-md-10">Offres filtrées </h1>
+<h1 class="col-md-12">Offres filtrées </h1>
 <a style="height:2.5em;margin-top:1em;"href="/GetRide/GetRide/offre/historique" class="btn btn-info col" role="button">Historique de recherche</a>
 </div>
-<table>
+<table style="margin-left:-2em;">
     <tr>
         <th>N°</th>
         <th>Horaire départ</th>
@@ -11,6 +12,7 @@
         <th>Ville départ</th>
         <th>Ville arrivée</th>
         <th>Conducteur</th>
+        <th>Note conducteur</th>
         <th>Prix</th>
         <th></th>
     </tr>
@@ -24,7 +26,11 @@
         echo "<td>"; echo ucfirst($item["nomVilleDepart"]); echo "</td>";
         echo "<td>"; echo ucfirst($item["nomVilleArrivee"]); echo "</td>";
         echo "<td>"; echo ucfirst($item["nom"])." ".ucfirst($item["prenom"]); echo "</td>";
-        echo "<td>"; echo $item["prix"];echo "</td>";
+        echo "<td>"; 
+        if ($item["noteMoyenne"]!="")echo $item["noteMoyenne"]; 
+        else echo "Aucune note";
+        echo "</td>";
+        echo "<td>"; echo $item["prix"]."€";echo "</td>";
         $idOffre = $item["idOffre"];
         echo "<td>";echo "<a role='button' class='btn btn-info' href = 'offre/details?idOffre=$idOffre'>Détails</a>"; echo"</td>";
         echo "</tr>";
@@ -35,12 +41,19 @@
 ?>
 </table></br>
 <div>
-    <form style="margin-right:2em;" action="offre/view" method="get" class="pull-left">
+    <form style="margin-right:1em;" action="offre/view" method="get" class="pull-left">
         <input type="submit" value="Filtres">
     </form>
     <form action="offre/view2" method="get" class="pull-left">
         <input type="submit" value="Filtres Avancés">
     </form>
+    <?php
+    if ($test_filtre=="1")
+    echo'<form style="margin-left:1em;"  action="/GetRide/GetRide/Offre" method="get" class="pull-left">
+        <input style="background-color:cornflowerblue; border-color:cornflowerblue;" type="submit" value="Enlever les filtres actuels">
+    </form>';
+    ?>
 </div>
 
 <div class="pull-right"><strong>Filtres appliqués :  </strong> <?php echo $string_filtre; ?></div>
+</div>

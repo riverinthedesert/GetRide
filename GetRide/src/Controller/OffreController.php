@@ -232,6 +232,8 @@ class OffreController extends AppController{
 
         $string_filtre = "";
 
+        $test_filtre="1";
+
         // SELECT ALL UTILISATEUR
         $conducteur = $conn->execute('SELECT * FROM conducteur')->fetchAll('assoc');
         $test_depart=$this->request->getQuery("depart");
@@ -244,7 +246,7 @@ class OffreController extends AppController{
           // BASE DE LA REQUETE
           $requete = "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
           ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
-          ,prix 
+          ,prix,noteMoyenne
           FROM offre
           INNER JOIN users ON users.idMembre=offre.idConducteur 
           INNER JOIN conducteur ON conducteur.idMembre=users.idMembre
@@ -272,23 +274,29 @@ class OffreController extends AppController{
             }
     
             // FILTRE CONCERNANT LE ORDER BY (on test les paramètres URL)
+            
             if ($test_tri == "1") { // A FAIRE APRES LES FILTRES AND
                 $string_filtre .= " Trié par prix le plus bas |";
                 $requete .= " ORDER BY prix ASC";
             } else if ($test_tri == "2") {
                 $string_filtre .= " Trié par horaire de départ le plus tôt |";
                 $requete .= " ORDER BY DATE_FORMAT(horaireDepart,'%H:%i:%s') ASC";
+            } else if ($test_tri == "3") {
+                $string_filtre .= " Trié par note de l'utilisateur |";
+                $requete .= " ORDER BY noteMoyenne DESC";
             }
             // On execute la requête
             $offre_filtres_applied = $conn->execute($requete)->fetchAll('assoc');
     
             if ($string_filtre == "") { // Si il n'y a aucune filtre : Aucun
                 $string_filtre = " Aucun";
+                $test_filtre="0";
             }
             // On transmet les variables à la vue.
             $this->set(compact('string_filtre'));
             $this->set(compact('offre_filtres_applied'));
             $this->set(compact('conducteur'));
+            $this->set(compact('test_filtre'));
     
 
         }

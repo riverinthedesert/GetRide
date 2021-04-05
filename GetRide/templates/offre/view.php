@@ -30,6 +30,11 @@
     <input type="radio" id="prix" name="tri" value="1">
     <label for="prix">Prix le plus bas</label>
 
+    </br>
+
+    <input type="radio" id="note" name="tri" value="3">
+    <label for="note">Note utilisateur</label>
+
   </div>
 
   <div class="form-group">
