@@ -3,7 +3,13 @@
 <h1 class="col-md-12">Offres filtrées </h1>
 <a style="height:2.5em;margin-top:1em;"href="/GetRide/GetRide/offre/historique" class="btn btn-info col" role="button">Historique de recherche</a>
 </div>
-<table style="margin-left:-2em;">
+<?php 
+
+if (sizeof($offre_filtres_applied)<=0){
+    echo "<h3> Pas d'offres trouvées ! </h3>";
+}else{
+    
+echo'<table style="margin-left:-2em;">
     <tr>
         <th>N°</th>
         <th>Horaire départ</th>
@@ -15,8 +21,8 @@
         <th>Note conducteur</th>
         <th>Prix</th>
         <th></th>
-    </tr>
-<?php
+    </tr>';
+
     foreach ($offre_filtres_applied as $item){
         echo "<tr>";
         echo "<td>"; echo $item["idOffre"]; echo "</td>";
@@ -38,6 +44,7 @@
   /*  foreach ($utilisateur as $user){
         echo $user["idMembre"];
     }*/
+}
 ?>
 </table></br>
 <div>
@@ -54,6 +61,5 @@
     </form>';
     ?>
 </div>
-
-<div class="pull-right"><strong>Filtres appliqués :  </strong> <?php echo $string_filtre; ?></div>
+<div class="pull-right"><strong>Filtres appliqués :  </strong> <?php echo $string_filtre?></div>
 </div>
