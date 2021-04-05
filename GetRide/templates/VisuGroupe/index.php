@@ -1,6 +1,7 @@
 <!-- Affichage des différents groupes
     Le menu se trouve dans layout/default.php -->
 
+<?= $this->Html->css(['ouiounon']) ?>
 <?php
 	use Cake\Datasource\ConnectionManager;
 	$conn = ConnectionManager::get('default');
@@ -16,7 +17,11 @@
 	
 	<!-- Boutton pour ajouter un groupe d'ami !-->
 	<a href="AjoutGroupe" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </a>
-	
+
+	<p1>
+	<?= $this->Form->postButton(__('Creer un trajet privee'), ['action' => 'creerTrajet']) ?>
+	</p1>
+
     <?php
 		//$admOuMembr = 0;
 		// Recherche dans la BDD des groupes

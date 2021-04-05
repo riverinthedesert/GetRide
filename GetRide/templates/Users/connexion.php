@@ -24,7 +24,7 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <div class="input text required">
                 <input type="email" name="mail" required="required" title="xxx@yyy.zzz" 
-                maxlength="50" pattern="^[a-zA-Z0-9.]{3,20}@[a-zA-Z]{3,20}\.[a-zA-Z]{2,8}$" 
+                maxlength="50" pattern="^[a-zA-Z0-9.]{3,20}@[a-zA-Z0-9]{1,20}\.[a-zA-Z]{2,8}$" 
                 placeholder="exemple@email.com" id="mail" />
             </div>
 

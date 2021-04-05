@@ -327,5 +327,53 @@ class OffreController extends AppController{
             'order' => "prix ASC"
         )));
         */
+
+
+    }
+
+    public function addprivee()
+    {
+        $conn = ConnectionManager::get('default');
+
+        $offre = $this->Offre->newEmptyEntity();
+            //session_start();
+            // Récupération des informations du formulaire
+            if ($this->request->is('post')) {
+                $offre = $this->Offre->patchEntity($offre, $this->request->getData());
+                $horaireDepart = $offre->get('horaireDepart') . " " . $offre->get('horaireDepart');
+                $horaireArrivee = $offre->get('horaireArrivee');
+                $nombrePassagers = $offre->get('nbPassagersMax');
+                $offre->set('idConducteur',$_SESSION['Auth']['idMembre']);
+
+                if($offre->get('idetapes1')!=null){
+                    $idVille = $offre->get('idetapes1');
+                    $requete = "INSERT INTO etape(idOffre,idVille) select (SELECT MAX(idOffre+1) FROM offre),".$idVille."";
+                    $conn->execute($requete);
+                }
+
+                if($offre->get('idetapes1')!=null){
+                    $idVille = $offre->get('idetapes2');
+                    $requete = "INSERT INTO etape(idOffre,idVille) select (SELECT MAX(idOffre+1) FROM offre),".$idVille."";
+                    $conn->execute($requete);
+                }
+
+                if($offre->get('idetapes1')!=null){
+                    $idVille = $offre->get('idetapes3');
+                    $requete = "INSERT INTO etape(idOffre,idVille) select (SELECT MAX(idOffre+1) FROM offre),".$idVille."";
+                    $conn->execute($requete);
+                }
+
+
+                //Sauvegarde dans la base de données
+                if ($this->Offre->save($offre)) {
+                    $this->Flash->success(__('Votre offre a bien été crée.'));
+                }
+                else
+                {	
+                $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
+            	}
+            }
+
+        $this->set(compact('offre'));
     }
 }

@@ -51,6 +51,18 @@
 
             
         }
+
+        public function creerTrajet()
+        {
+            $redirect = $this->request->getQuery('redirect', [
+				'controller' => 'Offre',
+				'action' => 'addprivee',
+			]);
+
+			return $this->redirect($redirect);
+
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     
