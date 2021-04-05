@@ -1,4 +1,7 @@
-<h1>Offres filtrées </h1>
+<div class="row"> 
+<h1 class="col-md-10">Offres filtrées </h1>
+<a style="height:2.5em;margin-top:1em;"href="/GetRide/GetRide/offre/historique" class="btn btn-info col" role="button">Historique de recherche</a>
+</div>
 <table>
     <tr>
         <th>N°</th>

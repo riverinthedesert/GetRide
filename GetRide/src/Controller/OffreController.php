@@ -6,6 +6,40 @@ use Cake\Datasource\ConnectionManager;
 
 class OffreController extends AppController{
 
+    public function historique(){
+        setlocale(LC_TIME, 'fr_FR');
+        date_default_timezone_set('Europe/Paris');
+
+        $conn = ConnectionManager::get('default');
+        $this->loadComponent('Paginator');
+
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
+
+        // BASE DE LA REQUETE
+        $requete = "SELECT offre.idOffre,horaireDepart,
+        ville_depart.ville_nom_simple as nomVilleDepart,
+        ville_arrivee.ville_nom_simple as nomVilleArrivee,
+        nom,prenom,dateRecherche
+
+        FROM offre
+        INNER JOIN users ON users.idMembre=offre.idConducteur 
+        INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
+        INNER JOIN historiquerecherche ON historiquerecherche.idOffre=offre.idOffre
+        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id
+        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
+        WHERE historiquerecherche.idMembre =".$id_utilisateur;
+
+        if ($this->request->getQuery("date")=="1"){
+            $requete.=" ORDER BY dateRecherche DESC";
+        }
+
+
+
+        // On execute la requête
+        $historique = $conn->execute($requete)->fetchAll('assoc');
+        // On transmet les variables à la vue.
+        $this->set(compact('historique'));
+    }
 
     public function offre()
     {
@@ -99,7 +133,7 @@ class OffreController extends AppController{
 
         $test_offre = $this->request->getQuery("idOffre");
 
-        $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
 
         // BASE DE LA REQUETE
         $requete = "SELECT offre.idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
@@ -119,7 +153,7 @@ class OffreController extends AppController{
             $requete .= $test_offre;
             $requete2 .= $test_offre;
         } else {
-            die("T'es mort mon pote");
+            die("");
         }
 
         // On execute la requête
@@ -140,6 +174,11 @@ class OffreController extends AppController{
         $this->set(compact('offre'));
         $this->set(compact('etape'));
         $this->set(compact('notif_test'));
+
+        if ($id_utilisateur>=0){
+            $historique="INSERT INTO historiquerecherche VALUES (".$id_utilisateur.",".$test_offre.",NOW())";
+            $hist = $conn->execute($historique);
+        }
     }
 
     public function view(){
