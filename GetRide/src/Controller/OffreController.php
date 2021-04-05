@@ -6,6 +6,19 @@ use Cake\Datasource\ConnectionManager;
 
 class OffreController extends AppController{
 
+    public function deleteHist(){
+        $conn = ConnectionManager::get('default');
+        $this->loadComponent('Paginator');
+
+        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
+
+        $requete="DELETE FROM historiquerecherche WHERE idMembre=".$id_utilisateur;
+        $confirm = $conn->execute($requete);
+
+        header('Location:/GetRide/GetRide/Offre/Historique'); 
+        exit();
+    }
+
     public function historique(){
         setlocale(LC_TIME, 'fr_FR');
         date_default_timezone_set('Europe/Paris');
