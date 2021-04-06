@@ -33,7 +33,7 @@ if (sizeof($historique) <= 0) {
         echo "</td>";
         $idOffre = $item["idOffre"];
         echo "<td>";
-        echo "<a role='button' class='btn btn-info' href = '/GetRide/GetRide/offre/details?idOffre=$idOffre'>Détails</a>";
+        echo "<a role='button' class='btn btn-info' href = 'offre/details?idOffre=$idOffre'>Détails</a>";
         echo "</td>";
         echo "</tr>";
     }
@@ -51,11 +51,11 @@ if (sizeof($historique) <= 0) {
         if (sizeof($historique) > 0) {
 
         if ($this->request->getQuery("date") == "1") {
-            echo '<a href="/GetRide/GetRide/offre/historique   " class="btn btn-danger" role="button">Affichage sans tri</a>';
+            echo '<a href="offre/historique   " class="btn btn-danger" role="button">Affichage sans tri</a>';
         } else {
-            echo '<a href="/GetRide/GetRide/offre/historique?date=1   " class="btn btn-danger" role="button">Trier par le plus récent</a>';
+            echo '<a href="offre/historique?date=1   " class="btn btn-danger" role="button">Trier par le plus récent</a>';
         }
-        echo'<a style="margin-left:1em;" href="/GetRide/GetRide/offre/delete_hist   " onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
+        echo'<a style="margin-left:1em;" href="offre/delete_hist   " onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
     }
         ?>
     </div>

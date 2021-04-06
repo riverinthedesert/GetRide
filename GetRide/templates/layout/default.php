@@ -57,10 +57,10 @@ $cakeDescription = 'Co-Voiturage';
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/GetRide/GetRide/Accueil">Co-Voiturages</a>
+                <a class="navbar-brand" href="Accueil">Co-Voiturages</a>
             </div>
             <ul class="nav navbar-nav">
-                <form class="navbar-form navbar-left" action="/GetRide/GetRide/search" method="post">
+                <form class="navbar-form navbar-left" action="search" method="post">
                     <div class="input-group input-group-sm">
 						   <input name="text" type="text" class="form-control" placeholder="Rechercher personne">
 						   
@@ -69,8 +69,8 @@ $cakeDescription = 'Co-Voiturage';
 							</div>
                     </div>
                 </form>
-                <li><a href="/GetRide/GetRide/offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
-                <li><a href="/GetRide/GetRide/offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
+                <li><a href="offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
                 <!-- Notifications : -->
 
                 <?php
@@ -93,12 +93,12 @@ $cakeDescription = 'Co-Voiturage';
                         if (sizeof($not) > 5) $limite = 5;
                         else $limite = sizeof($not);
                         for ($i = 0; $i < $limite; $i++) {
-                            echo '<li class="text-center"><a href="/GetRide/GetRide/notification#'.$not[$i]["message"].'">' . $not[$i]["message"] . '</a></ </li>';
+                            echo '<li class="text-center"><a href="notification#'.$not[$i]["message"].'">' . $not[$i]["message"] . '</a></ </li>';
                         }
                     }
                
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="/GetRide/GetRide/notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
+                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
                     echo '</ul> </li>';
                 }
 
@@ -111,7 +111,7 @@ $cakeDescription = 'Co-Voiturage';
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/GetRide/GetRide/visu-profil/">Visualiser son profil</a></li>
+                            <li><a href="visu-profil">Visualiser son profil</a></li>
                             <li><a href="VisuGroupe">Afficher les groupes d'amis</a></li>
                             <li><a href="#">Visualiser mes offres</a></li>
                             <li><a href="#">Visualiser mes offres en cours</a></li>
