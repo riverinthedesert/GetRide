@@ -43,4 +43,17 @@
             echo 1;
 
         }
+		
+		
+		public function accepter()
+		{
+
+		
+			
+		}
+		
+		public function refuser()
+		{
+
+		}
     }
