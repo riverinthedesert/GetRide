@@ -105,21 +105,17 @@ echo "</br>"
 
         <br>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
 
             <?php
 
             if (sizeof($etape) > 0) { // 1 étape ou plus
-
-                $etape_horaire = strftime("%Hh%M", strtotime(($etape[0]["horaire"])));
 
                 echo "<h3>Étapes</h3>";
 
                 echo "<div>";
 
                 echo "<strong>" . ucfirst($etape[0]["ville_nom_simple"]) . "</strong>";
-
-                echo " à <strong>" . $etape_horaire . "</strong>";
 
                 echo "</br>";
 
@@ -130,13 +126,11 @@ echo "</br>"
 
                 for ($i = 1; $i < sizeof($etape); $i++) {
 
-                    $etape_horaire = strftime("%Hh%M", strtotime(($etape[$i]["horaire"])));
+                    if ($i != sizeof($etape) - 1) echo "<p style='margin-left:2.5em;'class='glyphicon glyphicon-arrow-down '></p>";
 
                     echo "<div>";
 
                     echo "<strong>" . ucfirst($etape[$i]["ville_nom_simple"]) . "</strong>";
-
-                    echo " à <strong>" . $etape_horaire . "</strong>";
 
                     echo "</br>";
 
