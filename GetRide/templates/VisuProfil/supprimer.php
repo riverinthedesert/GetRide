@@ -6,6 +6,7 @@
 
     $session_active = $this->request->getAttribute('identity');
 	$mail = $session_active->mail;
+	$id = $session_active->idMembre;
 
 	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
@@ -17,7 +18,23 @@
 	}
 		//On delete le compte
 		$query = "DELETE FROM users WHERE mail='".$mail."';";
+		
+		$query2 = "DELETE FROM conducteur WHERE idMembre='".$id."';";
+		$query3 = "DELETE FROM copassager WHERE idMembre='".$id."';";
+		$query4 = "DELETE FROM copassager WHERE idMembre='".$id."';";
+		$query5 = "DELETE FROM historiquerecherche WHERE idMembre='".$id."';";
+		$query6 = "DELETE FROM historiquetrajet WHERE idMembre='".$id."';";
+		$query7 = "DELETE FROM membrefavo WHERE idMembre='".$id."';";
+		$query8 = "DELETE FROM notification WHERE idMembre='".$id."';";
+	
 	if ($conn->query($query) === TRUE) {
+		$conn->query($query2);
+		$conn->query($query3);
+		$conn->query($query4);
+		$conn->query($query5);
+		$conn->query($query6);
+		$conn->query($query7);
+		$conn->query($query8);
 
 		echo '<script type="text/javascript">
             window.location.replace("deconnexion");
