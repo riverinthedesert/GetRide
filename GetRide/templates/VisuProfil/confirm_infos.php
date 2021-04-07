@@ -42,7 +42,7 @@
 		echo $query;
 	$queryUpdate = $conn->query($query);
 	echo '<script type="text/javascript">
-			window.location.replace("http://localhost/GetRide/GetRide/visu-profil/");
+			window.location.replace("../visu-profil");
 		</script>';
 
 ?>

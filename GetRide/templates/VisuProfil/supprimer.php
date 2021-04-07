@@ -19,7 +19,7 @@
 		$query = "DELETE FROM users WHERE mail='".$mail."';";
 	if ($conn->query($query) === TRUE) {
 		echo '<script type="text/javascript">
-			window.location.replace("http://localhost/GetRide/GetRide/users/add");
+			window.location.replace("users/add");
 		</script>';
 	} 
 ?>
