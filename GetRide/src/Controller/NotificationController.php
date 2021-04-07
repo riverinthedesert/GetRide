@@ -84,6 +84,10 @@ class NotificationController extends AppController
         $messageExp = '';
         $messageDest = '';
 
+        // objet de mail selon le destinataire
+        $objetExp = '';
+        $objetDest = '';
+
         // liens d'accès aux détails
         $cheminOffre = 'http://localhost/GetRide/GetRide/offre/details?idOffre=';
         $cheminProfil = 'http://localhost/GetRide/GetRide/profile?id=';
@@ -271,10 +275,10 @@ class NotificationController extends AppController
         if ($this->Notification->save($notification)) {
 
             // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
-            if ($this->estActiveeParMail()) {
+            if ($this->estActiveeParMail($idExpediteur)) {
 
-                $elements = array($idExpediteur, $destinataires, $messageExp, $messageDest);
-                $this->envoyerNotifMail($elements); // rajouter l'id
+                $elements = array($idExpediteur, $messageExp);
+                $this->envoyerNotifMail($elements);
             }
 
             $i = 0;
@@ -284,7 +288,9 @@ class NotificationController extends AppController
 
                 $notification = $this->Notification->newEmptyEntity();
 
-                $notification->set('idMembre', $destinataires[$i]);
+                $idMembre = $destinataires[$i];
+
+                $notification->set('idMembre', $idMembre);
                 $notification->set('message', $messageDest);
 
                 // si la notification concerne une offre
@@ -297,16 +303,19 @@ class NotificationController extends AppController
                     $i++;
                 else
                     break;
+
+                // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
+                if ($this->estActiveeParMail($idMembre)) {
+
+                    $elements = array($idMembre, $messageDest);
+                    $this->envoyerNotifMail($elements);
+                }
             }
 
-            if ($i == $nbDestinataires)
-                $this->Flash->success(__('Toutes les notifications ont été envoyées'));
-
-            else
+            if ($i != $nbDestinataires)
                 $this->Flash->error(__('Erreur envoi notification'));
             /*return $this->redirect(['action' => 'index']);*/ //rediriger vers détails offre
         }
-
 
         $this->set(compact('notification'));
     }
@@ -314,25 +323,25 @@ class NotificationController extends AppController
 
 
     /**
-     * Détermine si l'utilisateur connecté a activé ou non les notifications par mail
+     * Détermine si un utilisateur a activé ou non les notifications par mail
      * 
+     * @param $idMembre     l'identifiant de l'utilisateur
      * @return bool         true si l'utilisateur a activé les notifications
      */
-    public function estActiveeParMail(): bool
+    public function estActiveeParMail($idMembre): bool
     {
 
-        $envoyer = false;
+        // connexion à la base de données
+        $connexion = ConnectionManager::get('default');
 
-        // on accède aux données de l'utilisateur connecté
-        $session_active = $this->Authentication->getIdentity();
+        // on cherche si le membre a activé les notifications par mail
+        $res = $connexion->query('SELECT notifMail FROM users
+                                  where idMembre = ' . $idMembre);
 
-        if (!is_null($session_active)) {
+        foreach ($res as $r)
+            $notif = $r['notifMail'];
 
-            $notif = $session_active->notifMail;
-            $envoyer = $notif == 1 ? true : false;
-        }
-
-        return $envoyer;
+        return $notif == 1 ? true : false;
     }
 
 
@@ -340,10 +349,37 @@ class NotificationController extends AppController
     /**
      * Envoie une notification par mail à un utilisateur
      * 
-     * @param $message  le message de la notification
+     * @param $elements  les informations du mail
      */
-    public function envoyerNotifMail($message)
+    public function envoyerNotifMail($elements)
     {
 
+        // connexion à la base de données
+        $connexion = ConnectionManager::get('default');
+
+        $idMembre = intval($elements[0]);
+        $message = $elements[1];
+
+        // on cherche l'adresse mail de la personne
+        $res = $connexion->query('SELECT mail, prenom FROM users
+                                where idMembre = ' . $idMembre);
+
+        foreach ($res as $r) {
+            $mail = $r['mail'];
+            $prenom = $r['prenom'];
+        }
+
+        // champs du mail
+        $origine = 'From: getride.noreply@gmail.com';
+        $contenu = "Bonjour " . $prenom . " !\n\n";
+        $contenu .= $message . "\n\n";
+        $contenu .= "Vous pouvez retrouver le contenu de cet email dans l'onglet Notifications.\n";
+        $contenu .= "Si vous le souhaitez, vous pouvez désactiver l'envoi de notifications par mail depuis";
+        $contenu .= " votre compte (Mon profil/Mes Paramètres/Notifications)";
+
+        $envoi = mail($mail, $message, $contenu, $origine);
+
+        if (!$envoi)
+            $this->Flash->error(__('Echec envoi mail'));
     }
 }
