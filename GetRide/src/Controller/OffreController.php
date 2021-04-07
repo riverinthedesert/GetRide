@@ -215,7 +215,20 @@ class OffreController extends AppController{
 
                 //Sauvegarde dans la base de données
                 if ($this->Offre->save($offre)) {
+                    
+                    /* Récupération des données de l'utilisateur connecté */
+                    $session_active = $this->Authentication->getIdentity();
+
+                    $idMembre = $session_active->idMembre;
+                    $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
+                    $idOffre = $offre->get('idOffre');
+                        
+                    /* Envoi de la notification au controller */
+                    $ids = array($idMembre, $nomComplet, $idOffre);
+                    NotificationController::notifier('ajoutOffre', $ids);
+
                     $this->Flash->success(__('Votre offre a bien été crée.'));
+
                 }
                 else
                 {	
@@ -367,6 +380,9 @@ class OffreController extends AppController{
                 $nombrePassagers = $offre->get('nbPassagersMax');
                 $offre->set('idConducteur',$_SESSION['Auth']['idMembre']);
 
+                // inscrit l'offre comme étant privée
+                $offre->set('estPrivee', '1');
+
                 if($offre->get('idetapes1')!=null){
                     $idVille = $offre->get('idetapes1');
                     $requete = "INSERT INTO etape(idOffre,idVille) select (SELECT MAX(idOffre+1) FROM offre),".$idVille."";
@@ -388,6 +404,22 @@ class OffreController extends AppController{
 
                 //Sauvegarde dans la base de données
                 if ($this->Offre->save($offre)) {
+
+                    /* Récupération des données de l'utilisateur connecté */
+                    $session_active = $this->Authentication->getIdentity();
+
+                    $idMembre = $session_active->idMembre;
+                    $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
+                    $idOffre = $offre->get('idOffre');
+
+                    //set test (à enlever)
+                    $idGroupe = 2;
+                    $offre->set('idGroupe', $idGroupe);
+                        
+                    /* Envoi de la notification au controller */
+                    $ids = array($idMembre, $nomComplet, $idOffre, $idGroupe);
+                    NotificationController::notifier('ajoutOffrePrivee', $ids);
+
                     $this->Flash->success(__('Votre offre a bien été crée.'));
                 }
                 else

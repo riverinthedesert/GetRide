@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\Datasource\ConnectionManager;
 use Cake\Event\EventInterface;
 use Cake\Mailer\Email;
+use Cake\Mailer\Mailer;
+use Cake\Mailer\TransportFactory;
+use Cake\Validation\Validator;
+
+use App\Controller\NotificationController;
 
 /* Gestion des utilisateurs et des autorisations d'accès aux pages.
    Remplace la table Membre dans la modélisation par souci de convention 
@@ -27,7 +33,8 @@ class UsersController extends AppController
         parent::beforeFilter($event);
 
         /* Redirection d'un utilisateur connecté vers l'accueil 
-           si celui-ci tente d'accéder à la connexion ou à l'inscription via leur URL */
+           si celui-ci tente d'accéder à la connexion, l'inscription 
+           ou la récupération via leur URL */
 
         // test d'une connexion active
         $session_active = $this->Authentication->getIdentity();
@@ -67,7 +74,13 @@ class UsersController extends AppController
     }
 
 
-    /* Gestion de la connexion à un compte déjà créé */
+
+    
+
+
+    /**
+     * Gère la connexion à un compte déjà créé
+     */
     public function connexion()
     {
         $this->request->allowMethod(['get', 'post']);
@@ -98,7 +111,10 @@ class UsersController extends AppController
     }
 
 
-    /* Gestion de la déconnexion pour un utilisateur connecté */
+
+    /**
+     * Gère la déconnexion pour un utilisateur connecté
+     */ 
     public function deconnexion()
     {
         // on vérifie que la session de l'utilisateur est toujours active

@@ -1,11 +1,21 @@
 <?php
 
 use Cake\Cache\Engine\FileEngine;
+use Cake\Core\Configure;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
+
+
+Configure::write('Session', [
+    'defaults' => 'php',
+    'ini' => [
+        // termine la session de l'utilisateur après 1 heure d'inactivité
+        'session.cookie_lifetime' => 3600
+    ]
+]);
 
 return [
     /*
