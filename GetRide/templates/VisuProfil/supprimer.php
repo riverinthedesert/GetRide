@@ -18,8 +18,10 @@
 		//On delete le compte
 		$query = "DELETE FROM users WHERE mail='".$mail."';";
 	if ($conn->query($query) === TRUE) {
+
 		echo '<script type="text/javascript">
-			window.location.replace("users/add");
+			window.location.replace("http://localhost/GetRide/GetRide/deconnexion");
 		</script>';
+		
 	} 
 ?>
