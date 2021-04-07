@@ -4,6 +4,14 @@ body {
 }
 
 </style>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.7.3/themes/base/jquery-ui.css">
+
+<?php 
+    //Nom de la ville correspond à ville_nom_reel dans la bdd
+
+?>
 
 </div>
 
@@ -24,23 +32,73 @@ body {
                 <br>
                 <div class="row">
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" value="Départ" style="background-color:DarkCyan; color:white">
+                        <h6>Départ</h6>
+                        <input  name="ville" id="ville" placeholder="Départ" type="text" class="form-control" style="background-color:DarkCyan; color:white">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" value="Destination" style="background-color:DarkCyan; color:white">
+                        <h6>Destination</h6>
+                        <input  name="ville2" id="ville2" type="text" class="form-control" placeholder="Destination"  style="background-color:DarkCyan; color:white">
                     </div>
                     <div class="col-sm-4">
+                        <h6>Date de départ</h6>
                         <input type="date" id="start" name="trip-start" value="" style="background-color:DarkCyan; color:white">
                     </div>
                     <div class="col-sm-4">
-                        <input type="number" id="tentacles" name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
+                        <h6>Nombre de passagers</h6>
+                        <input type="number" id="tentacles"  placeholder="nb passagers"  name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
                     </div>
                     <div class="col-sm-4">
+                        <h6></h6>
                         <button type="Submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
                     </div>
                 </div>
             </div>
         </div>
+
+<script> $("#ville").autocomplete({
+	source: function (request, response) {
+		$.ajax({
+			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville']").val(),
+			data: { q: request.term },
+			dataType: "json",
+			success: function (data) {
+				var cities = [];
+				response($.map(data.features, function (item) {
+					// Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+					if ($.inArray(item.properties.postcode, cities) == -1) {
+						cities.push(item.properties.postcode);
+						return { label: item.properties.city + "-" + item.properties.postcode , 
+								 value: item.properties.city
+						};
+					}
+				}));
+			}
+		});
+	}
+});
+
+$("#ville2").autocomplete({
+	source: function (request, response) {
+		$.ajax({
+			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville2']").val(),
+			data: { q: request.term },
+			dataType: "json",
+			success: function (data) {
+				var cities = [];
+				response($.map(data.features, function (item) {
+					// Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+					if ($.inArray(item.properties.postcode, cities) == -1) {
+						cities.push(item.properties.postcode);
+						return { label: item.properties.city + "-" + item.properties.postcode ,  
+								 value: item.properties.city
+						};
+					}
+				}));
+			}
+		});
+	}
+});
+</script>
 	</div>
 
 
