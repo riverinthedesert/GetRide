@@ -95,12 +95,15 @@ body {
                         vous et profitez des <b><span style="color:SteelBlue">meilleurs prix</span></b> de voyage.</p></font>
 </div>
 
+<?php if (is_null($session_active)){
+    ?>
 <div  style="background-color:#AFEEEE;">
     <div class="text-center">
         <p> <font size="5">Vous n'avez pas encore de compte ? <a href="/GetRide/GetRide/inscription">Inscrivez-vous</a> ! </font></p>
     </div>
 </div>
-
+<?php }
+?>
 
 
 
