@@ -74,8 +74,14 @@
 	echo $queryNotification;
 	$updateNotifications = $conn->query($queryNotification);
 
+	echo "</br>";>
+	//Si la notification a été refusée, on enlève la demande pour ne pas pouvoir l'accepter/refuser plusieurs fois!
+	$queryDelete = "DELETE FROM NOTIFICATION WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'";
+	$delete = $conn->query($queryDelete);
 	
-	
+	echo $queryDelete;
+	echo "</br>";
+
 	
 	
 	//Le nombre de passager diminie

@@ -42,8 +42,7 @@
 	echo "id Membre: ".$idMembre;
 	echo "</br>";
 	echo "id Offre: ".$idOffre;
-
-		echo "</br>";
+	echo "</br>";
 
 
 	//Recuperer le nom en fonction de son id
@@ -69,16 +68,22 @@
 		
 		
 		";
-			echo "</br>";
+	echo "</br>";
 
 	echo $queryNotification;
 	$updateNotifications = $conn->query($queryNotification);
 
 	
+	echo "</br>";
+	//Si la notification a été acceptée, on enlève la demande pour ne pas pouvoir l'accepter/refuser plusieurs fois!
+	$queryDelete = "DELETE FROM NOTIFICATION WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'";
+	$delete = $conn->query($queryDelete);
+	
+	echo $queryDelete;
+	echo "</br>";
 	
 	
-	
-	//Le nombre de passager diminie
+	//Le nombre de passager diminue
 	
 	
 	
