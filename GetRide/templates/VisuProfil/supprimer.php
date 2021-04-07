@@ -20,8 +20,8 @@
 	if ($conn->query($query) === TRUE) {
 
 		echo '<script type="text/javascript">
-			window.location.replace("http://localhost/GetRide/GetRide/deconnexion");
-		</script>';
+            window.location.replace("deconnexion");
+        </script>';
 		
 	} 
 ?>

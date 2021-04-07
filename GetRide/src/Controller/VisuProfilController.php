@@ -61,6 +61,26 @@ use Cake\Datasource\ConnectionManager;
 			}
 		}
 		
+		 public function deconnexion()
+		{
+			// on vérifie que la session de l'utilisateur est toujours active
+			$session_active = $this->request->getAttribute('identity');
+    
+			if (!is_null($session_active)){
+
+				$prenom = $session_active->prenom;
+
+				// déconnexion
+				$this->Authentication->logout();
+				
+				// message de confirmation de la déconnexion
+				$this->Flash->success(__('À bientôt ' . $prenom .' !'));
+
+				// redirection vers la page d'accueil
+				return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
+			}
+		}
+			
     }
 	
 ?>
