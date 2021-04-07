@@ -167,8 +167,8 @@ $cakeDescription = 'Co-Voiturage';
     <footer>
         <div class="text-center" style="background-color:#cecece;">
             <br>
-            <label><a href="Comment_ca_marche.html" style="color:#000000;">Comment ça marche ?</a></label>
-            <label><a href="Comment_ca_marche.html" style="color:#000000;">Nous contacter</a></label>
+            <label><a href="CommentCaMarche" style="color:#000000;">Comment ça marche ?</a></label>
+            <label><a href="#" style="color:#000000;">Nous contacter</a></label>
             <label>Langue : Française</label>
             <br>
         </div>
