@@ -56,7 +56,7 @@ class UsersTable extends Table
         $validator
             ->add('confirmerMotDePasse', 'no-misspelling', [
                 'rule' => ['compareWith', 'motDePasse'],
-                'message' => 'Les mot de passe sont différents',
+                'message' => 'Les mots de passe sont différents',
             ]);
 
         $validator
@@ -84,9 +84,13 @@ class UsersTable extends Table
             ->notEmptyString('genre');
 
         $validator
-            ->scalar('pathPhoto')
-            ->maxLength('pathPhoto', 255)
-            ->allowEmptyString('pathPhoto');
+            ->allowEmptyFile('pathPhoto')
+            ->add( 'pathPhoto', [
+                'mimetype' => [
+                    'rule' => [ 'mimetype', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
+                    'message' => 'Seul les images jpg et png sont acceptées.',
+                ],
+            ]);
 
         $validator
             ->scalar('estConducteur')
@@ -101,7 +105,7 @@ class UsersTable extends Table
     // Règles du formulaire
     public function buildRules(RulesChecker $rules): RulesChecker{
         $rules->add($rules->isUnique(['mail'], 'L\'adresse mail est déjà utilisée.', 'color:red' ));
-        $rules->add($rules->isUnique(['nom', 'prenom'], 'Votre nom est déjà associé à un compte.'));
         return $rules;
     }
+
 }

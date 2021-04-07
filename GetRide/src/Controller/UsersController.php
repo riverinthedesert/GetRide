@@ -50,27 +50,42 @@ class UsersController extends AppController
 
     public function add()
     {
-        $membre = $this->Users->newEmptyEntity();
+        $user = $this->Users->newEmptyEntity();
 
         // Récupération des informations du formulaire
         if ($this->request->is('post')) {
-            $membre = $this->Users->patchEntity($membre, $this->request->getData());
-            $nom_user = $membre->get('nom') . " " . $membre->get('prenom');
-            $mail_user = $membre->get('mail');
-            $id_user = $membre->get('idMembre');
+            
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            //Récupération de la photo de l'utilisateur
+            if (!$user->getErrors()) {
+                $pathPhoto = $this->request->getData('pathPhoto_file');
+
+                $nomPhoto = $pathPhoto->getClientFileName();
+
+                //Création du dossier photoProfil si il n'existe pas
+                if( !is_dir(WWW_ROOT.'img'.DS.'photoProfil') )
+                mkdir(WWW_ROOT.'img'.DS.'photoProfil',0775);
+
+                //Déplacement de la photo dans le répertoire
+                $chemin = WWW_ROOT.'img'.DS.'photoProfil'.DS.$nomPhoto;
+                if($nomPhoto != ""){
+                    $pathPhoto->moveTo($chemin);
+                    $user->pathPhoto = 'webroot\img\photoProfil\\'.$nomPhoto;
+                }
+            }
             //Sauvegarde dans la base de données
-            if ($this->Users->save($membre)) {
+            if ($this->Users->save($user)) {
                 $this->Flash->success(__('Votre compte a bien été créé.'));
               
                 // connecte automatiquement l'utilisateur
-                $this->Authentication->setIdentity($membre);
+                $this->Authentication->setIdentity($user);
             
                 // redirection vers l'accueil
                 return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
             }
             $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
         }
-        $this->set(compact('membre'));
+        $this->set(compact('user'));
     }
 
 

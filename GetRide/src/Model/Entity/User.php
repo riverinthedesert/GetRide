@@ -16,7 +16,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $mail
  * @property int $telephone
  * @property string $genre
- * @property string|null $pathPhoto
+ * @property string $pathPhoto
  * @property string $estConducteur
  * @property int|null $idUtilisateurFavo
  * @property int|null $idHistoriqueTrajet
