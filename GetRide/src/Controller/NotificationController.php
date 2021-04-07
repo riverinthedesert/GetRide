@@ -221,15 +221,15 @@ class NotificationController extends AppController
 
             case 'notationTrajetOubliee':
 
-                $idOffre = intval($idsConcernes[2]);
-                $messageExp = 'N\'oubliez pas de noter le trajet !';
+                /*$idOffre = intval($idsConcernes[2]);
+                $messageExp = 'N\'oubliez pas de noter le trajet !';*/
 
                 break;
 
             case 'notationEffectuee':
 
-                $idOffre = intval($idsConcernes[2]);
-                $messageExp = 'Votre notation a été prise en compte';
+                /*$idOffre = intval($idsConcernes[2]);
+                $messageExp = 'Votre notation a été prise en compte';*/
 
                 break;
 
@@ -243,6 +243,109 @@ class NotificationController extends AppController
                 $messageDest = $nomComplet . ' vous a invité a rejoindre son groupe privé';
 
                 // on cherche les membres du groupe privé
+                $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
+                                where groupemembre.idGroupe = ' . $idGroupe .
+                    ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);
+
+                // on les stocke dans la liste d'ids
+                foreach ($res as $r) {
+                    $id = $r['idUtilisateur'];
+                    array_push($destinataires, $id);
+                }
+                */
+                break;
+
+            case 'modifGroupe':
+
+                $idGroupe = intval($idsConcernes[2]);
+
+                $messageExp = 'Le groupe a été modifié';
+                $messageDest = $nomComplet . ' a modifié le groupe';
+
+                // on cherche les membres du groupe privé concernés par l'offre
+                $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
+                                where groupemembre.idGroupe = ' . $idGroupe .
+                    ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);
+
+                // on les stocke dans la liste d'ids
+                foreach ($res as $r) {
+                    $id = $r['idUtilisateur'];
+                    array_push($destinataires, $id);
+                }
+
+                break;
+
+
+            case 'ajoutMembreGroupe':
+
+                /*$idGroupe = intval($idsConcernes[2]);
+
+                $messageExp = 'Le membre a bien été ajouté';
+                $messageDest = $nomComplet . ' a été ajouté dans le groupe';
+
+                // on cherche les membres du groupe privé concernés par l'offre
+                $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
+                                where groupemembre.idGroupe = ' . $idGroupe .
+                    ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);
+
+                // on les stocke dans la liste d'ids
+                foreach ($res as $r) {
+                    $id = $r['idUtilisateur'];
+                    array_push($destinataires, $id);
+                }
+                */
+                break;
+
+
+            case 'supprimerGroupe':
+
+                /*$idGroupe = intval($idsConcernes[2]);
+
+                $messageExp = 'Le groupe a été supprimé';
+                $messageDest = $nomComplet . ' a supprimé le groupe';
+
+                // on cherche les membres du groupe privé concernés par l'offre
+                $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
+                                where groupemembre.idGroupe = ' . $idGroupe .
+                    ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);
+
+                // on les stocke dans la liste d'ids
+                foreach ($res as $r) {
+                    $id = $r['idUtilisateur'];
+                    array_push($destinataires, $id);
+                }
+                */
+                break;
+
+
+            case 'supprimerMembreGroupe':
+
+                $idGroupe = intval($idsConcernes[2]);
+
+                $messageExp = 'Le membre a bien été supprimé';
+                $messageDest = $nomComplet . ' a supprimé un membre du groupe';
+
+                // on cherche les membres du groupe privé concernés par l'offre
+                $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
+                                where groupemembre.idGroupe = ' . $idGroupe .
+                    ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);
+
+                // on les stocke dans la liste d'ids
+                foreach ($res as $r) {
+                    $id = $r['idUtilisateur'];
+                    array_push($destinataires, $id);
+                }
+
+                break;
+
+            case 'quitterGroupePrive':
+
+                /*$idGroupe = intval($idsConcernes[2]);
+
+                $messageExp = 'Vous avez quitté le groupe';
+                $messageDest = $nomComplet . ' a quitté le groupe';
+
+                // on cherche les membres du groupe privé concernés par l'offre
                 $res = $connexion->query('SELECT idUtilisateur FROM groupemembre
                                 where groupemembre.idGroupe = ' . $idGroupe .
                     ' AND groupemembre.idUtilisateur <> ' . $idExpediteur);

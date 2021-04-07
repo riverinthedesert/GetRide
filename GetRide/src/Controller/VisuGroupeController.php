@@ -40,6 +40,16 @@
                 $conn = ConnectionManager::get('default');
                 $requete="DELETE FROM `groupemembre` WHERE idUtilisateur=".$idUser." AND idGroupe=".$idGroupe;
                 $donnees = $conn->execute($requete);
+
+            
+                /* Partie notifications */
+                $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
+                    
+                /* Envoi de la notification au controller */
+                $ids = array($idUser, $nomComplet, $idGroupe);
+                NotificationController::notifier('quitterGroupePrive', $ids);
+
+                
                 $this->Flash->success(__('Vous avez bien quitté le groupe.'));
                  //on redirige l'utilisateur sur sa page de groupe
                 return $this->redirect(['controller' => 'VisuGroupe', 'action' => 'index']);

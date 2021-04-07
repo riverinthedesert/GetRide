@@ -1,4 +1,6 @@
 <?php
+
+use App\Controller\NotificationController;
 use Cake\Datasource\ConnectionManager;
 $conn = ConnectionManager::get('default');
 
@@ -17,6 +19,15 @@ if(!empty($idMbr) && !is_null($session_active) && !empty($idGp)){
     
     //Lancer la requete sur la bdd
     //$res = mysqli_query($conn, $query);
+
+    /* Partie notification */
+    $idMembre = $session_active->idMembre;
+    $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
+        
+    /* Envoi de la notification au controller */
+    $ids = array($idMembre, $nomComplet, $idGp);
+    NotificationController::notifier('supprimerMembreGroupe', $ids);
+
         echo "<div class='alert alert-success'>
             L'utilisateur a été retiré du groupe avec <strong>Succes</strong>
         </div>";
