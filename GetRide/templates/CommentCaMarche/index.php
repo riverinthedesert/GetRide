@@ -15,7 +15,6 @@
 					<ul class="dropdown-menu">
 						<li><a href="#connect">Connexion / Inscription</a></li>
 						<li><a href="#groupe">Les groupes d'amis</a></li>
-						<li><a href="#info">Mes informations</a></li>
 					</ul>
 				</li>
 				<li><a href="#"></a></li>
@@ -54,7 +53,7 @@
 		</FONT>
 		<h3>Problème d'inscription !</h3>
 		<FONT size="3pt">
-			<p>Vous n'arrivez pas à valider l'inscription ? Verifiez que ces données sont bien renseignez de la sorte : </p>
+			<p>Vous n'arrivez pas à valider l'inscription ? Verifiez que ces données sont bien renseignées de la sorte : </p>
 			<ul>
 				<li>Votre nom et prénom : <b>Aucun caractère ni chiffre</b>.</li>
 				<li>Votre sexe : <b>Le bouton est bien sélectionné</b>.</li>
@@ -69,16 +68,12 @@
 	<h2 id="groupe" class="text-info">Les groupes d'amis</h2>
 	<FONT size="3pt">
 		<p>Vous pouvez, dès lors que vous êtes inscrit, réaliser des groupes d'amis. Ces groupes vous permettront, lors de l'ajout d'une offre sur ce site, de choisir quelles personnes verront votre offre. </p>
-		<p>Par exemple : si vous avez aprécié le voyage avec certaines personnes qui font, comme vous, le même voyage à plusieur reprise, alors vous pouvez créer un groupe avec ces personnes.</p>
-		<p> Lors de l'ajout de ce groupe pensez à ajouter un commentaire (necessaire lorque l'on a beaucoup de groupe).</p>
+		<p>Par exemple : si vous avez apprécié le voyage avec certaines personnes qui font, comme vous, le même voyage à plusieurs reprise, alors vous pouvez créer un groupe avec ces personnes.</p>
+		<p> Lors de l'ajout de ce groupe pensez à ajouter un commentaire (nécessaire lorque l'on a beaucoup de groupe).</p>
 		<br>
 		<p>Un problème avec vos groupes ? <a href="#">Contactez-nous</a>.</p>
 	</FONT>
-	<h2 id="info" class="text-info">Mes informations</h2>
-	<FONT size="3pt">
-		<p>Les autres utilisateur ne peuvent voir de votre compte que votre photo (si vous en avez mis une), votre sexe et votre nom et prénom.</p>
-		<p>Toutes les autres informations personnelles ne sont connus que de vous. Elles nous permettent de vérifier votre âge et de vous envoyer une notification. </p>
-	</FONT>
+	
 	
 	
 	<div class="text-center">
@@ -86,12 +81,12 @@
 	</div>
 	<h2 id="ajouterOffre" class="text-info">Ajouter une offre de trajet</h2>
 	<FONT size="3pt">
-		<p>Lorsque vous êtes connecté, vous pouvez proposez à vos groupes d'amis privés, une nouvelle offre de trajet. Vous pouvez également faire une offre public, visible par n'importe qui. </p>
+		<p>Lorsque vous êtes connecté, vous pouvez proposez à vos groupes d'amis privés, une nouvelle offre de trajet. Vous pouvez également faire une offre publique, visible par n'importe qui. </p>
 	</FONT>
 		<div class="container">
 			<h3>Problème d'ajout d'une offre !</h3>
 			<FONT size="3pt">
-				<p>Vous n'arrivez pas à valider l'ajout de l'offre ? Verifiez que ces données sont bien renseignez de la sorte : </p>
+				<p>Vous n'arrivez pas à valider l'ajout de l'offre ? Verifiez que ces données sont bien renseignées de la sorte : </p>
 				<ul>
 					<li>Le lieu de départ et d'arrivé : <b>Aucun caractère ni chiffre</b>.</li>
 					<li>La date du départ : <b>Au format de date -> 01-12-2021</b>.</li>
@@ -111,12 +106,12 @@
 	</FONT>
 	<h2 id="visuOffre" class="text-info">Visualiser mes offres</h2>
 	<FONT size="3pt">
-		<p>Si vous souhaitez retrouver vos offres, vous pouvez les visualisez dans la section "<a href="#">Visualiser mes offres</a>" ou "<a href="#">Visualiser mes offres en cours</a>".</p>
+		<p>Si vous souhaitez retrouver vos offres, vous pouvez les visualiser dans la section "<a href="#">Visualiser mes offres</a>" ou "<a href="#">Visualiser mes offres en cours</a>".</p>
 		<p>Un problème avec votre visualisation ? <a href="#">Contactez-nous</a>.</p>
 	</FONT>
 	<h2 id="recherche" class="text-info">Rechercher des offres</h2>
 	<FONT size="3pt">
-		<p>Lorsque vous êtes connecté, vous pouvez rechercher des offres publiques ou privés qui pourrait vous interresser. Vous pouvez bien évidement filtrer ces offres selon vos besoins ou  selon les notes qu'ont reçus les utilisateurs.</p>
+		<p>Lorsque vous êtes connecté, vous pouvez rechercher des offres publiques ou privées qui pourrait vous interresser. Vous pouvez bien évidemment filtrer ces offres selon vos besoins ou selon les notes que les utilisateurs ont reçues.</p>
 		<p>Un problème avec vos recherches ? <a href="#">Contactez-nous</a>.</p>
 	</FONT>
 	

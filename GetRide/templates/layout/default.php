@@ -116,6 +116,7 @@ $cakeDescription = 'Co-Voiturage';
                             <li><a href="#">Visualiser mes offres</a></li>
                             <li><a href="#">Visualiser mes offres en cours</a></li>
                             <li><a href="HistoriqueTrajet">Historique de trajet effectué</a></li>
+                            <li><a href="VisuFavo">Visualiser mes favoris</a></li>
                         </ul>
                     </li>
                     <li><a href="Menu">Menu</a></li>

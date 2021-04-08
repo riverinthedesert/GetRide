@@ -65,18 +65,18 @@ if(!is_null($session_active)){
                     $membref = 0;
 
                     $membreFavori="SELECT * FROM `membrefavo` WHERE idMembre=".$idMembre;
-                    $mF = $conn->execute($membreFavori)->fetchAll('assoc');
+                    $mFA = $conn->execute($membreFavori)->fetchAll('assoc');
 
 
                     //$membreFavori = $conn->query("SELECT * FROM `membrefavo` WHERE idMembre='".$_SESSION['idMembre']."'");
-                    while($mF){
+                    foreach($mFA as $mF){
                         $membref++;
-                        
-                        $name="SELECT * FROM `membre` WHERE idMembre=".$mF['idMembreFavo'];
-                        $nom = $conn->execute($name)->fetchAll('assoc');
+                        $mff = $mF['idMembreFavo'];
+                        $name="SELECT * FROM `users` WHERE idMembre='".$mff."'";
+                        $nomF = $conn->execute($name)->fetchAll('assoc');
 
                         //$name = $conn->query("SELECT * FROM `membre` WHERE idMembre='".$mF['idMembreFavo']."'");
-				        while($nom){
+				        foreach($nomF as $nom){
                             if($nom['mail'] != $mail){
                 ?>
 
