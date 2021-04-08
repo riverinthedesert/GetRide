@@ -378,11 +378,13 @@ class NotificationController extends AppController
         if ($this->Notification->save($notification)) {
 
             // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
-            if ($this->estActiveeParMail($idExpediteur)) {
+            /*if ($this->estActiveeParMail($idExpediteur)) {
+
+                // réactiver pour destinataires plus bas
 
                 $elements = array($idExpediteur, $messageExp);
                 $this->envoyerNotifMail($elements);
-            }
+            }*/
 
             $i = 0;
 
@@ -408,11 +410,13 @@ class NotificationController extends AppController
                     break;
 
                 // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
-                if ($this->estActiveeParMail($idMembre)) {
+                /*if ($this->estActiveeParMail($idMembre)) {
+
+                    // réactiver pour créateur plus haut
 
                     $elements = array($idMembre, $messageDest);
                     $this->envoyerNotifMail($elements);
-                }
+                }*/
             }
 
             if ($i != $nbDestinataires)

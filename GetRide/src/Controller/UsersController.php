@@ -54,7 +54,7 @@ class UsersController extends AppController
 
         // Récupération des informations du formulaire
         if ($this->request->is('post')) {
-            
+
             $user = $this->Users->patchEntity($user, $this->request->getData());
             //Récupération de la photo de l'utilisateur
             if (!$user->getErrors()) {
@@ -63,23 +63,23 @@ class UsersController extends AppController
                 $nomPhoto = $pathPhoto->getClientFileName();
 
                 //Création du dossier photoProfil si il n'existe pas
-                if( !is_dir(WWW_ROOT.'img'.DS.'photoProfil') )
-                mkdir(WWW_ROOT.'img'.DS.'photoProfil',0775);
+                if (!is_dir(WWW_ROOT . 'img' . DS . 'photoProfil'))
+                    mkdir(WWW_ROOT . 'img' . DS . 'photoProfil', 0775);
 
                 //Déplacement de la photo dans le répertoire
-                $chemin = WWW_ROOT.'img'.DS.'photoProfil'.DS.$nomPhoto;
-                if($nomPhoto != ""){
+                $chemin = WWW_ROOT . 'img' . DS . 'photoProfil' . DS . $nomPhoto;
+                if ($nomPhoto != "") {
                     $pathPhoto->moveTo($chemin);
-                    $user->pathPhoto = 'webroot\img\photoProfil\\'.$nomPhoto;
+                    $user->pathPhoto = 'webroot\img\photoProfil\\' . $nomPhoto;
                 }
             }
             //Sauvegarde dans la base de données
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Votre compte a bien été créé.'));
-              
+
                 // connecte automatiquement l'utilisateur
                 $this->Authentication->setIdentity($user);
-            
+
                 // redirection vers l'accueil
                 return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
             }
@@ -90,7 +90,7 @@ class UsersController extends AppController
 
 
 
-    
+
 
 
     /**
@@ -129,21 +129,21 @@ class UsersController extends AppController
 
     /**
      * Gère la déconnexion pour un utilisateur connecté
-     */ 
+     */
     public function deconnexion()
     {
         // on vérifie que la session de l'utilisateur est toujours active
         $session_active = $this->request->getAttribute('identity');
-    
-        if (!is_null($session_active)){
+
+        if (!is_null($session_active)) {
 
             $prenom = $session_active->prenom;
 
             // déconnexion
             $this->Authentication->logout();
-            
+
             // message de confirmation de la déconnexion
-            $this->Flash->success(__('À bientôt ' . $prenom .' !'));
+            $this->Flash->success(__('À bientôt ' . $prenom . ' !'));
 
             // redirection vers la page d'accueil
             return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
@@ -154,5 +154,103 @@ class UsersController extends AppController
     /* Récupération du mot de passe pour un utlisateur non connecté mais disposant d'un compte */
     public function recuperation()
     {
+
+        if ($this->request->is('post')) {
+
+            // mail entré dans le formulaire
+            $mail = $this->request->getData('mail');
+
+            // connexion à la base de données
+            $connexion = ConnectionManager::get('default');
+
+            // on cherche si le mail est rattaché à un compte
+            $res = $connexion->query("SELECT count(*) FROM users 
+                                      WHERE mail = '$mail'");
+            foreach ($res as $r)
+                $nb = $r[0];
+
+            if ($nb != 1)
+                $this->Flash->error(__('Cette adresse mail n\'existe pas'));
+
+            else {
+
+                /* Création d'un nouveau mot de passe aléatoire */
+
+                $minuscules = 'abcdefghijklmnopqrstuvwxyz';
+                $majuscules = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $chiffres = '0123456789';
+                $speciaux = '@[]!"#()*/:;';
+
+                $nouveau = '';
+
+
+                /* On utilise random_int() pour définir la position d'un caractère 
+                   à insérer dans le mot de passe.
+                   C'est la fonction recommandée par la documentation officielle
+                   de php pour la gestion d'évènements aléatoires fiables.
+                   https://www.php.net/manual/fr/function.random-int.php */
+
+                // cinq minuscules
+                for ($i = 0; $i < 5; $i++) {
+
+                    $pos = random_int(0, strlen($minuscules) - 1);
+                    $nouveau .= $minuscules[$pos];
+                }
+
+                // un chiffre
+                $pos = random_int(0, strlen($chiffres) - 1);
+                $nouveau .= $chiffres[$pos];
+
+                // une majuscule
+                $pos = random_int(0, strlen($majuscules) - 1);
+                $nouveau .= $majuscules[$pos];
+
+                // un caractère spécial
+                $pos = random_int(0, strlen($speciaux) - 1);
+                $nouveau .= $speciaux[$pos];
+
+
+                /* Envoi par mail */
+
+                // on cherche le prénom de la personne
+                $res = $connexion->query("SELECT prenom FROM users 
+                                         WHERE mail = '$mail'");
+
+                foreach ($res as $r)
+                    $prenom = $r['prenom'];
+
+                // champs du mail
+                $origine = 'From: getride.noreply@gmail.com';
+
+                $objet = 'Récupération de votre mot de passe GetRide';
+
+                $contenu = "Bonjour " . $prenom . " !\n\n";
+                $contenu .= "Voici votre nouveau mot de passe : $nouveau\n\n";
+                $contenu .= "Par mesure de sécurité, il vous est conseillé de le changer ";
+                $contenu .= "dès votre prochaine connexion (Mon profil/Visualiser son profil/";
+                $contenu .= "Modifier votre mot de passe).\n\n";
+                $contenu .= "À bientôt !";
+
+                $envoi = mail($mail, $objet, $contenu, $origine);
+
+                if (!$envoi)
+                    $this->Flash->error(__('Echec de l\'envoi du mail'));
+
+                // si le mail a pu être envoyé, on change le mot passe dans la base de données
+                else {
+
+                    $hash = (new DefaultPasswordHasher)->hash($nouveau);
+
+                    // on met à jour le mot de passe
+                    $res = $connexion->query("UPDATE users SET motdePasse = '$hash'
+                                            WHERE mail = '$mail'");
+
+                    $this->Flash->success(__('Un mail de récupération vous a été envoyé'));
+
+                    // on redirige vers le formulaire de connexion
+                    return $this->redirect(['controller' => 'Users', 'action' => 'connexion']);
+                }
+            }
+        }
     }
 }
