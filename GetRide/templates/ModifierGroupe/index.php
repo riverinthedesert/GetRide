@@ -1,6 +1,8 @@
 
 <?php
 //Connection à la bdd
+
+use App\Controller\NotificationController;
 use Cake\Datasource\ConnectionManager;
 $conn = ConnectionManager::get('default');
 
@@ -32,7 +34,12 @@ if(!is_null($session_active) && $session_active->idMembre==$Admin[0]['idAdmin'])
                 ['idGroupe' => $idGp ]);
             }
 
-        
+            $idMembre = $session_active->idMembre;
+            $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
+                
+            /* Envoi de la notification au controller */
+            $ids = array($idMembre, $nomComplet, $idGp);
+            NotificationController::notifier('modifGroupe', $ids);
 
         header('Location: VisuGroupe');
         exit();
