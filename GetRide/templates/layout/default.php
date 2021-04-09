@@ -29,7 +29,11 @@ $cakeDescription = 'Co-Voiturage';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta(
+        'icone.ico',
+        '/icone.ico',
+        ['type' => 'icon']
+    ); ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
@@ -57,7 +61,9 @@ $cakeDescription = 'Co-Voiturage';
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="Accueil">Co-Voiturages</a>
+                <a class="navbar-brand" href="Accueil">
+                <img src="https://i.imgur.com/SKKVNvS.png" height="40">
+                </a>
             </div>
             <ul class="nav navbar-nav">
                 <form class="navbar-form navbar-left" action="search" method="post">
