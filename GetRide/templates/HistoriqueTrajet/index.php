@@ -55,7 +55,7 @@ use Cake\Datasource\ConnectionManager;
 
                         $timestamp = strtotime($offre[0]['horaireDepart']); 
                         $newDate = date("N-m-d-Y", $timestamp);
-                        list($jour, $day, $month, $year) = explode("-", $newDate);
+                        list($jour, $month, $day, $year) = explode("-", $newDate);
                         $months = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
                         $jours = array("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche");
                         echo "<td>".$jours[$jour-1]. " $day ".$months[$month-1]." $year </td>";

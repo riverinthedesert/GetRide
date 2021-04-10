@@ -125,7 +125,6 @@ $cakeDescription = 'Co-Voiturage';
                             <li><a href="VisuFavo">Visualiser mes favoris</a></li>
                         </ul>
                     </li>
-                    <li><a href="Menu">Menu</a></li>
                 <?php
                 }
                 ?>
