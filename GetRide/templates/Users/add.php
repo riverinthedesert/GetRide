@@ -13,13 +13,13 @@
                     echo "<div class=\"identite\"><table id=\"tableau\"><tr><td>";
                     echo $this->Form->control('nom', ['pattern' => '[a-zA-Z\-]*',
                                                       'required title' => "Ce champ doit être rempli uniquement avec des lettres",
-                                                      'autocomplete' => 'off',
+                                                      'placeholder' => 'Votre nom',
                                                       'label' => 'Nom*']);
                     echo "</td><td>";
                     echo $this->Form->control('prenom', ['pattern' => '[a-zA-Z\-]*',
                                                          'required title' => "Ce champ doit être rempli uniquement avec des lettres",
-                                                         'autocomplete' => 'off',
-                                                         'label' => 'Prenom*']);
+                                                         'placeholder' => 'Votre prénom',
+                                                         'label' => 'Prénom*']);
                     echo "</td></tr></div>";
                     echo "<tr><td>";
                     echo $this->Form->control('mail', [ 'autocomplete' => 'off',

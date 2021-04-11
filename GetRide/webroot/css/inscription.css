@@ -8,11 +8,6 @@ color:#ff0000;
 font-family:cursive;
 }
 
-#mail::placeholder{
-	font-family:italic;
-	size: 10px;
-}
-
 #mail{
 	height:35px;
 	background-color: transparent;
@@ -67,4 +62,9 @@ input[type=text]{
 
 td{
 	border:0px;
+}
+
+input::placeholder{
+	font-family: italic;
+	size: 10px;
 }
