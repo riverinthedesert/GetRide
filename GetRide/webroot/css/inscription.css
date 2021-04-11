@@ -1,0 +1,70 @@
+form{
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.error-message {
+color:#ff0000;
+font-family:cursive;
+}
+
+#mail::placeholder{
+	font-family:italic;
+	size: 10px;
+}
+
+#mail{
+	height:35px;
+	background-color: transparent;
+	width: 200px;
+}
+
+#telephone{
+	width:200px;
+}
+
+
+#naissance{
+	width:200px;
+}
+
+button{
+	margin:auto;
+	margin-left:35%;
+	width: 200px;
+}
+
+#genre{
+	font-size:100px;
+}
+
+input[type=password]{
+	height:35px;
+	width:300px;
+}
+
+input[type=text]{
+	height:35px;
+	width:300px;
+}
+
+
+.mdp img{
+	height: 20px;
+	cursor: pointer;
+	position: absolute;
+	top: 40%;
+	left: 33%;
+}
+
+.cmdp img{
+	height: 20px;
+	cursor: pointer;
+	position: absolute;
+	top: 40%;
+	left: 65.5%;
+}
+
+td{
+	border:0px;
+}
