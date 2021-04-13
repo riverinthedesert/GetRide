@@ -75,8 +75,8 @@ $cakeDescription = 'Co-Voiturage';
 							</div>
                     </div>
                 </form>
-                <li><a href="/GetRide/GetRide/offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
-                <li><a href="/GetRide/GetRide/offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
+                <li><a href="/GetRide/GetRide/Offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="/GetRide/GetRide/Offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
                 <!-- Notifications : -->
 
                 <?php
@@ -121,7 +121,7 @@ $cakeDescription = 'Co-Voiturage';
                             <li><a href="/GetRide/GetRide/VisuGroupe">Afficher les groupes d'amis</a></li>
                             <li><a href="/GetRide/GetRide/VisuOffre">Visualiser mes offres</a></li>
 							<li><a href="/GetRide/GetRide/AnnulationParticipation">Annuler une participation</a></li>
-                            <li><a href="#">Visualiser mes offres en cours</a></li>
+                            <li><a href="/GetRide/GetRide/VisuMesOffre">Visualiser mes offres en cours</a></li>
                             <li><a href="/GetRide/GetRide/HistoriqueTrajet">Historique de trajet effectué</a></li>
                             <li><a href="/GetRide/GetRide/VisuFavo">Visualiser mes favoris</a></li>
                         </ul>

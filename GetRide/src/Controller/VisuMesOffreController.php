@@ -4,7 +4,7 @@
     use Cake\Datasource\ConnectionManager;
     use Cake\ORM\TableRegistry;
 
-    class VisuOffreController extends AppController
+    class VisuMesOffreController extends AppController
     {
         public function index()
         {
@@ -16,8 +16,7 @@
             $this->set(compact('ville'));
             $copassager = TableRegistry::getTableLocator()->get('Copassager');
             $this->set(compact('copassager'));
-
-            
         }
     }
+
 ?>

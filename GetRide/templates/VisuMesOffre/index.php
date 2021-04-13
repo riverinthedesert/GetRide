@@ -4,22 +4,14 @@
 $session_active = $this->request->getAttribute('identity');
 
 // pour le prenom
-if (!is_null($session_active))
-    echo $session_active->prenom;
-    echo $session_active->idMembre;
-
- $query1 = $offre->find();
- $query2 = $users->find();
- $query3 = $ville->find();
- $query4 = $copassager->find();
-
-foreach ($query4 as $row) {
-    echo  $row->idMembre ;
-}
+$query1 = $offre->find();
+$query2 = $users->find();
+$query3 = $ville->find();
+$query4 = $copassager->find();
 
 
 ?>
-<?= $this->Html->css(['visuoffre']) ?>
+<?= $this->Html->css(['visumesoffre']) ?>
 <div class="row">
     <div class="column-responsive column-400">
         <div class="users view content">
@@ -47,7 +39,8 @@ foreach ($query4 as $row) {
                         $estCopassager=true;
                     }
                 }
-                if(($row->idConducteur==$session_active->idMembre)||$estCopassager){
+                $estCopassagerOUconducteur=($row->idConducteur==$session_active->idMembre)||$estCopassager;
+                if(($estCopassagerOUconducteur)&&(date("Y-m-d H:i:s") < $row->horaireArrivee)){
                     echo"<tr>
                             <td>".$row->idOffre." </td>
                         
