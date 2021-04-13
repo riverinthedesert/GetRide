@@ -37,14 +37,14 @@
 	
 
 	
-	echo "id Expediteur: ".$idExpediteur;
+/*echo "id Expediteur: ".$idExpediteur;
 	echo "</br>";
 	echo "id Membre: ".$idMembre;
 	echo "</br>";
 	echo "id Offre: ".$idOffre;
 
 		echo "</br>";
-
+*/
 
 	//Recuperer le nom en fonction de son id
 	$queryName = "SELECT * FROM `users` WHERE idMembre='".$id."'";
@@ -58,7 +58,7 @@
 
 
 
-	echo $message;
+	//echo $message;
 	
 	//Date actuel
 	$now = date_create()->format('Y-m-d H:i:s');
@@ -69,14 +69,14 @@
 		
 		
 		";
-			echo "</br>";
+			//echo "</br>";
 
-	echo $queryNotification;
+	//echo $queryNotification;
 	
 	if($conn->query($queryNotification) === TRUE){
-		echo "Insertion avec succés";
+		//echo "Insertion avec succés";
 	} else {
-		echo "Insertion echec";
+		//echo "Insertion echec";
 	}
 
 
@@ -88,16 +88,19 @@
 	
 	";
 	
-	echo $queryModify;
+	//echo $queryModify;
 	
 	if($conn->query($queryModify) === TRUE){
-		echo "Modification valeur avec succés";
+	//	echo "Modification valeur avec succés";
 	} else {
-		echo "Modification echec";
+		//echo "Modification echec";
 	}
 	
 	
 	
+	echo '<script type="text/javascript">
+				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+	</script>'; 
 	
 	//Le nombre de passager ne diminue pas
 	
