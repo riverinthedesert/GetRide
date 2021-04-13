@@ -23,71 +23,149 @@
 	$id = $session_active->idMembre;
 	$idOffre = $_GET['id'];
 
-	$query = "SELECT * FROM `notification` WHERE idMembre='".$id."' AND idOffre='".$idOffre."'";
 
+	$queryGetNombrePassagerMaxOffre = "Select * From offre where idOffre='".$idOffre."'";
+	
+	$nbPassager = $conn->query($queryGetNombrePassagerMaxOffre);
+	
+	$error = 0;
 
-	//recuperer la notification
-	$notification = $conn->query($query);
-	if($i = $notification->fetch_assoc()){		
-		$idExpediteur = $i['idExpediteur'];
-		$idMembre = $i['idMembre'];
-		$idOffre = $i['idOffre'];
+	if($i = $nbPassager->fetch_assoc()){		
+		$nbPassagerMax = $i['nbPassagersMax'];
 	}
 	
-	
-
-	
-	echo "id Expediteur: ".$idExpediteur;
-	echo "</br>";
-	echo "id Membre: ".$idMembre;
-	echo "</br>";
-	echo "id Offre: ".$idOffre;
-	echo "</br>";
-
-
-	//Recuperer le nom en fonction de son id
-	$queryName = "SELECT * FROM `users` WHERE idMembre='".$id."'";
-	$name = $conn->query($queryName);
-
-	if($i = $name->fetch_assoc()){		
-		$nom = $i['nom'];
-		$prenom = $i['prenom'];
-	}
-	$message = "L\'utilisateur ".$nom." ".$prenom." vous a accepté dans le trajet";
-
-
-
-	echo $message;
-	
-	//Date actuel
-	$now = date_create()->format('Y-m-d H:i:s');
-
-	//Notifier l'utilisateur associé
-	$queryNotification = "INSERT INTO NOTIFICATION(idMembre, message, estLue, necessiteReponse, idOffre,DateCreation,idExpediteur)
-		VALUES('$idExpediteur','$message','0','0','$idOffre','$now','$idMembre');
+	if($nbPassagerMax > 0){
 		
+
+		$query = "SELECT * FROM `notification` WHERE idMembre='".$id."' AND idOffre='".$idOffre."'";
+
+
+		//recuperer la notification
+		$notification = $conn->query($query);
+		if($i = $notification->fetch_assoc()){		
+			$idExpediteur = $i['idExpediteur'];
+			$idMembre = $i['idMembre'];
+			$idOffre = $i['idOffre'];
+		}
+		
+		
+
+		
+		/*echo "id Expediteur: ".$idExpediteur;
+		echo "</br>";
+		echo "id Membre: ".$idMembre;
+		echo "</br>";
+		echo "id Offre: ".$idOffre;
+		echo "</br>";*/
+
+
+		//Recuperer le nom en fonction de son id
+		$queryName = "SELECT * FROM `users` WHERE idMembre='".$id."'";
+		$name = $conn->query($queryName);
+
+		if($i = $name->fetch_assoc()){		
+			$nom = $i['nom'];
+			$prenom = $i['prenom'];
+		}
+		$message = "L\'utilisateur ".$nom." ".$prenom." vous a accepté dans le trajet";
+
+
+
+		//echo $message;
+		
+		//Date actuel
+		$now = date_create()->format('Y-m-d H:i:s');
+
+		//Notifier l'utilisateur associé
+		$queryNotification = "INSERT INTO NOTIFICATION(idMembre, message, estLue, necessiteReponse,idNotification, idOffre,DateCreation,idExpediteur)
+			VALUES('$idExpediteur','$message','0','0','0','$idOffre','$now','$idMembre');
+			
+			
+			";
+		//echo "</br>";
+
+		echo $queryNotification;
+		
+		if($conn->query($queryNotification) === TRUE){
+			//echo "Insertion avec succés";
+		} else {
+			//echo "Insertion echec";
+			$error = $error + 1;
+		}
+
+
+
+		//Modification update table pour ne pas pouvoir accepter plusieurs fois.
+		$queryModify = "UPDATE NOTIFICATION 
+			SET necessiteReponse = 0
+		WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'
 		
 		";
-	echo "</br>";
+		
+		echo $queryModify;
+		if($error == 0){
+			if($conn->query($queryModify) === TRUE){
+				//echo "Modification valeur necessiteReponse avec succés";
+			//	echo "</br>";
+			} else {
+				//echo "Modification echec";
+				//echo "</br>";
+				$error = $error + 1;
+			}
+		}
+		
+		
+		
+		
+		//On diminue le nombre de passager
+		$nbPassagerMax = $nbPassagerMax - 1;
+		//echo $nbPassagerMax;
+		//echo "</br>";
 
-	echo $queryNotification;
-	$updateNotifications = $conn->query($queryNotification);
+		
+		//Le nombre de passager diminue
+		$queryModifyNbPassager = "UPDATE Offre
+			SET nbPassagersMax = '".$nbPassagerMax."'
+		WHERE idOffre='".$idOffre."' 
+		";
+		
+		//echo $queryModifyNbPassager;
+		//echo "</br>";
+		if($error == 0){
+			if($conn->query($queryModifyNbPassager) === TRUE){
+				//echo "Modification valeur nbPassager avec succés";
+			//	echo "</br>";
+			} else {
+				//echo "Modification echec";
+			//	echo "</br>";
+				$error = $error + 1;
+			}
+		}
+		
+		
+		if($error == 0){
+			//Tout s'est bien passé
+			
+			//Retour à l'offre
+			echo '<script type="text/javascript">
+				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+			</script>'; 
+		} else {
+			echo "Une erreur est arrivée!";
+		}
+	} else {
+		//message d'erreur si nombre passager disponible = 0
+		echo "Erreur: l'offre ne peut plus recevoir de passager";
+		
+		if($error == 0){
+			//Tout s'est bien passé
+			
+			echo '<script type="text/javascript">
+				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+			</script>';
 
-	
-	echo "</br>";
-	//Si la notification a été acceptée, on enlève la demande pour ne pas pouvoir l'accepter/refuser plusieurs fois!
-	$queryDelete = "DELETE FROM NOTIFICATION WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'";
-	$delete = $conn->query($queryDelete);
-	
-	echo $queryDelete;
-	echo "</br>";
-	
-	
-	//Le nombre de passager diminue
-	
-	
-	
-	//message d'erreur si nombre passager disponible = 0
-
-
+		} else {
+			echo "une erreur est arrivée!";
+		}
+	}
 ?>

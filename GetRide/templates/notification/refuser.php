@@ -72,19 +72,34 @@
 			echo "</br>";
 
 	echo $queryNotification;
-	$updateNotifications = $conn->query($queryNotification);
+	
+	if($conn->query($queryNotification) === TRUE){
+		echo "Insertion avec succés";
+	} else {
+		echo "Insertion echec";
+	}
 
-	echo "</br>";>
-	//Si la notification a été refusée, on enlève la demande pour ne pas pouvoir l'accepter/refuser plusieurs fois!
-	$queryDelete = "DELETE FROM NOTIFICATION WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'";
-	$delete = $conn->query($queryDelete);
-	
-	echo $queryDelete;
-	echo "</br>";
 
+
+	//Modification update table pour ne pas pouvoir accepter plusieurs fois.
+	$queryModify = "UPDATE NOTIFICATION 
+		SET necessiteReponse = 0
+	WHERE idMEMBRE='".$idMembre."' AND idOffre='".$idOffre."' AND idExpediteur='".$idExpediteur."'
+	
+	";
+	
+	echo $queryModify;
+	
+	if($conn->query($queryModify) === TRUE){
+		echo "Modification valeur avec succés";
+	} else {
+		echo "Modification echec";
+	}
 	
 	
-	//Le nombre de passager diminie
+	
+	
+	//Le nombre de passager ne diminue pas
 	
 	
 	
