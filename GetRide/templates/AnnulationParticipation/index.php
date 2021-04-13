@@ -19,7 +19,7 @@ echo "Participants à mes trajets: ";
 	$getOffre = $conn->query($queryRecuperationMesOffres);
 	echo "Mes Trajets:</br>";
 	while ($i = $getOffre->fetch_assoc()){		
-		$queryRecuperationMesNotifications = "Select * from notification where idOffre = '".$i['idOffre']."' AND idExpediteur='".$id."'";
+		$queryRecuperationMesNotifications = "Select * from notification where idOffre = '".$i['idOffre']."' AND idExpediteur='".$id."' AND message LIKE '%accept%'";
 		$getIdMembre = $conn->query($queryRecuperationMesNotifications);
 		while ($j = $getIdMembre->fetch_assoc()){
 			echo "Offre: ".$i['idOffre'];

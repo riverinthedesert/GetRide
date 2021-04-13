@@ -73,6 +73,12 @@ echo "supprimer la personne";
 	echo $queryDeleteNotification;
 	
 	$deleteNotif = $conn->query($queryDeleteNotification);
+	
+	//Delete notification acceptation de trajet
+	$queryDeleteNotification2 = "Delete from notification where idMembre ='".$idExpediteur."' and idOffre = '".$idOffre."' and idExpediteur='".$id."' and message LIKE '%accept%'";
+	
+	$deleteNotif2 = $conn->query($queryDeleteNotification2);
+
 
 	
 	//Ajout d'une place au trajet
