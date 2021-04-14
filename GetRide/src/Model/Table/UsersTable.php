@@ -84,8 +84,8 @@ class UsersTable extends Table
             ->notEmptyString('genre');
 
         $validator
-            ->allowEmptyFile('pathPhoto')
-            ->add( 'pathPhoto', [
+            ->allowEmptyFile('pathPhoto_file')
+            ->add('pathPhoto_file', [
                 'mimetype' => [
                     'rule' => [ 'mimetype', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
                     'message' => 'Seul les images jpg et png sont acceptées.',
