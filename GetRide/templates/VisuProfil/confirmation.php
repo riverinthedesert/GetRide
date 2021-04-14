@@ -56,21 +56,21 @@
 				(SELECT mail FROM users where mail='".$mail."');";
 				if ($conn->query($query) === TRUE) {
 					echo "<script type='text/javascript'>
-						document.location = 'visu-profil';
+						document.location = 'http://localhost/GetRide/GetRide/visu-profil';
 					</script>";
 					//Reset du cookie
 					setcookie($cookieName);
 				} else {
 					//Problème query
 					echo "<script type='text/javascript'> 
-						document.location = '/visu-profil/modif-pass'; 
+						document.location = 'http://localhost/GetRide/GetRide/visu-profil/modif-pass'; 
 					</script>";
 					setcookie($cookieName, "query");
 				}
 			} else {
 				//Problème regex
 				echo "<script type='text/javascript'>
-			document.location = 'visu-profil/modif-pass'; 
+			document.location = 'http://localhost/GetRide/GetRide/visu-profil/modif-pass'; 
 				</script>";
 				setcookie($cookieName, "regex");
 			}
@@ -78,7 +78,7 @@
 		} else {
 			//nouveau mot de passe != mot de passe de confirmation
 			echo "<script type='text/javascript'>
-				document.location = 'visu-profil/modif-pass'; 
+				document.location = 'http://localhost/GetRide/GetRide/visu-profil/modif-pass'; 
 			</script>";
 			setcookie($cookieName, "confirm");
 
@@ -86,7 +86,7 @@
 	} else {
 		//Ancien mot de passe n'est pas égale au mot de passe dans la database
 		echo "<script type='text/javascript'> 
-			document.location = 'visu-profil/modif-pass'; 
+			document.location = 'http://localhost/GetRide/GetRide/visu-profil/modif-pass'; 
 		</script>";
 		setcookie($cookieName, "hash");
 	}
