@@ -30,35 +30,37 @@ body {
         <div style="background-color:#AFEEEE;">
             <div class="container">
                 <br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h6>Départ</h6>
-                        <input  name="ville" id="ville" placeholder="Départ" type="text" class="form-control" style="background-color:DarkCyan; color:white">
+                <form action="offre" method="GET">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6>Départ</h6>
+                            <input  name="villeDepart" id="villeDepart" placeholder="Départ" type="text" class="form-control" style="background-color:DarkCyan; color:white">
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>Destination</h6>
+                            <input  name="villeDarrivee" id="villeDarrivee" type="text" class="form-control" placeholder="Destination"  style="background-color:DarkCyan; color:white">
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>Date de départ</h6>
+                            <input type="date" id="horaireDepart" name="trip-start" value="" style="background-color:DarkCyan; color:white">
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>Nombre de passagers</h6>
+                            <input type="number" id="nombrePassagersMax"  placeholder="nb passagers"  name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
+                        </div>
+                        <div class="col-sm-4">
+                            <h6></h6>
+                            <button type="Submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <h6>Destination</h6>
-                        <input  name="ville2" id="ville2" type="text" class="form-control" placeholder="Destination"  style="background-color:DarkCyan; color:white">
-                    </div>
-                    <div class="col-sm-4">
-                        <h6>Date de départ</h6>
-                        <input type="date" id="start" name="trip-start" value="" style="background-color:DarkCyan; color:white">
-                    </div>
-                    <div class="col-sm-4">
-                        <h6>Nombre de passagers</h6>
-                        <input type="number" id="tentacles"  placeholder="nb passagers"  name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
-                    </div>
-                    <div class="col-sm-4">
-                        <h6></h6>
-                        <button type="Submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
-<script> $("#ville").autocomplete({
+<script> $("#villeDepart").autocomplete({
 	source: function (request, response) {
 		$.ajax({
-			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville']").val(),
+			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='villeDepart']").val(),
 			data: { q: request.term },
 			dataType: "json",
 			success: function (data) {
@@ -77,10 +79,10 @@ body {
 	}
 });
 
-$("#ville2").autocomplete({
+$("#villeDarrivee").autocomplete({
 	source: function (request, response) {
 		$.ajax({
-			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville2']").val(),
+			url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='villeDarrivee']").val(),
 			data: { q: request.term },
 			dataType: "json",
 			success: function (data) {
