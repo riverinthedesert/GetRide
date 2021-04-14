@@ -13,6 +13,10 @@ top:95px;
 	position: relative;
 }
 
+#tel{
+	position: relative;
+}
+
 #mail{
 	height:35px;
 	width: 200px;
@@ -65,4 +69,46 @@ td{
 input::placeholder{
 	font-family: italic;
 	size: 10px;
+}
+
+#aide-mdp{
+	position: absolute;
+	top: 10px;
+	left: 150px;
+}
+
+#aide-tel{
+	position: absolute;
+	top: 10px;
+	left: 120px;
+}
+
+/* Gestion des aides */
+
+.form__tooltip{
+	font-size: 9px;
+	background: grey;
+	color:white;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	text-align: center;
+	align-self: center;
+}
+
+.form__tooltip::after{
+	
+	position:absolute;
+	content:attr(data-tooltip);
+	display: none;
+	bottom: 10px;
+	left: 5px;
+	text-align: left;
+	width: 250px;
+}
+
+.form__tooltip:hover::after{
+	display: block;
+	font-size: 10px;
+	color: black;
 }

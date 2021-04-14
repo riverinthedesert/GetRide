@@ -14,27 +14,28 @@
                     echo $this->Form->control('nom', ['pattern' => '[a-zA-Z\-]*',
                                                       'required title' => "Ce champ doit être rempli uniquement avec des lettres",
                                                       'placeholder' => 'Votre nom',
-                                                      'label' => 'Nom*']);
+                                                      'label' => 'Nom *']);
                     echo "</td><td>";
                     echo $this->Form->control('prenom', ['pattern' => '[a-zA-Z\-]*',
                                                          'required title' => "Ce champ doit être rempli uniquement avec des lettres",
                                                          'placeholder' => 'Votre prénom',
-                                                         'label' => 'Prénom*']);
+                                                         'label' => 'Prénom *']);
                     echo "</td></tr></div>";
                     echo "<tr><td>";
                     echo $this->Form->control('mail', [ 'autocomplete' => 'off',
-                                                        'label' => 'Mail*',
+                                                        'label' => 'Mail *',
                                                         'placeholder' => "exemple@xyz.com",
                                                         'pattern' => "^(([-\w\d]+)(\.[-\w\d]+)*@([-\w\d]+)(\.[-\w\d]+)*(\.([a-zA-Z]{2,5}|[\d]{1,3})){1,2})$",
                                                         'required title' => "exemple@xyz.xyz"]);
                     echo "</td></tr>";
                     echo "<tr><td>";
                     echo "<div class=\"mdp\">";
+                    echo "<span id=\"aide-mdp\" class=\"form__tooltip\" data-tooltip=\"Votre mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial\">?</span>";
                     echo $this->Form->control('motDePasse', ['type' => 'password',
                                                              'pattern' => '(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,30}',
-                                                             'required title' => "au moins une majuscule, un chiffre et un caractère spécial",
+                                                             'required title' => "Votre mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial",
                                                              'autocomplete' => 'off',
-                                                             'label' => 'Mot de passe*',
+                                                             'label' => 'Mot de passe *',
                                                              'id' => 'mdp']);
                     echo "<p id=\"oeil\">";
                     echo $this->Html->image('eye_show.png', ['onClick' => 'Afficher()',
@@ -52,19 +53,22 @@
                                                              'id' => 'cimg']);
                     echo "</p>";
                     echo "</div></td></tr>";
-                    echo "<tr><td>";              
+                    echo "<tr><td>";
+                    echo "<div id=\"tel\">";
+                    echo "<span id=\"aide-tel\" class=\"form__tooltip\" data-tooltip=\"Votre téléphone doit commencer par 06 ou 07 et doit contenir 10 chiffres\">?</span>";            
                     echo $this->Form->control('telephone', ['autocomplete' => 'off',
                                                             'pattern' => '(^06|07)[0-9]{8}',
-                                                            'label' => 'Téléphone*',
+                                                            'label' => 'Téléphone *',
                                                             'required title' => 'doit contenir 10 chiffres et commencer par 06 ou 07']);
+                    echo "</div>";
                     echo "</td><td>";
                     echo $this->Form->control('naissance', ['type' => 'date',
                                                             'autocomplete' => 'off',
-                                                            'label' => 'Date de naissance*',
+                                                            'label' => 'Date de naissance *',
                                                             'max' => '2003-04-11']);
                     echo "</td></tr>";
                     echo "<tr><td>";
-                    echo "<label id='radio'>Genre :</label>";
+                    echo "<label id='radio'>Genre* :</label>";
                     echo $this->Form->radio('genre', 
                     [
                         [ 'value' => 'm', 'text' => 'Homme'],
@@ -72,7 +76,7 @@
                         [ 'value' =>'a', 'text' => 'Autre'],
                     ]);
                     echo "</td><td>";
-                    echo "<label id='radio'>Possédez-vous une voiture ?</label>";
+                    echo "<label id='radio'>Possédez-vous une voiture ? *</label>";
                     echo $this->Form->radio('estConducteur', 
                     [
                         [ 'value' => 'Oui', 'text' => 'Oui'],
