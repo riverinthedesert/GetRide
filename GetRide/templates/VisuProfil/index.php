@@ -81,19 +81,10 @@
 	
 	
 	<br><br>
-	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['action' => 'modifInfos']) ?>
-	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass']) ?> 
 	
-	
-	
-	
-	
-
-	
-
-	
-	
-	<?= $this->Form->postLink(__('Supprimer votre compte'), ['action' => 'supprimer'], ['class'=>'your_class', 'confirm' => __('Voulez-vous confirmer la suppression de compte?')]) ?>
+	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['action' => 'modifInfos'], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment modifier vos informations personnelles?')]) ?>
+	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass'], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment changer votre mot de passe?')]) ?>
+	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer'], ['class'=>'your_class', 'confirm' => __('Voulez-vous confirmer la suppression de compte?')]) ?>
 	
 
 
