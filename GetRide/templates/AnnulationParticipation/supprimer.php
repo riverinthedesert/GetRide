@@ -110,7 +110,7 @@ echo "supprimer la personne";
 	
 	
 	echo '<script type="text/javascript">
-				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+				window.location.replace("http://localhost/GetRide/GetRide/AnnulationParticipation");
 			</script>';
 	
 
