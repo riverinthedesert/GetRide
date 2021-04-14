@@ -117,13 +117,13 @@ $cakeDescription = 'Co-Voiturage';
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/GetRide/GetRide/visu-profil">Visualiser son profil</a></li>
-                            <li><a href="/GetRide/GetRide/VisuGroupe">Afficher les groupes d'amis</a></li>
-                            <li><a href="/GetRide/GetRide/VisuOffre">Visualiser mes offres</a></li>
+                            <li><a href="/GetRide/GetRide/visu-profil">Mon profil</a></li>
+                            <li><a href="/GetRide/GetRide/VisuGroupe">Mes groupes d'amis</a></li>
+                            <li><a href="/GetRide/GetRide/VisuOffre">Mes offres</a></li>
 							<li><a href="/GetRide/GetRide/AnnulationParticipation">Annuler une participation</a></li>
-                            <li><a href="/GetRide/GetRide/VisuMesOffre">Visualiser mes offres en cours</a></li>
+                            <li><a href="/GetRide/GetRide/VisuMesOffre">Mes offres en cours</a></li>
                             <li><a href="/GetRide/GetRide/HistoriqueTrajet">Historique de trajet effectué</a></li>
-                            <li><a href="/GetRide/GetRide/VisuFavo">Visualiser mes favoris</a></li>
+                            <li><a href="/GetRide/GetRide/VisuFavo">Mes favoris</a></li>
                         </ul>
                     </li>
                 <?php
