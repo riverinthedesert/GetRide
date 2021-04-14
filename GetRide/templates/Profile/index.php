@@ -60,8 +60,10 @@
 		}
 		if($i['genre']=='m'){
 			echo "<b>M. </b>";
-		} else {
+		} else if($i['genre']=='f') {
 			echo "<b>Mme </b>";
+		} else {
+			echo "";
 		}
 		echo $i['nom']." ".$i['prenom'];
 		echo "<br>";
