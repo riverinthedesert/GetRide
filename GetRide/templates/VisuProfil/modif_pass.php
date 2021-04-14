@@ -56,7 +56,9 @@
   }
   
 	function Confirm(){
+		 if (confirm("Voulez-vous vraiment changer votre mot de passe ?")) {
 			document.myForm.submit();
+		 }
 	}
 </script>
   <form name="myForm" action="confirmation" method="get">

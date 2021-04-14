@@ -71,7 +71,11 @@
 			appendMessageToErrorDiv(error_div, "Veuillez un état de conducteur valide !");
 		}
 		if (error_div.innerHTML == "") {
-			document.myForm.submit();
+			if (confirm("Etes-vous sûr de vouloir modifier vos informations personnelles ?")) {
+				document.myForm.submit();
+			} else {
+				window.location.replace("../visu-profil");
+			}
 		}
 	}
 </script>
