@@ -86,8 +86,8 @@
 		
 	if($nombre==0){
 ?>
-		
-	<?=$this->Form->postButton(__('Ajouter dans vos Favoris'), ['action' => 'ajouterFavo',$id]) ?>
+	<?= $this->Form->postButton(__('Ajouter dans vos Favoris'), ['action' => 'ajouterFavo',$id], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment ajouter cet utilisateur a vos favoris?')]) ?>
+
 <?php
 	} else {
 		echo "</br>";
