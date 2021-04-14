@@ -121,7 +121,7 @@ class NotificationController extends AppController
                 break;
 
             case 'annulerOffre':
-                /*
+        
                 $idOffre = intval($idsConcernes[2]);
 
                 $messageExp = 'Votre offre a été annulée';
@@ -137,7 +137,7 @@ class NotificationController extends AppController
                     $id = $r['idMembre'];
                     array_push($destinataires, $id);
                 }
-                */
+                
                 break;
 
             case 'ajoutOffrePrivee':

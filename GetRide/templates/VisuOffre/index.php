@@ -107,7 +107,12 @@ foreach ($query4 as $row) {
                     }
 
                     echo "<td>".$row->prix." </td>";
-                    echo "<td><a role='button' class='btn btn-info' href = 'Offre/details?idOffre=$row->idOffre'>Détails</a></td></tr>";
+                    echo "<td><a role='button' class='btn btn-info' href = 'Offre/details?idOffre=$row->idOffre'>Détails</a></td>"; ?>
+                    
+                    <td>
+                    <?= $this->Form->postLink('Annuler l\'offre', ['action' => 'delete', $row->idOffre], ['confirm' => 'Êtes vous sûr ?']); ?>
+                    </td></tr>
+                    <?php
                 }
             }
             ?>
