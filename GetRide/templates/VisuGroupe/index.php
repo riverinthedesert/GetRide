@@ -81,7 +81,7 @@
 											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='ModifierGroupe?idGroupe=$element' "?> ><span class="glyphicon glyphicon-pencil"></span>  Modifier le groupe</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" href=<?php echo "/GetRide/GetRide/VisuGroupe/quitterGroupe/$element"?>><span class="glyphicon glyphicon-remove"></span>  Quitter le groupe</a></li>
 											<li role="presentation" class="divider"></li>
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><p style="color:#FF0000";>Supprimer le groupe</p></a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href=<?php echo "/GetRide/GetRide/VisuGroupe/supprimerGroupe/$element"?>><p style="color:#FF0000";>Supprimer le groupe</p></a></li>
 										</ul>
 									</div>
 								</div>

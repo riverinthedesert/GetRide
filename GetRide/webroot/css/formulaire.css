@@ -5,19 +5,22 @@ form{
 
 .error-message {
 color:#ff0000;
-font-family:cursive;
+position: absolute;
+top:95px;
+}
+
+.error{
+	position: relative;
 }
 
 #mail{
 	height:35px;
-	background-color: transparent;
 	width: 200px;
 }
 
 #telephone{
 	width:200px;
 }
-
 
 #naissance{
 	width:200px;
@@ -43,21 +46,16 @@ input[type=text]{
 	width:300px;
 }
 
-
-.mdp img{
-	height: 20px;
-	cursor: pointer;
-	position: absolute;
-	top: 40%;
-	left: 33%;
+.mdp, .cmdp{
+	position: relative;
 }
 
-.cmdp img{
+#oeil img{
 	height: 20px;
 	cursor: pointer;
 	position: absolute;
-	top: 40%;
-	left: 65.5%;
+	top:58%;
+	left: 80%;
 }
 
 td{

@@ -1,4 +1,4 @@
-<?= $this->Html->css(['inscription']) ?>
+<?= $this->Html->css(['formulaire']) ?>
 <?= $this->Html->script(['inscription']) ?>
 <!-- Création du formulaire d'inscription -->
 <div class="row">
@@ -36,18 +36,21 @@
                                                              'autocomplete' => 'off',
                                                              'label' => 'Mot de passe*',
                                                              'id' => 'mdp']);
+                    echo "<p id=\"oeil\">";
                     echo $this->Html->image('eye_show.png', ['onClick' => 'Afficher()',
                                                     'fullBase' => false,
                                                     'id' => 'imageOeil']);
+                    echo "</p>";
                     echo "</div></td><td>";
                     echo "<div class=\"cmdp\">";
                     echo $this->Form->control('confirmerMotDePasse', ['type' => 'password',
                                                                       'label' => 'Confirmer le mot de passe*',
                                                                       'id' => 'cmdp']);
-
+                    echo "<p id=\"oeil\">";
                     echo $this->Html->image('eye_show.png', ['onClick' => 'conf_Afficher()',
                                                              'fullBase' => false,
                                                              'id' => 'cimg']);
+                    echo "</p>";
                     echo "</div></td></tr>";
                     echo "<tr><td>";              
                     echo $this->Form->control('telephone', ['autocomplete' => 'off',

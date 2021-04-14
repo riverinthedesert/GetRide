@@ -83,6 +83,8 @@ class UsersController extends AppController
                 // redirection vers l'accueil
                 return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
             }
+            $this->Flash->error(__('Vos informations sont incorrectes. Veuillez réessayer.'));
+
         }
         $this->set(compact('user'));
     }
