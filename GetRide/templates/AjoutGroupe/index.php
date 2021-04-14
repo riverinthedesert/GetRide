@@ -1,40 +1,50 @@
+<?= $this->Html->css(['ajoutGroupe']) ?>
 <?php
 use Cake\Datasource\ConnectionManager;
+use Cake\View\Helper\FlashHelper;
+
 $conn = ConnectionManager::get('default');
 
 $session_active = $this->request->getAttribute('identity');
 if(!is_null($session_active)){
     if (isset($_REQUEST['nom'])){
         $nom = $_REQUEST['nom'];
-        if (isset($_REQUEST['comment'])){
-            $comment = $_REQUEST['comment'];
-            //insertion du groupe avec commentaire
-            $conn->insert('groupe', [
-                'nom' => $nom,
-                'idAdmin' => $idMembre,
-                'commentaire' => $comment ]);
-            //$query = "INSERT into `groupe` (nom, idAdmin, commentaire) VALUES ('$nom', '$idMembre', '$comment')";
+        $requete= $conn->prepare("SELECT nom FROM `groupe` WHERE nom='".$nom."'");
+        $requete->execute();
+        $check = $requete->fetch('assoc');
+        if($check['nom'] == null){
+            if (isset($_REQUEST['comment'])){
+                $comment = $_REQUEST['comment'];
+                //insertion du groupe avec commentaire
+                $conn->insert('groupe', [
+                    'nom' => $nom,
+                    'idAdmin' => $idMembre,
+                    'commentaire' => $comment ]);
+                //$query = "INSERT into `groupe` (nom, idAdmin, commentaire) VALUES ('$nom', '$idMembre', '$comment')";
+            }
+            else{
+                $conn->insert('groupe', [
+                    'nom' => $nom,
+                    'idAdmin' => $idMembre]);
+                //$query = "INSERT into `groupe` (nom, idAdmin) VALUES ('$nom', '$idMembre')";
+            }
+            // On cherche l'id du créateur de cette offre
+            $requete="SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'";
+            $reqidG = $conn->execute($requete)->fetchAll('assoc');
+
+            $idGrp = $reqidG[0]["idGroupe"];
+
+            //Faire une modification s'il y a des amis en plus d'ajouté
+            $conn->insert('groupeMembre', [
+                'idGroupe' => $idGrp,
+                'idUtilisateur' => $idMembre]);
+            //$query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
+            
+            header('Location: VisuGroupe');
+            exit();
+        }else{
+            echo "<p id=\"erreur\">Le nom du groupe est déjà utilisé. Veuillez en choisir un autre.</p>";
         }
-        else
-            $conn->insert('groupe', [
-                'nom' => $nom,
-                'idAdmin' => $idMembre]);
-            //$query = "INSERT into `groupe` (nom, idAdmin) VALUES ('$nom', '$idMembre')";
-
-       // On cherche l'id du créateur de cette offre
-       $requete="SELECT idGroupe FROM `groupe` WHERE nom='".$nom."'";
-       $reqidG = $conn->execute($requete)->fetchAll('assoc');
-
-       $idGrp = $reqidG[0]["idGroupe"];
-
-        //Faire une modification s'il y a des amis en plus d'ajouté
-        $conn->insert('groupeMembre', [
-            'idGroupe' => $idGrp,
-            'idUtilisateur' => $idMembre]);
-        //$query2 = "INSERT into `groupeMembre` (idGroupe, idUtilisateur) VALUES ('$idGrp', '$idAdmin')";
-        
-        header('Location: VisuGroupe');
-        exit();
     }
 
 ?>
@@ -50,6 +60,7 @@ if(!is_null($session_active)){
 				<label for="nom">Nom (*):</label>
 				<input type="text" class="form-control" required id="nom" placeholder="Entrer nom" name="nom">
 			</div>
+            <br/>
 			<div class="form-group">
 				<label for="comment">Commentaires (optionnels):</label>
 				<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
