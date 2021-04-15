@@ -55,7 +55,7 @@ if (sizeof($historique) <= 0) {
         } else {
             echo '<a href="historique?date=1   " class="btn btn-danger" role="button">Trier par le plus récent</a>';
         }
-        echo'<a style="margin-left:1em;" href="delete_hist" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
+        echo'<a style="margin-left:1em;" href="delete_hist" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer votre historique?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
     }
         ?>
     </div>
