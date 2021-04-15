@@ -166,7 +166,7 @@
 			
 			//Retour à l'offre
 			echo '<script type="text/javascript">
-				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+				window.location.replace("http://localhost/GetRide/GetRide/notification/");
 			</script>'; 
 		} else {
 			echo "Une erreur est arrivée!";
@@ -179,7 +179,7 @@
 			//Tout s'est bien passé
 			
 			echo '<script type="text/javascript">
-				window.location.replace("http://localhost/GetRide/GetRide/offre/");
+				window.location.replace("http://localhost/GetRide/GetRide/notification/");
 			</script>';
 
 		} else {
