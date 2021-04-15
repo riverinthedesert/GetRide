@@ -87,10 +87,10 @@
 		<input type="datetime-local" id="ha" name="ha" value="<?php echo $horaireArrivee3?>">
 		<label for="nbpassagersMax">Modifier le nombre de passagers max:</label><br>
 		<input type="text" id="nbpassagers" name="nbpassagers" value="<?php echo $nbpassagersMax?>">
-		<label for="idVilleDepart">Modifier l'id de la ville de départ:</label><br>
-		<input type="text" id="idVilleDepart" name="idVilleDepart" value="<?php echo $idVilleDepart?>">
-		<label for="idVilleArrivee">Modifier l'id de la ville d'arrivée</label><br>
-		<input type="text" id="idVilleArrivee" name="idVilleArrivee" value="<?php echo $idVilleArrivee?>">
+		<label for="VilleDepart">Modifier la ville de départ:</label><br>
+		<input type="text" id="VilleDepart" name="VilleDepart" value="<?php echo $idVilleDepart?>">
+		<label for="VilleArrivee">Modifier la ville d'arrivée</label><br>
+		<input type="text" id="VilleArrivee" name="VilleArrivee" value="<?php echo $idVilleArrivee?>">
 		<label for="prix">Modifier le prix de votre trajet</label><br>
 		<input type="text" id="prix" name="prix" value="<?php echo $prix?>">
 		<label for="idEtape">Modifier le numéro de l'étape</label><br>
