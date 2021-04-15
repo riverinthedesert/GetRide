@@ -83,10 +83,13 @@ class UsersController extends AppController
                 $typeVoiture = $_POST['typeVoiture'];
                 $immatriculation = $_POST['immatriculation'];
                 $id_user = $user->get('idMembre');
-                
-                //Stockage des données dans la table conducteur
-                $requete= $conn->prepare("INSERT INTO `conducteur` VALUES ('$id_user','$typeVoiture','$immatriculation')");
-                $requete->execute();
+
+                // On vérifie si l'utilisateur à entrer une valeur pour sa voiture
+                if($typeVoiture != null){
+                    //Stockage des données dans la table conducteur
+                    $requete= $conn->prepare("INSERT INTO `conducteur` VALUES ('$id_user','$typeVoiture','$immatriculation')");
+                    $requete->execute();
+                }
 
                 $this->Flash->success(__('Votre compte a bien été créé.'));
 

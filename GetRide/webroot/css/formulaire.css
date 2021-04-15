@@ -50,7 +50,7 @@ input[type=text]{
 	width:300px;
 }
 
-.mdp, .cmdp{
+.mdp, .cmdp, .plaque{
 	position: relative;
 }
 
@@ -83,9 +83,17 @@ input::placeholder{
 	left: 120px;
 }
 
+#aide-immatriculation{
+	position: absolute;
+	top: 10px;
+	left: 250px;
+}
+
 label[for=voiture], label[for=immatriculation]{
 	display: none;
 }
+
+
 
 /* Gestion des aides */
 

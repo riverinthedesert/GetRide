@@ -88,18 +88,20 @@
                     echo $this->Form->control('typeVoiture', [
                         'id' => 'voiture',
                         'style' => 'display: none',
-                        'placeholder' => 'Renault Twingo'
+                        'placeholder' => 'Ex : Renault Twingo'
                     ]);
                     echo "</td><td>";
+                    echo "<div class=\"plaque\">";
                     echo "<label id=\"labelImmatriculation\" for=\"immatriculation\">Plaque d'immatriculation</label>";
+                    echo "<span id=\"aide-immatriculation\" class=\"form__tooltip\" data-tooltip=\"Format : 2 lettres - 3 chiffres - 2 lettres\" style=\"display: none\">?</span>";            
                     echo $this->Form->control('immatriculation', [
                         'id' => 'immatriculation',
                         'style' => 'display: none',
                         'label' => 'Plaque d\'immatriculation',
-                        'placeholder' => 'AB-000-AB',
+                        'placeholder' => 'Ex : AB-000-AB',
                         'pattern' => '[A-Z]{2}-[0-9]{3}-[A-Z]{2}',
-                        'required title' => 'Format : AB-000-AB'
                     ]);
+                    echo "</div>";
                     echo "</td></tr>";
                     echo "<tr><td>";
                     echo $this->Form->control('pathPhoto_file', ['type' => 'file', 'label' => 'Photo de profil']);

@@ -30,10 +30,16 @@ function montrerChamp(){
         document.getElementById("immatriculation").style.display="block";
         document.getElementById("labelVoiture").style.display="block";
         document.getElementById("labelImmatriculation").style.display="block";
+        document.getElementById("aide-immatriculation").style.display="block";
+        document.getElementById("voiture").required= true;
+        document.getElementById("immatriculation").required= true;
     }else{
         document.getElementById("voiture").style.display="none";
         document.getElementById("immatriculation").style.display="none";
         document.getElementById("labelVoiture").style.display="none";
         document.getElementById("labelImmatriculation").style.display="none";
+        document.getElementById("aide-immatriculation").style.display="none";
+        document.getElementById("voiture").required= false;
+        document.getElementById("immatriculation").required= false;
     }
 }
