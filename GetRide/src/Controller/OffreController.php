@@ -211,7 +211,7 @@ class OffreController extends AppController{
 
 
     public function add(){
-            $offre = $this->Offre->newEmptyEntity();
+           /*$offre = $this->Offre->newEmptyEntity();
             //session_start();
             // Récupération des informations du formulaire
             if ($this->request->is('post')) {
@@ -223,17 +223,17 @@ class OffreController extends AppController{
 
 
                 //Sauvegarde dans la base de données
-                if ($this->Offre->save($offre)) {
+                if ($this->Offre->save($offre)) {*/
                     
                     /* Récupération des données de l'utilisateur connecté */
-                    $session_active = $this->Authentication->getIdentity();
+                    /*$session_active = $this->Authentication->getIdentity();
 
                     $idMembre = $session_active->idMembre;
                     $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
-                    $idOffre = $offre->get('idOffre');
+                    $idOffre = $offre->get('idOffre');*/
                         
                     /* Envoi de la notification au controller */
-                    $ids = array($idMembre, $nomComplet, $idOffre);
+                    /*$ids = array($idMembre, $nomComplet, $idOffre);
                     NotificationController::notifier('ajoutOffre', $ids);
 
                     $this->Flash->success(__('Votre offre a bien été crée.'));
@@ -244,7 +244,8 @@ class OffreController extends AppController{
                 $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
             	}
             }
-            $this->set(compact('offre'));
+            $this->set(compact('offre'));*/
+
     }
 
     public function index(){
