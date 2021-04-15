@@ -24,3 +24,16 @@ function conf_Afficher(){
 }
 
 
+function montrerChamp(){
+    if(document.getElementById("estconducteur-oui").checked){
+        document.getElementById("voiture").style.display="block";
+        document.getElementById("immatriculation").style.display="block";
+        document.getElementById("labelVoiture").style.display="block";
+        document.getElementById("labelImmatriculation").style.display="block";
+    }else{
+        document.getElementById("voiture").style.display="none";
+        document.getElementById("immatriculation").style.display="none";
+        document.getElementById("labelVoiture").style.display="none";
+        document.getElementById("labelImmatriculation").style.display="none";
+    }
+}

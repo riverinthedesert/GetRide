@@ -56,8 +56,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
 
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            //Récupération de la photo de l'utilisateur
+
+            $conn = ConnectionManager::get('default');
+            
             if (!$user->getErrors()) {
+                //Récupération de la photo de l'utilisateur
                 $pathPhoto = $this->request->getData('pathPhoto_file');
 
                 $nomPhoto = $pathPhoto->getClientFileName();
@@ -75,6 +78,16 @@ class UsersController extends AppController
             }
             //Sauvegarde dans la base de données
             if ($this->Users->save($user)) {
+
+                //Récupération des informations sur la voiture de l'utilisateur.
+                $typeVoiture = $_POST['typeVoiture'];
+                $immatriculation = $_POST['immatriculation'];
+                $id_user = $user->get('idMembre');
+                
+                //Stockage des données dans la table conducteur
+                $requete= $conn->prepare("INSERT INTO `conducteur` VALUES ('$id_user','$typeVoiture','$immatriculation')");
+                $requete->execute();
+
                 $this->Flash->success(__('Votre compte a bien été créé.'));
 
                 // connecte automatiquement l'utilisateur

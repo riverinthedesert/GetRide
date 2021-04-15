@@ -79,8 +79,26 @@
                     echo "<label id='radio'>Possédez-vous une voiture ? *</label>";
                     echo $this->Form->radio('estConducteur', 
                     [
-                        [ 'value' => 'Oui', 'text' => 'Oui'],
-                        [ 'value' => 'Non', 'text' => 'Non'],
+                        [ 'value' => 'Oui', 'text' => 'Oui', 'onclick' => 'montrerChamp()'],
+                        [ 'value' => 'Non', 'text' => 'Non',  'onclick' => 'montrerChamp()'],
+                    ]);
+                    echo "</td></tr>";
+                    echo "<tr><td>";
+                    echo "<label id=\"labelVoiture\" for=\"voiture\">Type de voiture</label>";
+                    echo $this->Form->control('typeVoiture', [
+                        'id' => 'voiture',
+                        'style' => 'display: none',
+                        'placeholder' => 'Renault Twingo'
+                    ]);
+                    echo "</td><td>";
+                    echo "<label id=\"labelImmatriculation\" for=\"immatriculation\">Plaque d'immatriculation</label>";
+                    echo $this->Form->control('immatriculation', [
+                        'id' => 'immatriculation',
+                        'style' => 'display: none',
+                        'label' => 'Plaque d\'immatriculation',
+                        'placeholder' => 'AB-000-AB',
+                        'pattern' => '[A-Z]{2}-[0-9]{3}-[A-Z]{2}',
+                        'required title' => 'Format : AB-000-AB'
                     ]);
                     echo "</td></tr>";
                     echo "<tr><td>";

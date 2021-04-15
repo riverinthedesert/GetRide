@@ -83,6 +83,10 @@ input::placeholder{
 	left: 120px;
 }
 
+label[for=voiture], label[for=immatriculation]{
+	display: none;
+}
+
 /* Gestion des aides */
 
 .form__tooltip{
