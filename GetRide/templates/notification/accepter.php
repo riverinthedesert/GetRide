@@ -129,6 +129,8 @@
 		WHERE idOffre='".$idOffre."' 
 		";
 		
+		
+		
 		//echo $queryModifyNbPassager;
 		//echo "</br>";
 		if($error == 0){
@@ -143,13 +145,29 @@
 		}
 		
 		
+		//Insertion de l'id dans la table copassager
+		$queryCoPassager = "INSERT INTO copassager(idMembre, idOffre)
+			VALUES('$idExpediteur','$idOffre')";
+		echo "</br>";
+		echo $queryCoPassager;
+
+		if($conn->query($queryCoPassager) === TRUE){
+			echo "good query";
+			echo $idExpediteur;
+			echo $idOffre;
+		} else {
+			echo "bad query";
+		}
+
+		
+		
 		if($error == 0){
 			//Tout s'est bien passé
 			
 			//Retour à l'offre
-			echo '<script type="text/javascript">
+			/*echo '<script type="text/javascript">
 				window.location.replace("http://localhost/GetRide/GetRide/offre/");
-			</script>'; 
+			</script>'; */
 		} else {
 			echo "Une erreur est arrivée!";
 		}
@@ -160,9 +178,9 @@
 		if($error == 0){
 			//Tout s'est bien passé
 			
-			echo '<script type="text/javascript">
+			/*echo '<script type="text/javascript">
 				window.location.replace("http://localhost/GetRide/GetRide/offre/");
-			</script>';
+			</script>';*/
 
 		} else {
 			echo "une erreur est arrivée!";
