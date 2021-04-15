@@ -66,8 +66,8 @@
 
             if ($item["necessiteReponse"] == "1") { // A voir plus tard pour accepter/refuser une demande
                 echo '</br>';
-                echo '<a class="btn btn-primary" href="http://localhost/GetRide/GetRide/notification/accepter?id='.$idOffre.'" role="button">Accepter</a> ';
-                echo '<a class="btn btn-danger" href="http://localhost/GetRide/GetRide/notification/refuser?id='.$idOffre.'" role="button">Refuser</a> ';
+                echo '<a class="btn btn-primary" href="http://localhost/GetRide/GetRide/Notification/accepter?id='.$idOffre.'" role="button">Accepter</a> ';
+                echo '<a class="btn btn-danger" href="http://localhost/GetRide/GetRide/Notification/refuser?id='.$idOffre.'" role="button">Refuser</a> ';
 				
             }
             if ($item["idOffre"] != "") { // Détails offre dans notification + lien
