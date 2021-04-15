@@ -19,6 +19,15 @@ class OffreController extends AppController{
         exit();
     }
 
+	public function editer()
+    {
+
+    }
+	
+	public function confirmEdit()
+    {
+
+    }
     public function historique(){
         setlocale(LC_TIME, 'fr_FR');
         date_default_timezone_set('Europe/Paris');

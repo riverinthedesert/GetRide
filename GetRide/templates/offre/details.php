@@ -6,6 +6,26 @@
     }
 </style>
 
+<?php
+   	define('DB_SERVER', 'localhost');
+	define('DB_USERNAME', 'root');
+	define('DB_PASSWORD', '');
+	define('DB_NAME', 'getride');
+	$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+	if($conn === false){
+		die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
+	}
+	
+	//Recuperer l'id 
+	$session_active = $this->request->getAttribute('identity');
+
+	$id = $session_active->idMembre;
+
+
+
+
+?>
+
 <script>
     // FONCTION PARTICIPER
     $(document).on("click", ".participer", function() {
@@ -243,10 +263,21 @@ echo "</br>"
         ?>
 
         <a onclick="goBack()" class="btn btn-info" role="button">Retour</a>
-
+	<?php
+	
+		//Si on est le créateur de l'offre
+		if (!is_null($session_active) && $session_active->idMembre == $offre[0]['idConducteur']){
+			//Afficher le bouton "editer"
+	?>
+	<?= $this->Form->postButton(__('Editer votre trajet'), ['action' => 'editer?id='.$_GET['idOffre'].''], ['class'=>'your_class', 'confirm' => __('Voulez-vous confirmer l\'édition de votre trajet?')]) ?>
+	
+	<?php
+		}
+	?>
 
     </div>
 
+	
 
 
     </br>

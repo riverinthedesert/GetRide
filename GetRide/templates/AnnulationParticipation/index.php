@@ -51,16 +51,10 @@ echo "<h1>Participants à mes trajets: </h1>";
 					}
 				}
 			}
-
 			//Ajout d'un petit bouton pour tej la personne;
 			echo "</br>";
-
 			echo "<a href='AnnulationParticipation/supprimer?idOffre=".$idOffre."&idExpediteur=".$idMembre."'>Retirer la personne de vos trajets</a>";
-
-
 		}
-		
-	
 	}
 ?>
 
