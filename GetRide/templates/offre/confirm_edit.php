@@ -100,9 +100,9 @@ $queryFinale = $queryFinale.";";
 		echo $queryFinale;
 	
 	
-	//$queryUpdate = $conn->query($queryFinale);
-	/*echo '<script type="text/javascript">
+	$queryUpdate = $conn->query($queryFinale);
+	echo '<script type="text/javascript">
 			window.location.replace("../visu-profil");
-		</script>';*/
+		</script>';
 
 ?>
