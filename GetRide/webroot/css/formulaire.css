@@ -3,6 +3,9 @@ form{
   box-sizing: border-box;
 }
 
+
+/* CSS des erreurs */
+
 .error-message {
 color:#ff0000;
 position: absolute;
@@ -11,6 +14,25 @@ top:90px;
 
 .error{
 	position: relative;
+}
+
+
+/* CSS des champs du formulaire */
+
+input[type=text]{
+	height:35px;
+	width:300px;
+}
+
+input[type=password]{
+	height:35px;
+	width:300px;
+}
+
+button{
+	margin:auto;
+	margin-left:35%;
+	width: 200px;
 }
 
 #tel{
@@ -30,29 +52,30 @@ top:90px;
 	width:200px;
 }
 
-button{
-	margin:auto;
-	margin-left:35%;
-	width: 200px;
-}
-
 #genre{
 	font-size:100px;
 }
 
-input[type=password]{
-	height:35px;
-	width:300px;
+input::placeholder{
+	font-family: italic;
+	size: 10px;
 }
 
-input[type=text]{
-	height:35px;
-	width:300px;
+label[for=voiture], label[for=immatriculation]{
+	display: none;
 }
 
 .mdp, .cmdp, .plaque{
 	position: relative;
 }
+
+/* CSS du tableau */
+
+td{
+	border:0px;
+}
+
+/* CSS des images des yeux pour les mots de passe */
 
 #oeil img{
 	height: 20px;
@@ -62,14 +85,8 @@ input[type=text]{
 	left: 80%;
 }
 
-td{
-	border:0px;
-}
 
-input::placeholder{
-	font-family: italic;
-	size: 10px;
-}
+/* Positionnement des aides (?) */
 
 #aide-mdp{
 	position: absolute;
@@ -89,13 +106,7 @@ input::placeholder{
 	left: 250px;
 }
 
-label[for=voiture], label[for=immatriculation]{
-	display: none;
-}
-
-
-
-/* Gestion des aides */
+/* Gestion des aides (?) */
 
 .form__tooltip{
 	font-size: 9px;
