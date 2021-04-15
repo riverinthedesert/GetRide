@@ -119,7 +119,7 @@
 		
 	$queryUpdate = $conn->query($queryFinale);
 	echo '<script type="text/javascript">
-			window.location.replace("../visu-profil");
+			window.location.replace("http://localhost/GetRide/GetRide/Offre/details?idOffre='.$idOffre.'");
 		</script>';
 
 ?>
