@@ -34,7 +34,20 @@
 		$commentaire = $i['commentaire'];
 	}	
 	
+	
+	//Get les villes en fonction des ids
+	$queryRecuperationVilleDepart = "Select * from villes_france_free where ville_id = '".$idVilleDepart."'";
+	$queryRecuperationVilleArrivee = "Select * from villes_france_free where ville_id = '".$idVilleArrivee."'";
+	$getVilleDepart = $conn->query($queryRecuperationVilleDepart);
+	$getVilleArrivee = $conn->query($queryRecuperationVilleArrivee);
 
+	if($m = $getVilleDepart->fetch_assoc()){
+		$nomVilleDepart = $m['ville_nom_reel'];
+	}
+	
+	if($n = $getVilleArrivee->fetch_assoc()){
+		$nomVilleArrivee = $n['ville_nom_reel'];
+	}
 
 
 
@@ -88,9 +101,9 @@
 		<label for="nbpassagersMax">Modifier le nombre de passagers max:</label><br>
 		<input type="text" id="nbpassagers" name="nbpassagers" value="<?php echo $nbpassagersMax?>">
 		<label for="VilleDepart">Modifier la ville de départ:</label><br>
-		<input type="text" id="VilleDepart" name="VilleDepart" value="<?php echo $idVilleDepart?>">
+		<input type="text" id="VilleDepart" name="VilleDepart" value="<?php echo $nomVilleDepart?>">
 		<label for="VilleArrivee">Modifier la ville d'arrivée</label><br>
-		<input type="text" id="VilleArrivee" name="VilleArrivee" value="<?php echo $idVilleArrivee?>">
+		<input type="text" id="VilleArrivee" name="VilleArrivee" value="<?php echo $nomVilleArrivee?>">
 		<label for="prix">Modifier le prix de votre trajet</label><br>
 		<input type="text" id="prix" name="prix" value="<?php echo $prix?>">
 		<label for="idEtape">Modifier le numéro de l'étape</label><br>
