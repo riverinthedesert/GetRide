@@ -20,7 +20,7 @@
 
         <form method="post">
 
-            <div style="margin-left: 20%; margin-right: 35%">
+            <div style="margin-left: 20%; margin-right: 40%">
                 <label for="email">Adresse e-mail</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

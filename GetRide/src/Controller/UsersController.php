@@ -13,6 +13,7 @@ use Cake\Mailer\TransportFactory;
 use Cake\Validation\Validator;
 
 use App\Controller\NotificationController;
+use Cake\Routing\Router;
 
 /* Gestion des utilisateurs et des autorisations d'accès aux pages.
    Remplace la table Membre dans la modélisation par souci de convention 
@@ -26,24 +27,29 @@ class UsersController extends AppController
     }
 
 
-    /* Permet d'autoriser l'accès à la connexion et à l'inscription 
-       pour les utilisateurs non connectés */
+    /* Gestion de droit d'accès aux pages de ce controller */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
 
-        /* Redirection d'un utilisateur connecté vers l'accueil 
-           si celui-ci tente d'accéder à la connexion, l'inscription 
-           ou la récupération via leur URL */
-
         // test d'une connexion active
         $session_active = $this->Authentication->getIdentity();
 
-        if (!is_null($session_active))
-            $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
+        if (!is_null($session_active)) {
 
-        else
-            // Exceptions à l'authentification nécessaire (seulement pour ce contrôleur)
+            $pagePrecedente = $this->referer('/', true);
+
+            /* Redirection d'un utilisateur connecté vers l'accueil 
+               si celui-ci tente d'accéder à la connexion, l'inscription 
+               ou la récupération via leur URL.
+               Cas particulier si l'utilisateur vient de se connecter
+               (cf connexion() plus bas) */
+            if (!str_contains($pagePrecedente, 'connexion'))
+                $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
+        } else
+            /* Exceptions à l'authentification nécessaire (seulement pour ce contrôleur).
+               Permet à un utilisateur non connecté de se connecter, de s'inscrire ou de récupérer
+               son mot de passe */
             $this->Authentication->addUnauthenticatedActions(['connexion', 'add', 'recuperation']);
     }
 
@@ -58,7 +64,7 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
             $conn = ConnectionManager::get('default');
-            
+
             if (!$user->getErrors()) {
                 //Récupération de la photo de l'utilisateur
                 $pathPhoto = $this->request->getData('pathPhoto_file');
@@ -85,9 +91,9 @@ class UsersController extends AppController
                 $id_user = $user->get('idMembre');
 
                 // On vérifie si l'utilisateur à entrer une valeur pour sa voiture
-                if($typeVoiture != null){
+                if ($typeVoiture != null) {
                     //Stockage des données dans la table conducteur
-                    $requete= $conn->prepare("INSERT INTO `conducteur` VALUES ('$id_user','$typeVoiture','$immatriculation')");
+                    $requete = $conn->prepare("INSERT INTO `conducteur` VALUES ('$id_user','$typeVoiture','$immatriculation')");
                     $requete->execute();
                 }
 
@@ -100,13 +106,9 @@ class UsersController extends AppController
                 return $this->redirect(['controller' => 'Accueil', 'action' => 'index']);
             }
             $this->Flash->error(__('Vos informations sont incorrectes. Veuillez réessayer.'));
-
         }
         $this->set(compact('user'));
     }
-
-
-
 
 
 
@@ -117,28 +119,70 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['get', 'post']);
 
-        // gestion de la connexion par le plugin Authentication
+        // récupèration du résultat de la connexion
         $resultat = $this->Authentication->getResult();
 
-        // si le compte existe et que la connexion s'est bien passée...
+        // si le compte existe et que la connexion s'est bien passée
         if ($resultat->isValid()) {
-
-            // ... on redirige l'utilisateur vers la page d'accueil du site
-            $redirection = $this->request->getQuery('redirect', [
-                'controller' => 'Accueil',
-                'action' => 'index',
-            ]);
 
             $this->Flash->success(__('Connexion réussie !'));
 
-            return $this->redirect($redirection);
+            // retourne l'url de la dernière page visitée
+            $pageRedirigee = $this->referer('/', true);
+
+            /* Cas où le site a redirigé l'utilisateur non connecté vers la page de connexion
+               car celui-ci tentait d'accéder à une page réservée aux membres */
+            if (str_contains($pageRedirigee, 'redirect')) {
+
+                $url1 = str_replace('%2F', '/', $pageRedirigee);
+                $url2 = str_replace('/connexion?redirect=/GetRide/GetRide/', '', $url1);
+
+                // séparation de l'url d'origine (par exemple en Offre et add)
+                $parties = explode('/', $url2);
+
+                // la recherche d'un utilisateur se fait via la méthode post, on ne
+                // peut pas relancer la recherche à partir de l'url
+                if (strcmp($parties[0], 'search') == 0)
+                    $redirection = 'Accueil';
+
+                else
+                    $redirection = "$parties[0]";
+
+                // dans le cas d'une url type controller/fonction (offre/add)
+                if (count($parties) > 1)
+                    $redirection .= "/$parties[1]";
+
+                // l'utilisateur a accédé à la page de connexion de lui-même
+            } else
+                $redirection = 'Accueil';
+
+                /* Le return ne peut pas attendre la fin de la fonction car puisque 
+                   la vérification n'a pas pu avoir lieu lors du premier accès à la page, 
+                   le site redirigera vers la valeur par défaut de $redirection à l'infini */
+               return $this->redirect("http://localhost/GetRide/GetRide/$redirection");
         }
 
-        // si une erreur s'est produite, la page ne change pas et un mesage d'erreur s'affiche
+        // si une erreur s'est produite, la page ne change pas et un message d'erreur s'affiche
         if ($this->request->is('post') && !$resultat->isValid()) {
-            /*debug($resultat->getData());
-            debug($resultat->getErrors());*/
-            $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
+
+            // email entré par l'utilisateur
+            $email = $this->request->getData('mail');
+
+            // connexion à la base de données
+            $connexion = ConnectionManager::get('default');
+
+            // on cherche si l'email est stocké dans la base de données
+            $res = $connexion->query("SELECT count(*) FROM users 
+                            WHERE mail = '$email'");
+
+            foreach ($res as $r)
+                $nb = $r[0];
+
+            if ($nb == 0)
+                $this->Flash->error(__('Cet email n\'est pas reconnu'));
+
+            else
+                $this->Flash->error(__('Le mot de passe est incorrect'));
         }
     }
 
