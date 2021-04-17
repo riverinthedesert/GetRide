@@ -32,7 +32,7 @@ body {
         <div style="background-color:#AFEEEE;">
             <div class="container">
                 <br>
-                <form action="offre" method="GET">
+                <form action="Offre" method="GET">
                     <div class="row">
                         <div class="col-sm-4">
                             <h6>Départ</h6>
@@ -44,11 +44,11 @@ body {
                         </div>
                         <div class="col-sm-4">
                             <h6>Date de départ</h6>
-                            <input type="date" id="horaireDepart" name="trip-start" value="" style="background-color:DarkCyan; color:white">
+                            <input type="date" id="horaireDepart" name="horaireDepart" value="" style="background-color:DarkCyan; color:white">
                         </div>
                         <div class="col-sm-4">
                             <h6>Nombre de passagers</h6>
-                            <input type="number" id="nombrePassagersMax"  placeholder="nb passagers"  name="tentacles" min="1" max="100" style="background-color:DarkCyan; color:white">
+                            <input type="number" id="nombrePassagersMax"  placeholder="nb passagers"  name="nombrePassagersMax" min="1" max="100" style="background-color:DarkCyan; color:white">
                         </div>
                         <div class="col-sm-4">
                             <h6></h6>

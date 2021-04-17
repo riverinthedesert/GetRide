@@ -12,7 +12,7 @@
         <form style="margin-right:1em;" action="offre/view" method="get" class="pull-left">
             <input type="submit" value="Filtres">
         </form>
-        <form action="offre/view2" method="get" class="pull-left">
+        <form action="FiltreAvance" method="get" class="pull-left">
             <input type="submit" value="Filtres Avancés">
         </form>
 
@@ -94,11 +94,11 @@
         <?php
         if (isset($test_filtre)) {
             if ($test_filtre == "1")
-                echo '<form style="margin-left:1em;"  action="/GetRide/GetRide/Offre" method="get" class="pull-left">
+                echo '<form style="margin-left:1em;"  action="Offre" method="get" class="pull-left">
         <input style="background-color:cornflowerblue; border-color:cornflowerblue;" type="submit" value="Enlever les filtres actuels">
     </form>';
         } else {
-            echo '<form style="margin-left:1em;"  action="/GetRide/GetRide/Offre" method="get" class="pull-left">
+            echo '<form style="margin-left:1em;"  action="Offre" method="get" class="pull-left">
         <input style="background-color:cornflowerblue; border-color:cornflowerblue;" type="submit" value="Enlever les filtres actuels">
     </form>';
         }

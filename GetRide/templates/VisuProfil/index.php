@@ -48,6 +48,7 @@
                 echo $i['prenom'];
 				
 				
+				
 			
 			$_SESSION['idMembre'] = $i['idMembre'];
 
@@ -67,14 +68,20 @@
         ?>
 	</div>
 	<div class="form-group">
-        <p><b>Votre numéro de téléphone : </b></p>
+        <p><br><b>Votre numéro de téléphone : </b></p>
         <?php
             echo $i['telephone'];
         ?>
 		
-		<p><b>Votre date de naissance : </b></p>
+		<p><br><b>Votre date de naissance : </b></p>
         <?php
             echo $i['naissance'];
+        ?>
+
+		
+		<p><br><b>Votre moyenne : </b></p>
+        <?php
+            echo $i['noteMoyenne']."/5";
         ?>
 	</div>
 	&emsp;&emsp;
@@ -82,7 +89,7 @@
 	
 	<br><br>
 	
-	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['action' => 'modifInfos'], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment modifier vos informations personnelles?')]) ?>
+	<?= $this->Form->postButton(__('Modifier ses informations personnelles'), ['controller' => 'ModifInfos','action' => 'index'], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment modifier vos informations personnelles?')]) ?>
 	<?= $this->Form->postButton(__('Modifier votre mot de passe'), ['action' => 'modifPass'], ['class'=>'your_class', 'confirm' => __('Voulez-vous vraiment changer votre mot de passe?')]) ?>
 	<?= $this->Form->postButton(__('Supprimer votre compte'), ['action' => 'supprimer'], ['class'=>'your_class', 'confirm' => __('Voulez-vous confirmer la suppression de compte?')]) ?>
 	
