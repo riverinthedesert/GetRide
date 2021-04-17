@@ -218,7 +218,7 @@ class OffreController extends AppController{
                 $requete.=" AND prix <= ".$prix;
             }
             if ($passagers!=""){
-                $requete.=" AND prix >= ".$passagers;
+                $requete.=" AND nbPassagersMax >= ".$passagers;
             }
             // On execute la requête
             $offre_filtres_applied = $conn->execute($requete)->fetchAll('assoc');
