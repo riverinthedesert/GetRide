@@ -89,8 +89,8 @@
 // DATE EN TITRE
 
 if (sizeof($offre) == 0) {
-    die("Il y a eu une erreur dans cette offre !");
-}
+    echo "<h2>Cette offre n'existe plus ! </h2>";
+}else{
 
 $date_depart = $offre[0]["horaireDepart"];
 $date_depart_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_depart)))));
@@ -273,6 +273,7 @@ echo "</br>"
 	
 	<?php
 		}
+    }
 	?>
 
     </div>
