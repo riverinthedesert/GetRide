@@ -18,6 +18,11 @@ class OffreController extends AppController{
 
     }
 
+    public function view()
+    {
+
+    }
+
 
     public function view2()
     {
