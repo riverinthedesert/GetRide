@@ -27,8 +27,9 @@
 		} else {
 			$genre = "Autre";
 		}
+		$pathPhoto = $i['pathPhoto'];
 		$estConducteur = $i['estConducteur'];
-	}	
+	}
 ?>
 
 
@@ -80,7 +81,7 @@
 	}
 </script>
 	Les informations entrées seront modifiées.
-  <form name="myForm" action="confirmInfos" method="get">
+  <form name="myForm" action="confirmInfos" method="post" enctype="multipart/form-data">
 		<label for="lname">Modifier votre nom:</label><br>
 		<input type="text" id="nom" name="nom" value="<?php echo $nom?>"><br>
 		<label for="fname">Modifier votre prenom:</label><br>
@@ -93,6 +94,10 @@
 		<input type="text" id="sex" name="sex" value="<?php echo $genre?>">
 		<label for="dtn">Modifier si vous êtes conducteur (Oui - Non):</label><br>
 		<input type="text" id="conducteur" name="conducteur" value="<?php echo $estConducteur?>">
+		
+		<!--<label for="photoProfil">Modifier votre photo de profil</label><br>
+
+		<input type="file" id="photoDeProfil" name="photoDeProfil" value="">-->
 		<input onclick = "Confirm()" type="button" value="Envoyer">
 		<div style="color:red;" id="submission_errors"/>
 	</form>

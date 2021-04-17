@@ -15,11 +15,11 @@
 	$membre = $conn->query("SELECT * FROM `users` WHERE mail='".$mail."'");
 	
 	
-	$nom = $_GET['nom'];
-	$prenom = $_GET['prenom'];
-	$dtn = $_GET['dtn'];
-	$tel = $_GET['tel'];
-	$sex = $_GET['sex'];
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$dtn = $_POST['dtn'];
+	$tel = $_POST['tel'];
+	$sex = $_POST['sex'];
 	if($sex=="Masculin"){
 		$sex = "m";
 	} else if($sex=="Féminin"){
@@ -27,9 +27,23 @@
 	} else {
 		$sex = "a";
 	}
-	$estConducteur = $_GET['conducteur'];
+	$estConducteur = $_POST['conducteur'];
+	/*echo "</br>";
+	echo $_FILES["photoDeProfil"]["name"];
+	echo "</br>";*/
 
-	
+
+
+	//$target_dir = "\webroot\img\photoProfil\\";
+	//$target_file = $target_dir . basename($_FILES["photoDeProfil"]["name"]);
+
+
+
+
+
+
+
+
 	$query =("Update `users` 
 		set nom = '".$nom."',
 		prenom = '".$prenom."',
