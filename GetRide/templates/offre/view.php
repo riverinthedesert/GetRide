@@ -67,20 +67,6 @@
 
   </div>
 
-  <div class="form-group">
-
-    <h2>Services et équipements (TODO)</h2>
-
-    <input type="radio" id="service1" name="eau" value="eau1">
-    <label for="eau1">Bouteille d'eau Evian offerte</label>
-
-    </br>
-
-    <input type="radio" id="service2" name="eau" value="eau2">
-    <label for="eau2">Bouteille d'eau Fuji offerte</label>
-
-  </div>
-
   <div>
     <button class="btn btn-info" type="submit">Rechercher</button>
     <a href="../offre" class="btn btn-info" role="button">Annuler</a>

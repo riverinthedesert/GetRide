@@ -108,6 +108,10 @@ class OffreController extends AppController{
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');
 
+        setlocale(LC_TIME, 'fr_FR');
+        date_default_timezone_set('Europe/Paris');
+    
+
         $string_filtre = "";
 
         $test_filtre="1";
@@ -200,11 +204,22 @@ class OffreController extends AppController{
     
 
         }
-        else
+        else // Filtres avancées 
         {
 
+            $prix=$this->request->getQuery("prix");
+            $passagers=$this->request->getQuery("nombrePassagersMax");
+
+
+    
 
             $requete .= " AND  ville_depart.ville_nom_simple LIKE '%".$this->request->getQuery("villeDepart")."%' AND ville_arrivee.ville_nom_simple LIKE '%".$this->request->getQuery("villeDarrivee")."%'";
+            if ($prix!=""){
+                $requete.=" AND prix <= ".$prix;
+            }
+            if ($passagers!=""){
+                $requete.=" AND prix >= ".$passagers;
+            }
             // On execute la requête
             $offre_filtres_applied = $conn->execute($requete)->fetchAll('assoc');
 
