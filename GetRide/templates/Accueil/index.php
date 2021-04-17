@@ -9,8 +9,10 @@ body {
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.7.3/themes/base/jquery-ui.css">
 
 <?php 
-    //Nom de la ville correspond à ville_nom_reel dans la bdd
-
+    use Cake\Datasource\ConnectionManager;
+    $conn = ConnectionManager::get('default');
+    
+    $session_active = $this->request->getAttribute('identity');
 ?>
 
 </div>
@@ -122,8 +124,29 @@ $("#villeDarrivee").autocomplete({
 	<div class="text-center">
 		<h3>Vous souhaitez utiliser votre véhicule ? Pas de problème ! </h3>
 		<a href="AjouterUneOffre" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPublique.jpg', ['alt' => 'AjoutPublic']); ?><font size="5">Proposer une nouvelle offre de trajet publique</font></a> <br><br>
-		<a href="AjouterOffrePrivee" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPrivée.jpg', ['alt' => 'AjoutPrivee']); ?><font size="5">Proposer une nouvelle offre de trajet privée</font></a>
-	</div>
+        <?php
+            if (!is_null($session_active)){
+                $idMembre=$session_active->idMembre;
+
+                //Recherche des groupes
+                $donnees = $conn->execute($requete="SELECT * FROM `groupemembre` WHERE idUtilisateur=".$idMembre)->fetchAll('assoc');
+                
+                $admOuMembr = 0;
+		
+                foreach($donnees as $don){
+                    $admOuMembr++;
+                    $tabl[] = $don['idGroupe'];
+                }
+
+                if($admOuMembr != 0){ 
+            
+        ?>
+		            <a href="AjouterOffrePrivee" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPrivée.jpg', ['alt' => 'AjoutPrivee']); ?><font size="5">Proposer une nouvelle offre de trajet privée</font></a>
+        <?php
+                }
+            }
+        ?>
+    </div>
 	<br>
 	<div class="container">
         <div class="row">
@@ -144,7 +167,7 @@ $("#villeDarrivee").autocomplete({
             <div class="col-sm-4">
                 <h3>Ajouter une offre privée</h3>
                 <p>Vous avez déjà un compte ? Vous souhaitez voyager avec des personnes que vous connaissez ? </p>
-                <p><br><a href="AjouterUneOffre"><span class="glyphicon glyphicon-plus"></span> Ajoutez une offre privée</a>, choisissez le groupe de personne à qui envoyer la demande. Et patientez.</p>
+                <p><br><?php if (!is_null($session_active)){ if($admOuMembr != 0){ ?><a href="AjouterOffrePrivee"><span class="glyphicon glyphicon-plus"></span> Ajoutez une offre privée</a><?php } else {?><a href="VisuGroupe"><span class="glyphicon glyphicon-plus"></span> Ajoutez une offre privée</a><?php }} else {?><a href="VisuGroupe"><span class="glyphicon glyphicon-plus"></span> Ajoutez une offre privée</a><?php }?>, choisissez le groupe de personne à qui envoyer la demande. Et patientez.</p>
                 <p><br><span class="glyphicon glyphicon-eye-open"></span> Vérifiez vos mail et vos  <a href="notification">notifications</a> sur le site, si quelqu'un est interressé par votre annonce, vous serez signalé.</p>
                 <p><br><span class="glyphicon glyphicon-ok"></span> Et voilà ! Le tour est joué.</p>
             </div>

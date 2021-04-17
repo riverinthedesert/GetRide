@@ -116,8 +116,8 @@
         public function creerTrajet()
         {
             $redirect = $this->request->getQuery('redirect', [
-				'controller' => 'Offre',
-				'action' => 'addprivee',
+				'controller' => 'AjouterOffrePrivee',
+				'action' => 'index',
 			]);
 
 			return $this->redirect($redirect);

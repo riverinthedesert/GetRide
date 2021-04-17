@@ -19,28 +19,26 @@
 	<a href="AjoutGroupe" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </a>
 
 	<p1>
-	<?= $this->Form->postButton(__('Creer un trajet privee'), ['action' => 'creerTrajet']) ?>
-	</p1>
-
-    <?php
-		//$admOuMembr = 0;
-		// Recherche dans la BDD des groupes
-		/*$idMembre = $conn->query("SELECT idMembre FROM `users` WHERE mail='".$_SESSION['mail']."'");
-		$i = $idMembre->fetch_assoc();
-		
-		$_SESSION['idMembre'] = $i['idMembre'];
-		
-		$groupe = $conn->query("SELECT * FROM `groupemembre` WHERE idUtilisateur='".$_SESSION['idMembre']."'");
-		while($donnees = $groupe->fetch_assoc()){
-			$admOuMembr++;
-			$tabl[] = $donnees['idGroupe'];
-		}*/
+	<?php
 		$admOuMembr = 0;
 		
 		foreach($donnees as $don){
 			$admOuMembr++;
 			$tabl[] = $don['idGroupe'];
 		}
+
+		if($admOuMembr != 0){ 
+	?>
+			<?= $this->Form->postButton(__('Creer un trajet privee'), ['action' => 'creerTrajet']) ?>
+	<?php
+		}
+	?>
+	</p1>
+
+    <?php
+		// Recherche dans la BDD des groupes
+		
+		
 		if($admOuMembr == 0){ 
 	?>
 			<div class="text-center">

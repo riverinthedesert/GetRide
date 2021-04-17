@@ -6,18 +6,7 @@ use Cake\Datasource\ConnectionManager;
 
 class OffreController extends AppController{
 
-    public function deleteHist(){
-        $conn = ConnectionManager::get('default');
-        $this->loadComponent('Paginator');
-
-        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
-
-        $requete="DELETE FROM historiquerecherche WHERE idMembre=".$id_utilisateur;
-        $confirm = $conn->execute($requete);
-
-        header('Location: HistoriqueOffre'); 
-        exit();
-    }
+    
 
 	public function editer()
     {
@@ -27,40 +16,6 @@ class OffreController extends AppController{
 	public function confirmEdit()
     {
 
-    }
-    public function historique(){
-        setlocale(LC_TIME, 'fr_FR');
-        date_default_timezone_set('Europe/Paris');
-
-        $conn = ConnectionManager::get('default');
-        $this->loadComponent('Paginator');
-
-        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
-
-        // BASE DE LA REQUETE
-        $requete = "SELECT offre.idOffre,horaireDepart,
-        ville_depart.ville_nom_simple as nomVilleDepart,
-        ville_arrivee.ville_nom_simple as nomVilleArrivee,
-        nom,prenom,dateRecherche
-
-        FROM offre
-        INNER JOIN users ON users.idMembre=offre.idConducteur 
-        INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
-        INNER JOIN historiquerecherche ON historiquerecherche.idOffre=offre.idOffre
-        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id
-        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
-        WHERE historiquerecherche.idMembre =".$id_utilisateur;
-
-        if ($this->request->getQuery("date")=="1"){
-            $requete.=" ORDER BY dateRecherche DESC";
-        }
-
-
-
-        // On execute la requête
-        $historique = $conn->execute($requete)->fetchAll('assoc');
-        // On transmet les variables à la vue.
-        $this->set(compact('historique'));
     }
 
 
@@ -95,7 +50,7 @@ class OffreController extends AppController{
         $requete="INSERT INTO notification VALUES (".$id_utilisateur.",'Vous avez annulé votre demande de participation !',0,0,".$id.",".$offre_id.",NOW(),NULL)";
         $notif = $conn->execute($requete);
 
-        echo 1;
+        //echo 1;
     }
 
     public function participer(){
@@ -136,73 +91,10 @@ class OffreController extends AppController{
         $requete="INSERT INTO notification VALUES (".$id_createur_offre.", 'L\'utilisateur ".ucfirst($nom)." ".ucfirst($prenom)." veut rejoindre votre trajet',0,1,".$id.",".$offre_id.",NOW(),".$id_utilisateur.")";
         $notif = $conn->execute($requete);
 
-        echo 1;
+        //echo 1;
     }
 
-    public function details()
-    {
-
-        setlocale(LC_TIME, 'fr_FR');
-        date_default_timezone_set('Europe/Paris');
-
-        $conn = ConnectionManager::get('default');
-        $this->loadComponent('Paginator');
-
-
-        $test_offre = $this->request->getQuery("idOffre");
-
-        $id_utilisateur=$this->Authentication->getIdentity()->idMembre;
-
-        // BASE DE LA REQUETE
-        $requete = "SELECT offre.idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
-        ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
-        ,prix,users.noteMoyenne as note,idConducteur
-        FROM offre
-        INNER JOIN users ON users.idMembre=offre.idConducteur 
-        INNER JOIN conducteur ON conducteur.idMembre=offre.idConducteur
-        LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id
-        LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
-        WHERE offre.idOffre=";
-
-        $requete2 = "SELECT * FROM etape,villes_france_free WHERE etape.idVille=villes_france_free.ville_id AND idOffre=";
-
-
-        if ($test_offre != "") { // On rajoute l'id dans le where
-            $requete .= $test_offre;
-            $requete2 .= $test_offre;
-        } else {
-            die("");
-        }
-
-        // On execute la requête
-        $offre = $conn->execute($requete)->fetchAll('assoc');
-        $etape = $conn->execute($requete2)->fetchAll('assoc');
-
-        $requete3 = "SELECT * FROM notification WHERE idOffre=".$test_offre." AND idExpediteur=".$id_utilisateur;
-
-        $notif = $conn->execute($requete3)->fetchAll('assoc');
-
-        if (empty($notif)){
-            $notif_test=0;
-        }else $notif_test=1;
-        
-
-
-        // On transmet les variables à la vue.
-        $this->set(compact('offre'));
-        $this->set(compact('etape'));
-        $this->set(compact('notif_test'));
-
-        if ($id_utilisateur>=0){
-            $historique="INSERT INTO historiquerecherche VALUES (".$id_utilisateur.",".$test_offre.",NOW())";
-            $hist = $conn->execute($historique);
-        }
-    }
-
-    public function view(){
-
-       
-    }
+    
 
 
 

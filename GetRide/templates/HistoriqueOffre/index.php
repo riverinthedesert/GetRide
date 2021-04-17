@@ -51,11 +51,11 @@ if (sizeof($historique) <= 0) {
         if (sizeof($historique) > 0) {
 
         if ($this->request->getQuery("date") == "1") {
-            echo '<a href="historique   " class="btn btn-danger" role="button">Affichage sans tri</a>';
+            echo '<a href="HistoriqueOffre   " class="btn btn-danger" role="button">Affichage sans tri</a>';
         } else {
-            echo '<a href="historique?date=1   " class="btn btn-danger" role="button">Trier par le plus récent</a>';
+            echo '<a href="HistoriqueOffre?date=1   " class="btn btn-danger" role="button">Trier par le plus récent</a>';
         }
-        echo'<a style="margin-left:1em;" href="delete_hist" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer votre historique?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
+        echo'<a style="margin-left:1em;" href="HistoriqueOffre/deleteHist" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer votre historique?\'));" class="btn btn-danger" role="button">Supprimer mon historique</a>';
     }
         ?>
     </div>
