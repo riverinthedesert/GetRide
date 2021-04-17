@@ -61,7 +61,7 @@ $cakeDescription = 'Co-Voiturage';
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/GetRide/GetRide/Accueil">
+                <a class="navbar-brand" href="Accueil">
                 <img src="https://i.imgur.com/SKKVNvS.png" height="40">
                 </a>
             </div>
@@ -75,8 +75,8 @@ $cakeDescription = 'Co-Voiturage';
 							</div>
                     </div>
                 </form>
-                <li><a href="/GetRide/GetRide/Offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
-                <li><a href="/GetRide/GetRide/Offre/add"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
+                <li><a href="Offre"><span class="glyphicon glyphicon-list-alt"></span> Afficher les offres</a></li>
+                <li><a href="AjouterUneOffre"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une offre de trajet</a></li>
                 <!-- Notifications : -->
 
                 <?php
@@ -104,7 +104,7 @@ $cakeDescription = 'Co-Voiturage';
                     }
                
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="/GetRide/GetRide/notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
+                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
                     echo '</ul> </li>';
                 }
 
@@ -117,13 +117,18 @@ $cakeDescription = 'Co-Voiturage';
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mon Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/GetRide/GetRide/visu-profil">Mon profil</a></li>
-                            <li><a href="/GetRide/GetRide/VisuGroupe">Mes groupes d'amis</a></li>
-                            <li><a href="/GetRide/GetRide/VisuOffre">Mes offres</a></li>
-							<li><a href="/GetRide/GetRide/AnnulationParticipation">Annuler une participation</a></li>
-                            <li><a href="/GetRide/GetRide/VisuMesOffre">Mes offres en cours</a></li>
-                            <li><a href="/GetRide/GetRide/HistoriqueTrajet">Historique de trajet effectué</a></li>
-                            <li><a href="/GetRide/GetRide/VisuFavo">Mes favoris</a></li>
+                            <li><a href="visu-profil">Mon profil</a></li>
+                            <li><a href="VisuGroupe">Mes groupes d'amis</a></li>
+                            <li><a href="VisuFavo">Mes favoris</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mes Offres<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="VisuOffre">Mes offres</a></li>
+                            <li><a href="VisuMesOffre">Mes offres en cours</a></li>
+							<li><a href="AnnulationParticipation">Annuler une participation</a></li>
+                            <li><a href="HistoriqueTrajet">Historique de trajet effectué</a></li>
                         </ul>
                     </li>
                 <?php
@@ -147,15 +152,15 @@ $cakeDescription = 'Co-Voiturage';
                 ?>
                     <!--Affiche que si une personne est connecté -->
                     
-                    <a href="/GetRide/GetRide/deconnexion">
+                    <a href="deconnexion">
                     <button style="margin-right:1em;margin-left:1em;" class="btn btn-danger navbar-btn">Déconnexion</button>
                     </a>
                 <?php
                 } else {
                 ?>
                     <!--afficher s'il n'y personne de connecté-->
-                    <li><a href="/GetRide/GetRide/inscription"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
-                    <li><a href="/GetRide/GetRide/connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                    <li><a href="inscription"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                    <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                 }
                 ?>
@@ -175,7 +180,7 @@ $cakeDescription = 'Co-Voiturage';
         <div class="text-center" style="background-color:#cecece;">
             <br>
             <label><a href="CommentCaMarche" style="color:#000000;">Comment ça marche ?</a></label>
-            <label><a href="#" style="color:#000000;">Nous contacter</a></label>
+            <!--<label><a href="#" style="color:#000000;">Nous contacter</a></label>-->
             <label>Langue : Française</label>
             <br>
         </div>

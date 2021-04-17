@@ -15,7 +15,7 @@ class OffreController extends AppController{
         $requete="DELETE FROM historiquerecherche WHERE idMembre=".$id_utilisateur;
         $confirm = $conn->execute($requete);
 
-        header('Location:/GetRide/GetRide/Offre/Historique'); 
+        header('Location: HistoriqueOffre'); 
         exit();
     }
 
@@ -63,10 +63,6 @@ class OffreController extends AppController{
         $this->set(compact('historique'));
     }
 
-    public function offre()
-    {
-
-    }
 
     public function view2()
     {
@@ -209,44 +205,6 @@ class OffreController extends AppController{
     }
 
 
-
-    public function add(){
-           /*$offre = $this->Offre->newEmptyEntity();
-            //session_start();
-            // Récupération des informations du formulaire
-            if ($this->request->is('post')) {
-                $offre = $this->Offre->patchEntity($offre, $this->request->getData());
-                $horaireDepart = $offre->get('horaireDepart') . " " . $offre->get('horaireDepart');
-                $horaireArrivee = $offre->get('horaireArrivee');
-                $nombrePassagers = $offre->get('nbPassagersMax');
-                $offre->set('idConducteur',$_SESSION['Auth']['idMembre']);
-
-
-                //Sauvegarde dans la base de données
-                if ($this->Offre->save($offre)) {*/
-                    
-                    /* Récupération des données de l'utilisateur connecté */
-                    /*$session_active = $this->Authentication->getIdentity();
-
-                    $idMembre = $session_active->idMembre;
-                    $nomComplet = $session_active->prenom . ' ' . $session_active->nom;
-                    $idOffre = $offre->get('idOffre');*/
-                        
-                    /* Envoi de la notification au controller */
-                    /*$ids = array($idMembre, $nomComplet, $idOffre);
-                    NotificationController::notifier('ajoutOffre', $ids);
-
-                    $this->Flash->success(__('Votre offre a bien été crée.'));
-
-                }
-                else
-                {	
-                $this->Flash->error(__('Les informations rentrées ne sont pas correctes. Veuillez réessayer.'));
-            	}
-            }
-            $this->set(compact('offre'));*/
-
-    }
 
     public function index(){
 
