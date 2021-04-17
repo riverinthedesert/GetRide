@@ -29,10 +29,6 @@ class OffreController extends AppController{
 	
 
     }
-	public function details()
-    {
-
-    }
 
     public function noParticiper(){
         $conn = ConnectionManager::get('default');
@@ -105,7 +101,7 @@ class OffreController extends AppController{
     }
 
 
-  /*  public function details()
+    public function details()
     {
 
         setlocale(LC_TIME, 'fr_FR');
@@ -164,7 +160,7 @@ class OffreController extends AppController{
             $hist = $conn->execute($historique);
         }
     }
-*/
+
     
 
 
