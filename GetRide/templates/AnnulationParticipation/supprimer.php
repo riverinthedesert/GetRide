@@ -67,22 +67,11 @@ echo "supprimer la personne";
 	}
 
 	
-	//Suppression du fait que la personne participe au trajet
-	//== Suppression de la notificationn qui indique que l'utilisateur veut rejoindre votre trajet
-	$queryDeleteNotification = "Delete from notification where idMembre ='".$id."' and idOffre = '".$idOffre."' and idExpediteur='".$idExpediteur."'";
-	echo $queryDeleteNotification;
-	
-	$deleteNotif = $conn->query($queryDeleteNotification);
-	
-	//Delete notification acceptation de trajet
-	$queryDeleteNotification2 = "Delete from notification where idMembre ='".$idExpediteur."' and idOffre = '".$idOffre."' and idExpediteur='".$id."' and message LIKE '%accept%'";
-	
-	$deleteNotif2 = $conn->query($queryDeleteNotification2);
-
-
+	//Suppression du fait que la personne participe au trajet	
+	$queryDeleteCoPassager = "Delete from copassager where idMembre = '".$idExpediteur."' and idOffre = '".$idOffre."'";
+	$conn->query($queryDeleteCoPassager);
 	
 	//Ajout d'une place au trajet
-	
 	$queryGetNombrePassagerMaxOffre = "Select * From offre where idOffre='".$idOffre."'";
 	
 	$nbPassager = $conn->query($queryGetNombrePassagerMaxOffre);

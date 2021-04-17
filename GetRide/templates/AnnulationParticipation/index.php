@@ -17,9 +17,13 @@ echo "<h1>Participants à mes trajets: </h1>";
 	$queryRecuperationMesOffres = "Select * from offre where idConducteur = '".$id."'";
 	$getOffre = $conn->query($queryRecuperationMesOffres);
 	while ($i = $getOffre->fetch_assoc()){	
-		$queryRecuperationMesNotifications = "Select * from notification where idOffre = '".$i['idOffre']."' AND idExpediteur='".$id."' AND message LIKE '%accept%'";
-		$getOffres = $conn->query($queryRecuperationMesNotifications);
-		while($j = $getOffres->fetch_assoc()){
+		$queryRecupCoPassager = "Select * from copassager where idOffre = '".$i['idOffre']."'";
+		//echo $queryRecupCoPassager;
+		//$queryRecuperationMesNotifications = "Select * from notification where idOffre = '".$i['idOffre']."' AND idExpediteur='".$id."' AND message LIKE '%accept%'";
+		//$getOffres = $conn->query($queryRecuperationMesNotifications);
+		
+		$getMembres = $conn->query($queryRecupCoPassager);
+		while($j = $getMembres->fetch_assoc()){
 			echo "</br>";
 			echo "</br>";
 			echo "<b>Offre n°".$j['idOffre'].":</b>";
