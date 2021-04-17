@@ -4,7 +4,7 @@
 <form style="margin-right:1em;" action="offre/view" method="get" class="pull-left">
         <input type="submit" value="Filtres">
     </form>
-    <form action="offre/view2" method="get" class="pull-left">
+    <form action="FiltreAvance" method="get" class="pull-left">
         <input type="submit" value="Filtres Avancés">
     </form>
     

@@ -32,7 +32,7 @@ body {
         <div style="background-color:#AFEEEE;">
             <div class="container">
                 <br>
-                <form action="offre" method="GET">
+                <form action="Offre" method="GET">
                     <div class="row">
                         <div class="col-sm-4">
                             <h6>Départ</h6>

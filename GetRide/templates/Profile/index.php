@@ -1,7 +1,5 @@
 <?php
 
-
-
 	use Cake\Datasource\ConnectionManager;
 	use Cake\Event\EventInterface;
 	use Cake\Mailer\Email;
@@ -73,7 +71,10 @@
 		echo "<br>";
 		echo "<b>Date de naissance</b> : ".$i['naissance'];
 		echo "<br>";
-		echo "<b>Conducteur :</b>".$i['estConducteur'];
+		echo "<b>Conducteur :</b> ".$i['estConducteur'];
+		echo "<br>";
+		echo "<b>La note moyenne :</b> ".$i['noteMoyenne']. "/5";
+		echo "<p><br></p>";
 	}
 	echo "</div>";
 	
