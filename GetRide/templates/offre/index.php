@@ -1,7 +1,7 @@
 <div style="margin-left:-1em;">
 <div class="row"> 
 <h1 class="col-md-12">Offres filtrées </h1>
-<a style="height:2.5em;margin-top:1em;"href="/GetRide/GetRide/offre/historique" class="btn btn-info col" role="button">Historique de recherche</a>
+<a style="height:2.5em;margin-top:1em;"href="HistoriqueOffre" class="btn btn-info col" role="button">Historique de recherche</a>
 </div>
 <?php 
 
@@ -38,7 +38,7 @@ echo'<table style="margin-left:-2em;">
         echo "</td>";
         echo "<td>"; echo $item["prix"]."€";echo "</td>";
         $idOffre = $item["idOffre"];
-        echo "<td>";echo "<a role='button' class='btn btn-info' href = 'offre/details?idOffre=$idOffre'>Détails</a>"; echo"</td>";
+        echo "<td>";echo "<a role='button' class='btn btn-info' href = 'DetailOffre?idOffre=$idOffre'>Détails</a>"; echo"</td>";
         echo "</tr>";
     }
   /*  foreach ($utilisateur as $user){

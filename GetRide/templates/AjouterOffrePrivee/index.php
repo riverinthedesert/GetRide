@@ -146,7 +146,7 @@ if(!is_null($session_active)){
         $anne = date("Y");
 ?>
 <div class="text-center">
-		<h1>Ajouter une offre public</h1>
+		<h1>Ajouter une offre privée</h1>
 </div>
 <form method="post" action="AjouterUneOffre">
 	<div class="form-row">
@@ -260,7 +260,7 @@ if(!is_null($session_active)){
 			'prix' => $pr ,
 			'idEtape' => 'NULL' ,
 			'idGroupe' => '0' ,
-			'estPrivee' => '0' ,
+			'estPrivee' => '1' ,
 			'precisionLieu' => $Lieu ,
 			'commentaire' => $c 
 			]);
@@ -321,8 +321,8 @@ if(!is_null($session_active)){
                     ]);
         }
 
-		
-        header('Location: Offre');
+		//A modifier (avec le privée et le public)
+        header('Location: Offre'); 
         exit();
 
 	}

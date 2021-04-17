@@ -122,7 +122,7 @@ $("#villeDarrivee").autocomplete({
 	<div class="text-center">
 		<h3>Vous souhaitez utiliser votre véhicule ? Pas de problème ! </h3>
 		<a href="AjouterUneOffre" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPublique.jpg', ['alt' => 'AjoutPublic']); ?><font size="5">Proposer une nouvelle offre de trajet publique</font></a> <br><br>
-		<a href="AjouterUneOffre" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPrivée.jpg', ['alt' => 'AjoutPrivee']); ?><font size="5">Proposer une nouvelle offre de trajet privée</font></a>
+		<a href="AjouterOffrePrivee" class="btn btn-default btn-lg " role="button" aria-disabled="true"><?php echo $this->Html->image('AjoutPrivée.jpg', ['alt' => 'AjoutPrivee']); ?><font size="5">Proposer une nouvelle offre de trajet privée</font></a>
 	</div>
 	<br>
 	<div class="container">
