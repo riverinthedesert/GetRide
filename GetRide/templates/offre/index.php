@@ -1,4 +1,4 @@
-<div style="margin-left:-1em;">
+<div style="margin-left:-3.5em;">
     <div class="row">
         <a style="
         position:fixed;
@@ -6,7 +6,7 @@
         margin-left:85.5em;
         margin-top:34em;
         width:2em;" 
-        id="button" type="button" href="#top" class="btn btn-primary">
+        id="button" type="button" href="#top" class="btn btn-warning">
         <span style="width:0.5em;margin-left:-0.53em;" class="glyphicon glyphicon-menu-up"></span></a>
         <h1 class="col-md-12">Offres filtrées </h1>
         <form style="margin-right:1em;" action="offre/view" method="get" class="pull-left">
