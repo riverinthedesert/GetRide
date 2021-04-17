@@ -41,13 +41,13 @@
             },
             success: function(response) {
 
-                if (response == 1) { // Enleve le HTML
+                //if (response == 1) { // Enleve le HTML
                     $(el).closest('a').css('background-color', 'red');
                     $(el).closest('a').text("Ne plus participer");
                     document.getElementById("participer").classList.replace('participer', 'no_participer');
-                } else {
-                    alert('Mauvais id.');
-                }
+                //} else {
+                    //alert('Mauvais id.');
+                //}
 
             }
         });
@@ -69,13 +69,13 @@
             },
             success: function(response) {
 
-                if (response == 1) { // Enleve le HTML
+                //if (response == 1) { // Enleve le HTML
                     $(el).closest('a').css('background-color', '#5bc0de');
                     $(el).closest('a').text("Participer au trajet");
                     document.getElementById("participer").classList.replace('no_participer', 'participer');
-                } else {
+                /*} else {
                     alert('Mauvais id.');
-                }
+                }*/
 
             }
         });
