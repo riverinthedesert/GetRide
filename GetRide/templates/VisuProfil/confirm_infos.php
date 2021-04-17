@@ -51,7 +51,7 @@
 	if ($nomPhoto != "") {
 		$pathPhoto->moveTo($chemin);
 		//$user->pathPhoto = 'webroot\img\photoProfil\\' . $nomPhoto;
-		$photo = 'webroot\img\photoProfil\\'.$nomPhoto;
+		$photo = "webroot/img/photoProfil/".$nomPhoto;
 		
 		$query =("Update `users` 
 		set nom = '".$nom."',
