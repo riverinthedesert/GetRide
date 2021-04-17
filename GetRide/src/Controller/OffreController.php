@@ -24,6 +24,11 @@ class OffreController extends AppController{
     }
 
 
+    public function view2()
+    {
+
+    }
+
     public function noParticiper(){
         $conn = ConnectionManager::get('default');
         $this->loadComponent('Paginator');

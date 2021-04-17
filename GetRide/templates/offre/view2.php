@@ -19,7 +19,7 @@
 
 <h1> Filtres recherche de offres </h1>
 
-<form action="Offre" method="GET">
+<form action="../offre" method="GET">
   <label for="villeDepart">Ville de départ : </label>
   <input type="text" name="villeDepart"/>
   <label for="villeDarivee">Ville d'arrivée : </label>
@@ -35,7 +35,7 @@
 
   <div>
     <button class="btn btn-info" type="submit">Rechercher</button>
-    <a href="Offre" class="btn btn-info" role="button">Annuler</a>
+    <a href="../offre" class="btn btn-info" role="button">Annuler</a>
   </div>
 
 </form>
