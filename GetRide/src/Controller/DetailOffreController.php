@@ -77,4 +77,75 @@
             }
         }
 
+        public function noParticiper(){
+            $conn = ConnectionManager::get('default');
+            $this->loadComponent('Paginator');
+            
+            $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE (à remplacer par $_session['id'])
+    
+            $offre_id = $this->request->getQuery("id"); // GET message
+            
+            // On cherche l'id du créateur de cette offre
+            $requete="SELECT * FROM conducteur,offre WHERE conducteur.idMembre=idConducteur AND offre.idOffre=".$offre_id;
+            $requete_offre = $conn->execute($requete)->fetchAll('assoc');
+    
+            $id_createur_offre = $requete_offre[0]["idMembre"]; // ID CREATEUR OFFRE
+    
+            $requete="SELECT MAX(idNotification+1) as id FROM notification";
+            $notif2 = $conn->execute($requete)->fetchAll('assoc');
+            $id=$notif2[0]["id"];
+    
+            if ($id=="") $id="0"; // ID NEW NOTIF
+    
+            $requete="DELETE FROM notification WHERE idOffre=".$offre_id." AND idMembre=".$id_createur_offre." AND idExpediteur=".$id_utilisateur;
+            $notif = $conn->execute($requete);
+    
+            $requete="INSERT INTO notification VALUES (".$id_utilisateur.",'Vous avez annulé votre demande de participation !',0,0,".$id.",".$offre_id.",NOW(),NULL)";
+            $notif = $conn->execute($requete);
+    
+            //echo 1;
+        }
+    
+        public function participer(){
+            $conn = ConnectionManager::get('default');
+            $this->loadComponent('Paginator');
+            
+            $id_utilisateur=$this->Authentication->getIdentity()->idMembre; // A CHANGE ()
+    
+            $requete="SELECT * FROM users WHERE idMembre=".$id_utilisateur;
+            $requete_id = $conn->execute($requete)->fetchAll('assoc');
+    
+            $prenom = $requete_id[0]["prenom"];
+            $nom = $requete_id[0]["nom"];
+    
+            $offre_id = $this->request->getQuery("id"); // GET message
+            
+            // Id nouvelle notif
+            $requete="SELECT MAX(idNotification+1) as id FROM notification";
+            $notif2 = $conn->execute($requete)->fetchAll('assoc');
+            $id=$notif2[0]["id"];
+            if ($id=="") $id="0";
+    
+            // On cherche l'id du créateur de cette offre
+            $requete="SELECT * FROM conducteur,offre WHERE conducteur.idMembre=idConducteur AND offre.idOffre=".$offre_id;
+            $requete_offre = $conn->execute($requete)->fetchAll('assoc');
+    
+            $id_createur_offre = $requete_offre[0]["idMembre"];
+            
+            $requete="INSERT INTO notification VALUES (".$id_utilisateur.", 'Vous avez fait une demande de participation',0,0,".$id.",".$offre_id.",NOW(),NULL)";
+            $notif = $conn->execute($requete);
+    
+            // Id nouvelle notif
+            $requete="SELECT MAX(idNotification+1) as id FROM notification";
+            $notif2 = $conn->execute($requete)->fetchAll('assoc');
+            $id=$notif2[0]["id"];
+            if ($id=="") $id="0";
+    
+            $requete="INSERT INTO notification VALUES (".$id_createur_offre.", 'L\'utilisateur ".ucfirst($nom)." ".ucfirst($prenom)." veut rejoindre votre trajet',0,1,".$id.",".$offre_id.",NOW(),".$id_utilisateur.")";
+            $notif = $conn->execute($requete);
+    
+            //echo 1;
+        }
+    
+
     }

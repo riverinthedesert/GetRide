@@ -80,7 +80,7 @@
             echo "</td>";
             $idOffre = $item["idOffre"];
             echo "<td>";
-            echo "<a role='button' class='btn btn-info' href = 'DetailOffre?idOffre=$idOffre'>Détails</a>";
+            echo "<a role='button' class='btn btn-info' href = 'Offre/details?idOffre=$idOffre'>Détails</a>";
             echo "</td>";
             echo "</tr>";
         }

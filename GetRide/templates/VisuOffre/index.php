@@ -5,8 +5,8 @@ $session_active = $this->request->getAttribute('identity');
 
 // pour le prenom
 if (!is_null($session_active))
-    echo $session_active->prenom;
-    echo $session_active->idMembre;
+    //echo $session_active->prenom;
+    //echo $session_active->idMembre;
 
  $query1 = $offre->find();
  $query2 = $users->find();
@@ -14,7 +14,7 @@ if (!is_null($session_active))
  $query4 = $copassager->find();
 
 foreach ($query4 as $row) {
-    echo  $row->idMembre ;
+    //echo  $row->idMembre ;
 }
 
 
