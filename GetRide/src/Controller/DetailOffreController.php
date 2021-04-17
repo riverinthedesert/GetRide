@@ -6,6 +6,18 @@
 
     class DetailOffreController extends AppController
     {
+		
+		
+		public function editer()
+		{
+
+		}
+		
+		public function confirmEdit()
+		{
+
+		}
+
         public function index()
         {
             setlocale(LC_TIME, 'fr_FR');

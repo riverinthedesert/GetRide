@@ -26,6 +26,11 @@ class OffreController extends AppController{
 
     public function view2()
     {
+	
+
+    }
+	public function details()
+    {
 
     }
 
