@@ -69,7 +69,7 @@
             echo ucfirst($item["nomVilleArrivee"]);
             echo "</td>";
             echo "<td>";
-            echo ucfirst($item["nom"]) . " " . ucfirst($item["prenom"]);
+            echo "<a style='height:2.8em;margin-left:1em;' href='profile?id=".$item["idConducteur"]."' class='btn btn-light col' >".ucfirst($item["nom"]) . " " . ucfirst($item["prenom"]);
             echo "</td>";
             echo "<td>";
             if ($item["noteMoyenne"] != "") echo $item["noteMoyenne"];

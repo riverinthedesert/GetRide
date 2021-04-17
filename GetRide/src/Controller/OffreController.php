@@ -134,7 +134,7 @@ class OffreController extends AppController{
 
           if ($test_privee!="1"){
 
-          $requete = "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
+          $requete = "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax, idConducteur,
           ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
           ,prix,noteMoyenne
           FROM offre
@@ -146,7 +146,7 @@ class OffreController extends AppController{
 
           }else{
           $string_filtre.= " Offres privées |";
-          $requete =  "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,
+          $requete =  "SELECT idOffre,horaireDepart,horaireArrivee,nbPassagersMax,idConducteur,
           ville_depart.ville_nom_simple as nomVilleDepart,ville_arrivee.ville_nom_simple as nomVilleArrivee,nom,prenom
           ,prix,noteMoyenne
           FROM offre
