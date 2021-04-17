@@ -204,7 +204,7 @@ class OffreController extends AppController{
           INNER JOIN conducteur ON conducteur.idMembre=users.idMembre
           LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
           LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
-          WHERE estPrivee=0";
+          WHERE estPrivee=0 AND horaireDepart > NOW() ";
 
           }else{
           $string_filtre.= " Offres privées |";
@@ -217,7 +217,7 @@ class OffreController extends AppController{
           INNER JOIN groupemembre ON groupemembre.idGroupe=offre.idGroupe
           LEFT OUTER JOIN villes_france_free ville_depart ON offre.idVilleDepart=ville_depart.ville_id 
           LEFT OUTER JOIN villes_france_free ville_arrivee ON offre.idVilleArrivee=ville_arrivee.ville_id
-          WHERE estPrivee=1 AND groupemembre.idUtilisateur=".$id_utilisateur;
+          WHERE estPrivee=1 AND groupemembre.idUtilisateur=".$id_utilisateur." AND horaireDepart > NOW() ";
           }
         
         if(!isset($test_view2))

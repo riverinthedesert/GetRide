@@ -1,4 +1,4 @@
-<div style="margin-left:-3.5em;">
+<div style="margin-left:-2em;">
     <div class="row">
         <a style="
         position:fixed;
@@ -42,11 +42,11 @@
         foreach ($offre_filtres_applied as $item) {
 
             $date_depart = $item["horaireDepart"];
-            $date_depart_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_depart)))));
+            $date_depart_string = ucwords(utf8_encode(strftime("%A %d %B %G", strtotime(($date_depart)))));
             $heure_depart_string = strftime("%Hh%M", strtotime(($date_depart)));
 
             $date_arrivee = $item["horaireArrivee"];
-            $date_arrivee_string = ucwords(utf8_encode(strftime("%A %d %B", strtotime(($date_arrivee)))));
+            $date_arrivee_string = ucwords(utf8_encode(strftime("%A %d %B %G", strtotime(($date_arrivee)))));
             $heure_arrivee_string = strftime("%Hh%M", strtotime(($date_arrivee)));
 
             echo "<tr>";
@@ -54,10 +54,10 @@
             echo $item["idOffre"];
             echo "</td>";
             echo "<td>";
-            echo $date_depart_string . " " . $heure_depart_string;
+            echo $date_depart_string . " <strong>" . $heure_depart_string."</strong>";
             echo "</td>";
             echo "<td>";
-            echo $date_arrivee_string . " " . $heure_arrivee_string;
+            echo $date_arrivee_string . " <strong>" . $heure_arrivee_string."</strong>";
             echo "</td>";
             echo "<td>";
             echo $item["nbPassagersMax"];
