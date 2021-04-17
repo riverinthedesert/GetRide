@@ -61,7 +61,7 @@
 		 }
 	}
 </script>
-  <form name="myForm" action="confirmation" method="get">
+  <form name="myForm" action="confirmation" method="POST">
 		<label for="fname">Ancien mot de passe:</label><br>
 		<input type="password" id="oldpass" name="oldpass" required><br>
 		<label for="lname">Nouveau mot de passe:</label><br>

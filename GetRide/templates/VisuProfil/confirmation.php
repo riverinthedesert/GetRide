@@ -20,9 +20,9 @@
 	while($i = $membre->fetch_assoc()){
 		$ancienPass = $i['motDePasse'];
 	}
-	$oldPass = $_GET["oldpass"];
-	$confpass = $_GET["confpass"];
-	$newPass = $_GET["newpass"];
+	$oldPass = $_POST["oldpass"];
+	$confpass = $_POST["confpass"];
+	$newPass = $_POST["newpass"];
 	//Creation du cookie pour les messages d'erreurs.
 	$cookieName = "password";
 	setcookie($cookieName);
