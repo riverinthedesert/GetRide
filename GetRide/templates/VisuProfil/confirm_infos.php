@@ -28,32 +28,56 @@
 		$sex = "a";
 	}
 	$estConducteur = $_POST['conducteur'];
-	/*echo "</br>";
+	echo "</br>";
 	echo $_FILES["photoDeProfil"]["name"];
-	echo "</br>";*/
+	echo "</br>";
 
 
 
-	//$target_dir = "\webroot\img\photoProfil\\";
-	//$target_file = $target_dir . basename($_FILES["photoDeProfil"]["name"]);
-
-
+	$target_dir = "\webroot\img\photoProfil\\";
+	$target_file = $target_dir . basename($_FILES["photoDeProfil"]["name"]);
 
 
 
 
 
+	$pathPhoto = $this->request->getData('photoDeProfil');
 
-	$query =("Update `users` 
+	$nomPhoto = $pathPhoto->getClientFileName();
+
+
+	//Déplacement de la photo dans le répertoire
+	$chemin = WWW_ROOT . 'img' . DS . 'photoProfil' . DS . $nomPhoto;
+	if ($nomPhoto != "") {
+		$pathPhoto->moveTo($chemin);
+		//$user->pathPhoto = 'webroot\img\photoProfil\\' . $nomPhoto;
+		$photo = 'webroot\img\photoProfil\\'.$nomPhoto;
+		
+		$query =("Update `users` 
 		set nom = '".$nom."',
 		prenom = '".$prenom."',
 		mail = '".$mail."',
 		naissance = '".$dtn."',
 		telephone = '".$tel."',
 		genre = '".$sex."',
+		pathPhoto = '".$photo."',
 		estConducteur = '".$estConducteur."'
 		WHERE mail='".$mail."'");
-		echo $query;
+		
+	}
+	else
+		$query =("Update `users` 
+			set nom = '".$nom."',
+			prenom = '".$prenom."',
+			mail = '".$mail."',
+			naissance = '".$dtn."',
+			telephone = '".$tel."',
+			genre = '".$sex."',
+			estConducteur = '".$estConducteur."'
+			WHERE mail='".$mail."'");
+	
+
+
 	$queryUpdate = $conn->query($query);
 	echo '<script type="text/javascript">
 			window.location.replace("../visu-profil");

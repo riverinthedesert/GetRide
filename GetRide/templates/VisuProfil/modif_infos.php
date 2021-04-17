@@ -95,9 +95,9 @@
 		<label for="dtn">Modifier si vous êtes conducteur (Oui - Non):</label><br>
 		<input type="text" id="conducteur" name="conducteur" value="<?php echo $estConducteur?>">
 		
-		<!--<label for="photoProfil">Modifier votre photo de profil</label><br>
+		<label for="photoProfil">Modifier votre photo de profil</label><br>
 
-		<input type="file" id="photoDeProfil" name="photoDeProfil" value="">-->
+		<input type="file" id="photoDeProfil" name="photoDeProfil" value="">
 		<input onclick = "Confirm()" type="button" value="Envoyer">
 		<div style="color:red;" id="submission_errors"/>
 	</form>
