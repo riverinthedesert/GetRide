@@ -13,6 +13,94 @@ body {
     $conn = ConnectionManager::get('default');
     
     $session_active = $this->request->getAttribute('identity');
+
+    //Faire la vérification des offres
+    $donnees = $conn->execute("SELECT * FROM `offre` ")->fetchAll('assoc');
+         
+    
+    
+
+    function offreT($of, $cond, $date)
+    {
+        //of = idOffre
+        //cond = idConducteur
+        //date = dateTrajet
+
+        $conn = ConnectionManager::get('default');
+        
+        //Fonction vérifier si offre est déjà ajouté sinon ajouter
+        $trajet = $conn->execute("SELECT * FROM `historiquetrajet` ")->fetchAll('assoc');
+        $oui = 0;
+        foreach($trajet as $t){
+            if($t['idOffre'] == $of)
+                $oui = 1;
+        }
+        if($oui == 0){
+            $idM = $cond;
+            $idO = $of;
+            $d = $date;
+            $conn->insert('historiquetrajet', [
+                'idMembre' => $idM ,
+                'idOffre' =>  $idO ,
+                'dateTrajet' => $d
+                ]);
+
+            //Ajouter les passagers
+            $membre = $conn->execute("SELECT * FROM `copassager` WHERE idOffre='".$idO."' ")->fetchAll('assoc');
+            foreach($membre as $m){
+                $me = $m['idMembre'];
+                $conn->insert('historiquetrajet', [
+                    'idMembre' => $me ,
+                    'idOffre' =>  $idO ,
+                    'dateTrajet' => $d
+                    ]);
+            }
+        }
+    }
+
+
+    foreach($donnees as $don){
+        setlocale(LC_TIME, 'fra_fra');
+
+        $jour = date("d");
+        $mois = date("m");
+        $anne = date("Y");
+        $heure = date("H");
+
+        $dateA = date_create($don['horaireArrivee']);
+
+        $don['horaireArrivee'] = date_format($dateA, 'Y-m-d');
+
+        $jourA = date_format($dateA, 'd');
+        $moisA = date_format($dateA, 'm');
+        $anneeA = date_format($dateA, 'Y');
+        $heureA = date_format($dateA, 'H');
+
+
+        if($anne == $anneeA){
+            if($mois == $moisA){
+                if($jour == $jourA){
+                    if($heure == $heureA){
+                        offreT($don['idOffre'], $don['idConducteur'], $don['horaireArrivee']);
+                    }
+                    elseif($heure > $heureA){
+                        offreT($don['idOffre'], $don['idConducteur'], $don['horaireArrivee']);
+                    }
+                }
+                elseif($jour > $jourA){
+                    offreT($don['idOffre'], $don['idConducteur'], $don['horaireArrivee']);
+                }
+            }
+            elseif($mois > $moisA){
+                offreT($don['idOffre'], $don['idConducteur'], $don['horaireArrivee']);
+            }
+        }
+        elseif($anne > $anneeA){
+            offreT($don['idOffre'], $don['idConducteur'], $don['horaireArrivee']);
+        }
+        echo "\n";
+    }
+
 ?>
 
 </div>
