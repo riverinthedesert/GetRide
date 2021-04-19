@@ -101,12 +101,12 @@ $cakeDescription = 'Co-Voiturage';
                         if (sizeof($not) > 5) $limite = 5;
                         else $limite = sizeof($not);
                         for ($i = 0; $i < $limite; $i++) {
-                            echo '<li class="text-center"><a href="notification#'.$not[$i]["message"].'">' . $not[$i]["message"] . '</a></ </li>';
+                            echo '<li class="text-center"><a href="/GetRide/GetRide/notification#'.$not[$i]["message"].'">' . $not[$i]["message"] . '</a></ </li>';
                         }
                     }
                
                     echo '<li role="separator" class="divider"></li>';
-                    echo '<li><a href="notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
+                    echo '<li><a href="/GetRide/GetRide/notification"><strong>Voir le reste</strong></a></li>'; // Path a changé plus tard !
                     echo '</ul> </li>';
                 }
 
@@ -154,15 +154,15 @@ $cakeDescription = 'Co-Voiturage';
                 ?>
                     <!--Affiche que si une personne est connecté -->
                     
-                    <a href="deconnexion">
+                    <a href="/GetRide/GetRide/deconnexion">
                     <button style="margin-right:1em;margin-left:1em;" class="btn btn-danger navbar-btn">Déconnexion</button>
                     </a>
                 <?php
                 } else {
                 ?>
                     <!--afficher s'il n'y personne de connecté-->
-                    <li><a href="inscription"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
-                    <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                    <li><a href="/GetRide/GetRide/inscription"><span class="glyphicon glyphicon-user"></span>S'inscrire</a></li>
+                    <li><a href="/GetRide/GetRide/connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
                 }
                 ?>

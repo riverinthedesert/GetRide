@@ -55,32 +55,67 @@ if(!is_null($session_active)){
 
 			
 			if(empty($reqidG)){
-				echo "Le ville de départ n'existe pas !\n";
+				?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						La ville de départ n'existe pas !
+					</div><?php
+				//echo "La ville de départ n'existe pas !\n";
 				$AfficherFormulaire=1;
 			}
 			elseif(empty($reqidGB))
 			{
-				echo "Le ville de d'arrivée n'existe pas !\n";
+				?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						La ville de d'arrivée n'existe pas !
+					</div><?php
+				//echo "La ville de d'arrivée n'existe pas !\n";
 				$AfficherFormulaire=1;
             }
             else{
 				if($anneeD > $anneeA){
-					echo "Vous ne pouvez pas arriver avant d'être parti !";
+					?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						Vous ne pouvez pas arriver avant d'être parti !
+					</div><?php
+					//echo "Vous ne pouvez pas arriver avant d'être parti !";
 					$AfficherFormulaire=1;
 				}
 				else if($anneeD == $anneeA){
 					if($moisD > $moisA){
-						echo "Vous ne pouvez pas arriver avant d'être parti !";
+						?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						Vous ne pouvez pas arriver avant d'être parti !
+					</div><?php
+						//echo "Vous ne pouvez pas arriver avant d'être parti !";
 						$AfficherFormulaire=1;
 					}
 					else if($moisD == $moisA){
-						if($jourD > $jourA){
-							echo "Vous ne pouvez pas arriver avant d'être parti !";
+						if($jourD > $jourA){?>
+							<div class="alert alert-danger" role="alert">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span class="sr-only">Error:</span>
+								Vous ne pouvez pas arriver avant d'être parti !
+							</div><?php
+							//echo "Vous ne pouvez pas arriver avant d'être parti !";
 							$AfficherFormulaire=1;
 						}
 						else if($jourD == $jourA){
 							if($heureD > $heureA){
-								echo "Vous ne pouvez pas arriver avant d'être parti !";
+								?>
+								<div class="alert alert-danger" role="alert">
+									<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+									<span class="sr-only">Error:</span>
+									Vous ne pouvez pas arriver avant d'être parti !
+								</div><?php
+								//echo "Vous ne pouvez pas arriver avant d'être parti !";
 								$AfficherFormulaire=1;
 							}
 							else{
@@ -107,8 +142,13 @@ if(!is_null($session_active)){
 
 			    $vileE = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE1."'")->fetchAll('assoc');
 
-                if(empty($vileE)){
-                    echo "La ville de l'Etape 1 n'existe pas !\n";
+                if(empty($vileE)){?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						La ville de l'Etape 1 n'existe pas !
+					</div><?php
+                    //echo "La ville de l'Etape 1 n'existe pas !\n";
                     $AfficherFormulaire=1;
                 }
             }
@@ -118,8 +158,13 @@ if(!is_null($session_active)){
 
 			    $vileE2 = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE2."'")->fetchAll('assoc');
 
-                if(empty($vileE2)){
-                    echo "La ville de l'Etape 2 n'existe pas !\n";
+                if(empty($vileE2)){?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						La ville de l'Etape 2 n'existe pas !
+					</div><?php
+                    //echo "La ville de l'Etape 2 n'existe pas !\n";
                     $AfficherFormulaire=1;
                 }
             }
@@ -128,8 +173,13 @@ if(!is_null($session_active)){
 
 			    $vileE3 = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE3."'")->fetchAll('assoc');
 
-                if(empty($vile3)){
-                    echo "La ville de l'Etape 3 n'existe pas !\n";
+                if(empty($vile3)){?>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						La ville de l'Etape 3 n'existe pas !
+					</div><?php
+                    //echo "La ville de l'Etape 3 n'existe pas !\n";
                     $AfficherFormulaire=1;
                 }
             }
@@ -321,8 +371,8 @@ if(!is_null($session_active)){
                     ]);
         }
 
-		//A modifier (avec le privée et le public)
-        header('Location: Offre'); 
+		
+        header('Location: VisuOffre'); 
         exit();
 
 	}
