@@ -28,6 +28,15 @@
 		$sex = "a";
 	}
 	$estConducteur = $_POST['conducteur'];
+
+	$notifMail = $_POST['activerNotifs'];
+
+	if($notifMail=="Oui"){
+		$notifMail = 1;
+	} else
+		$notifMail = 0;
+
+
 	echo "</br>";
 	echo $_FILES["photoDeProfil"]["name"];
 	echo "</br>";
@@ -61,7 +70,8 @@
 		telephone = '".$tel."',
 		genre = '".$sex."',
 		pathPhoto = '".$photo."',
-		estConducteur = '".$estConducteur."'
+		estConducteur = '".$estConducteur."',
+		notifMail = '".$notifMail."'
 		WHERE mail='".$mail."'");
 		
 	}
@@ -73,7 +83,8 @@
 			naissance = '".$dtn."',
 			telephone = '".$tel."',
 			genre = '".$sex."',
-			estConducteur = '".$estConducteur."'
+			estConducteur = '".$estConducteur."',
+			notifMail = '".$notifMail."'
 			WHERE mail='".$mail."'");
 	
 
