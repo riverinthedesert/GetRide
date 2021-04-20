@@ -26,6 +26,10 @@
 		$query6 = "DELETE FROM historiquetrajet WHERE idMembre='".$id."';";
 		$query7 = "DELETE FROM membrefavo WHERE idMembre='".$id."';";
 		$query8 = "DELETE FROM notification WHERE idMembre='".$id."';";
+		$query9 = "DELETE FROM groupemembre WHERE idUtilisateur='".$id."';";
+		$query10 = "DELETE FROM notation WHERE idUtilisateur='".$id."';";
+		$query11 = "DELETE FROM groupe WHERE idAdmin='".$id."';";
+
 	
 	if ($conn->query($query) === TRUE) {
 		$conn->query($query2);
@@ -35,6 +39,9 @@
 		$conn->query($query6);
 		$conn->query($query7);
 		$conn->query($query8);
+		$conn->query($query9);
+		$conn->query($query10);
+		$conn->query($query11);
 
 		echo '<script type="text/javascript">
             window.location.replace("deconnexion");

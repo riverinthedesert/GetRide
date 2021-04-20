@@ -58,7 +58,7 @@
 					if ($i % 2 == 0)
 						echo "<tr>";
 
-					echo "<td>";
+					echo "<td style='vertical-align:top'>";
 					$i++;
 
 					$name="SELECT * FROM `groupe` WHERE idGroupe=".$element;
@@ -69,7 +69,7 @@
 			?>
 					<p><br></p>
 					
-					<div class="panel panel-default" style="width:50%">
+					<div class="panel panel-default" style="width:80%">
 						<!-- Entete :  -->
 						<div class="panel panel-success">
 							<div class="panel-heading">

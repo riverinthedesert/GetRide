@@ -1,7 +1,5 @@
 <!-- Visu d'un groupe, calqué sur les détails d'une offre -->
 
-
-
 <html>
 
 <style>
@@ -25,6 +23,7 @@
                         <h3>Membres</h3>
                     </td>
 
+                    <!-- bouton pour créer un trajet privé -->
                     <td style="margin-left:60%; text-align:right">
                         <?= "<a role='button' class='btn btn-danger' 
                         href = '../ajouter-offre-privee?idGroupe=$idGroupe'>Créer un trajet privé</a>" ?>
@@ -39,20 +38,13 @@
 
                 <?php
 
-
                 $idMembre = $this->request->getAttribute('identity')->idMembre;
 
-
-                // affichage des noms des différents membres
+                // affichage des informations des différents membres
                 foreach ($membresGroupe as $membre) {
 
                     $nomComplet = $membre['prenom'] . ' ' . $membre['nom'];
-
                     $id =   $membre['id'];
-
-                    $photo = $membre['photo'];
-
-                    echo "<img src='$photo' height='50' width='50'>";
 
                     if ($id == $idAdmin)
                         $nomComplet .= ' (admin)';
@@ -65,26 +57,10 @@
 
                     echo "<br/><br/>";
                 }
-
-
                 ?>
-
-
-
-
             </div>
-
-
         </div>
-
-        <br>
-
-
-
-
-
     </div>
-
 </body>
 
 </html>

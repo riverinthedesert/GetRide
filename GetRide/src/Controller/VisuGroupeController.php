@@ -147,28 +147,27 @@
                 foreach ($res as $r)
                     $nomGroupe = $r['nom'];
 
+                // contient les différents membres du groupe
                 $membresGroupe = array();
 
                 // on cherche les membres du groupe
-                $res = $connexion->query("SELECT nom, prenom, pathPhoto, idMembre FROM groupeMembre, users  
+                $res = $connexion->query("SELECT nom, prenom, idMembre FROM groupeMembre, users  
                                 WHERE groupemembre.idGroupe = '$idGroupe' 
                                 AND groupemembre.idUtilisateur = users.idMembre");
 
                 foreach ($res as $r){
                     $nom = $r['nom'];
                     $prenom = $r['prenom'];
-                    $photo = $r['pathPhoto'];
                     $idMembre = $r['idMembre'];
 
                     $infos = ['nom' => $nom,
                                 'prenom' => $prenom,
-                                'photo' => $photo,
                                 'id' => $idMembre];
 
                     array_push($membresGroupe, $infos);
                 }
 
-                // on l'admin du groupe
+                // on cherche l'admin du groupe
                 $res = $connexion->query("SELECT idAdmin FROM groupe  
                                 WHERE groupe.idGroupe = '$idGroupe'");
                 

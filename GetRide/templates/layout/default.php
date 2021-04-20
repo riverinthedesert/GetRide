@@ -64,7 +64,7 @@ $cakeDescription = 'Co-Voiturage';
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/GetRide/GetRide/Accueil">
-                <img src="https://i.imgur.com/SKKVNvS.png" height="40">
+                <img src="webroot/img/logo.png" height="40">
                 </a>
             </div>
             <ul class="nav navbar-nav">
