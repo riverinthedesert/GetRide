@@ -75,7 +75,7 @@
 		echo "<br>";
 		echo "<b>Conducteur :</b> ".$i['estConducteur'];
 		echo "<br>";
-		echo "<b>La note moyenne :</b> ".$i['noteMoyenne']. "/5";
+		echo "<b>La note moyenne :</b> "; if($i['noteMoyenne'] == "") echo "Cette utilisateur n'a pas encore de note"; else echo $i['noteMoyenne']. "/5";
 		echo "<p><br></p>";
 	}
 	echo "</div>";

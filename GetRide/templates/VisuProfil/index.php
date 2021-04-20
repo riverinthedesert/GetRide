@@ -81,7 +81,10 @@
 		
 		<p><br><b>Votre moyenne : </b></p>
         <?php
-            echo $i['noteMoyenne']."/5";
+			if($i['noteMoyenne'] == "")
+				echo "Vous n'avez pas encore eu de note.";
+			else
+            	echo $i['noteMoyenne']."/5";
         ?>
 	</div>
 	&emsp;&emsp;
