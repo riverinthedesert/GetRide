@@ -244,12 +244,12 @@ if(!is_null($session_active)){
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="nbPassager">Nombre de passager maximal *</label>
-				<input id="nbPassager" placeholder="Nombre de passager" type="number" min="1" class="form-control" required>
+				<input name="nbPassager" id="nbPassager" placeholder="Nombre de passager" type="number" min="1" class="form-control" required>
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="prix">Prix de la course * (par personne)</label>
-				<input id="prix" placeholder="Nombre de passager" type="number" class="form-control" required>
+				<input name="prix" id="prix" placeholder="Nombre de passager" type="number" class="form-control" required>
 			</div>
 		</div>
 
@@ -282,19 +282,19 @@ if(!is_null($session_active)){
 		$reqidGB = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vA."'")->fetchAll('assoc');
 	
 		$c = "";
-		if(isset($_POST['comment']))
+		if(!empty($_POST['comment']))
 			$c = $_POST['comment'];
 
 		$nbP = "1";
-		if(isset($_POST['nbPassager']))
+		if(!empty($_POST['nbPassager']))
 			$nbP = $_POST['nbPassager'];
 
 		$pr = "1";
-		if(isset($_POST['prix']))
+		if(!empty($_POST['prix']))
 			$pr = $_POST['prix'];
 			
 		$Lieu = "1";
-		if(isset($_POST['prdv']))
+		if(!emty($_POST['prdv']))
 			$Lieu = $_POST['prdv'];
 
         
