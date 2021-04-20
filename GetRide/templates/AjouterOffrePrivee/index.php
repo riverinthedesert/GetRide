@@ -197,6 +197,22 @@ if(!is_null($session_active)){
 ?>
 <div class="text-center">
 		<h1>Ajouter une offre privée</h1>
+		<br/>
+		<h3><?php 
+		
+		$idGroupe = $_GET['idGroupe'];
+
+		$res = $conn->query("SELECT nom FROM groupe  
+                                WHERE groupe.idGroupe = '$idGroupe'");
+
+        foreach ($res as $r)
+            $nomGroupe = $r['nom'];
+		
+		echo "Invitez les membres de \"$nomGroupe\" <br/> à participer à un trajet avec vous";?></h3>
+
+		<br/>
+		<br/>
+		<br/>
 </div>
 <form method="post" action="AjouterUneOffre">
 	<div class="form-row">
@@ -256,7 +272,7 @@ if(!is_null($session_active)){
 
 		<div class="form-group">
 				<label for="prdv">Précision du lieu de rendez-vous * (Où ...)</label>
-				<input type="text" class="form-control" id="prdv" required>
+				<input type="text" class="form-control" id="prdv" name="prdv" required>
 		</div>
 		<div class="form-group">
 				<label for="comment">Commentaire (Possiblité d'avoir : chien, bagage... )</label>
@@ -294,7 +310,7 @@ if(!is_null($session_active)){
 			$pr = $_POST['prix'];
 			
 		$Lieu = "1";
-		if(!emty($_POST['prdv']))
+		if(!empty($_POST['prdv']))
 			$Lieu = $_POST['prdv'];
 
         
@@ -309,8 +325,8 @@ if(!is_null($session_active)){
 			'idConducteur' => $session_active->idMembre , //id de la personne qui ajoute l'offre
 			'prix' => $pr ,
 			'idEtape' => 'NULL' ,
-			'idGroupe' => '0' ,
-			'estPrivee' => '1' ,
+			'idGroupe' => $idGroupe ,
+			'estPrivee' => 1 ,
 			'precisionLieu' => $Lieu ,
 			'commentaire' => $c 
 			]);

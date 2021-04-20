@@ -26,12 +26,6 @@
 			$admOuMembr++;
 			$tabl[] = $don['idGroupe'];
 		}
-
-		if($admOuMembr != 0){ 
-	?>
-			<?= $this->Form->postButton(__('Creer un trajet privee'), ['action' => 'creerTrajet']) ?>
-	<?php
-		}
 	?>
 	</p1>
 
@@ -51,11 +45,22 @@
 			
 	?>
 	
+	<table>
 	<!-- Sinon :  -->
 		<!-- Boucle pour de :  -->
 		<?php 
+
+			$i = 0;
+
 			foreach($tabl as $element){
 				if($element != 0){
+
+					if ($i % 2 == 0)
+						echo "<tr>";
+
+					echo "<td>";
+					$i++;
+
 					$name="SELECT * FROM `groupe` WHERE idGroupe=".$element;
 					$nom = $conn->execute($name)->fetchAll('assoc');
 
@@ -63,11 +68,20 @@
 					$nom = $name->fetch_assoc();*/
 			?>
 					<p><br></p>
-					<div class="panel panel-default">
+					
+					<div class="panel panel-default" style="width:50%">
 						<!-- Entete :  -->
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<?php echo $nom[0]['nom']; ?> 
+							
+								<?php 
+
+								$nomGroupe = $nom[0]['nom'];
+
+								echo "<a href='VisuGroupe/details?idGroupe=$element'><strong>$nomGroupe</strong></a>";
+								
+								?>
+								 
 								<div class="pull-right">
 									<div class="dropdown">
 										<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -86,7 +100,7 @@
 							</div>
 						</div>
 						<!-- Contenu du panneau : -->
-						<div class="panel-body">
+						<div class="panel-body"  style="overflow: auto; max-height:300px">
 							<!-- Visualiser la BDD du groupe et afficher les nom et prénom de chaque personne : -->
 							<ul>
 							<?php
@@ -117,10 +131,17 @@
 						</div>
 					</div> 
 		<?php
+				echo "</td>";
+
+				if ($i % 2 == 0)
+					echo "</tr>";
+				
+
 				}
 			}
 		}
 	?>
+</table>
 </div>
 <?php
 	}
