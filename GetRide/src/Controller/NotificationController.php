@@ -480,9 +480,11 @@ class NotificationController extends AppController
         $origine = 'From: getride.noreply@gmail.com';
         $contenu = "Bonjour " . $prenom . " !\n\n";
         $contenu .= $message . "\n\n";
-        $contenu .= "Vous pouvez retrouver le contenu de cet email dans l'onglet Notifications.\n";
+        $contenu .= "___\n\nVous pouvez retrouver le contenu de cet email dans l'onglet Notifications de notre site.\n";
         $contenu .= "Si vous le souhaitez, vous pouvez désactiver l'envoi de notifications par mail depuis";
-        $contenu .= " votre compte (Mon profil/Mes Paramètres/Notifications)";
+        $contenu .= " votre compte (Mon profil/Modifier ses informations personnelles).\n\n";
+        $contenu .= "À bientôt !\n\n";
+        $contenu .= "Cet email a été généré automatiquement, merci de ne pas y répondre.";
 
         $envoi = mail($mail, $message, $contenu, $origine);
 

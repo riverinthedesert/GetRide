@@ -59,6 +59,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
 
     $builder->connect('recuperation', ['controller' => 'users', 'action' => 'recuperation']);
 
+    $builder->connect('contact', ['controller' => 'contact', 'action' => 'formulaire']);
+
 
     
     /*

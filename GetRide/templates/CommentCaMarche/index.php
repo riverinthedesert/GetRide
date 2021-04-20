@@ -50,7 +50,7 @@
 			<p>Vous avez déjà un compte mais vous <b>n'arrivez pas à vous connecter</b> ? </p>
 			<ul>
 				<li>Vous pouvez <a href="#">réinisialiser</a> votre mot de passe et vous reconnecter.</li>
-				<li>Le problème perciste ? <a href="#">Contactez-nous</a>.</li>
+				<li>Le problème perciste ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</li>
 			</ul>
 			<p>Vous n'avez peut-être pas de compte. <a href="#">Inscrivez-vous</a>.</p>
 		</FONT>
@@ -65,7 +65,7 @@
 				<li>Votre mot de passe et la confirmation : <b>Identiques</b>.</li>
 				<li>Votre date de naissance : <b>La date est inférieur à la date d'aujourd'hui et vous avez plus de 18 ans, le format -> 01-12-1996</b>.</li>
 			</ul>
-			<p>Le problème perciste ? <a href="#">Contactez-nous</a>.</p>
+			<p>Le problème perciste ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 		</FONT>
 	</div>
 	<h2 id="groupe" class="text-info">Les groupes d'amis</h2>
@@ -74,25 +74,25 @@
 		<p>Par exemple : si vous avez apprécié le voyage avec certaines personnes qui font, comme vous, le même voyage à plusieurs reprise, alors vous pouvez créer un groupe avec ces personnes.</p>
 		<p> Lors de l'ajout de ce groupe pensez à ajouter un commentaire (nécessaire lorque l'on a beaucoup de groupe).</p>
 		<br>
-		<p>Un problème avec vos groupes ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec vos groupes ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="ajoutFav" class="text-info">Ajouter aux favoris</h2>
 	<FONT size="3pt">
 		<p>Pour ajouter quelqu'un à vos favoris, il suffit d'accéder à son profil et le bouton "AJOUTER DANS VOS FAVORIS" s'affiche avec les informations du profil. Vous pouvez ainsi cliquer dessus et le tour est joué.</p>
-		<p>Un problème avec vos favoris ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec vos favoris ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="visuFav" class="text-info">Visualiser mes favoris</h2>
 	<FONT size="3pt">
 		<p>Si vous souhaitez afficher votre de liste de favoris, vous pouvez en allant dans la section "<a href="#">Visualiser mes favoris</a>".</p>
-		<p>Un problème avec vos favoris ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec vos favoris ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	<div class="container">
 	<h3 id="supprFav" class="text-info">Supprimer un favoris</h2>
 		<FONT size="3pt">
 			<p>Lorsque vous vous trouvez dans la section "<a href="#">Visualiser mes favoris</a>", vous avez la possibilité de supprimer l'un de vos favoris en cliquant sur "Supprimer".</p>
-			<p>Un problème avec vos favoris ? <a href="#">Contactez-nous</a>.</p>
+			<p>Un problème avec vos favoris ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 		</FONT>
 	</div>
 	
@@ -118,38 +118,38 @@
 					<li>La <b>précision</b> du lieu de rendez-vous.</li>
 					<li>Si vous renseignez des étapes (optionnel) : <b>Aucun caractère ni chiffre</b>.</li>
 				</ul>
-				<p>Le problème perciste ? <a href="#">Contactez-nous</a>.</p>
+				<p>Le problème perciste ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 			</FONT>
 		</div>
 	</br>
 	<h2 id="annulerOffre" class="text-info">Annuler une offre de trajet</h2>
 	<FONT size="3pt">
 		<p>Vous ne pouvez annuler une offre que si la date de départ est dans plus de 24h.</p>
-		<p>Un problème avec votre annulation ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec votre annulation ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="visuOffre" class="text-info">Visualiser mes offres</h2>
 	<FONT size="3pt">
 		<p>Si vous souhaitez retrouver vos offres, vous pouvez les visualiser dans la section "<a href="#">Visualiser mes offres</a>" ou "<a href="#">Visualiser mes offres en cours</a>".</p>
-		<p>Un problème avec votre visualisation ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec votre visualisation ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="recherche" class="text-info">Rechercher des offres</h2>
 	<FONT size="3pt">
 		<p>Lorsque vous êtes connecté, vous pouvez rechercher des offres publiques ou privées qui pourrait vous interresser. Vous pouvez bien évidemment filtrer ces offres selon vos besoins ou selon les notes que les utilisateurs ont reçues.</p>
-		<p>Un problème avec vos recherches ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec vos recherches ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="visuFav" class="text-info">Historique de recherche</h2>
 	<FONT size="3pt">
 		<p>Pour afficher votre historique de recherche dans la section <a href="#">Afficher les offres</a>, cliquez sur le bouton "Historique de recherche".</p>
-		<p>Un problème avec l'affichage de votre historique ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec l'affichage de votre historique ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 	</br>
 	<h2 id="visuFav" class="text-info">Trajets effectués</h2>
 	<FONT size="3pt">
 		<p>Vous pouvez afficher l'historique de vos trajets effectués dans la section "<a href="#">Historique de trajet effectué</a>", la liste de vos trajets va donc s'afficher si vous en avez.</p>
-		<p>Un problème avec l'affichage de vos trajets ? <a href="#">Contactez-nous</a>.</p>
+		<p>Un problème avec l'affichage de vos trajets ? <a href="/GetRide/GetRide/contact">Contactez-nous</a>.</p>
 	</FONT>
 
 	

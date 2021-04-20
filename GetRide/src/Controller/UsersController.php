@@ -290,7 +290,8 @@ class UsersController extends AppController
                 $contenu .= "Par mesure de sécurité, il vous est conseillé de le changer ";
                 $contenu .= "dès votre prochaine connexion (Mon profil/Visualiser son profil/";
                 $contenu .= "Modifier votre mot de passe).\n\n";
-                $contenu .= "À bientôt !";
+                $contenu .= "À bientôt !\n\n";
+                $contenu .= "Cet email a été généré automatiquement, merci de ne pas y répondre.";
 
                 $envoi = mail($mail, $objet, $contenu, $origine);
 

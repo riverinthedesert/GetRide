@@ -103,7 +103,7 @@
 		<input type="text" id="prenom" name="prenom" value="<?php echo $prenom?>"><br><br>
 		<label for="dtn">Modifier votre date de naissance:</label>
 		<input type="date" id="dtn" name="dtn" value="<?php echo $dtn?>"><br><br>
-		<label for="tel">Modifier votre Telephone:</label>
+		<label for="tel">Modifier votre téléphone:</label>
 		<input type="text" id="tel" name="tel" value="<?php echo $tel?>" maxlength="10" pattern="(^06|07)[0-9]{8}"><br><br>
 		<label for="sex">Modifier votre sexe:</label>
 		<select name="sex" id="sex">
@@ -154,7 +154,7 @@
 		</select><br><br>
 	
 		
-		<label for="photoDeProfil">Modifier votre photo de profil</label>
+		<label for="photoDeProfil">Modifier votre photo de profil:</label>
 
 		<input type="file" id="photoDeProfil" name="photoDeProfil" value=""><br><br>
 

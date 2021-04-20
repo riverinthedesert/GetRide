@@ -182,7 +182,7 @@ $cakeDescription = 'Co-Voiturage';
         <div class="text-center" style="background-color:#cecece;">
             <br>
             <label><a href="/GetRide/GetRide/CommentCaMarche" style="color:#000000;">Comment ça marche ?</a></label>
-            <!--<label><a href="#" style="color:#000000;">Nous contacter</a></label>-->
+            <label><a href="/GetRide/GetRide/contact" style="color:#000000;">Nous contacter</a></label>
             <label>Langue : Française</label>
             <br>
         </div>
