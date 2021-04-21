@@ -81,10 +81,20 @@
 		
 		<p><br><b>Votre moyenne : </b></p>
         <?php
-			if($i['noteMoyenne'] == "")
+			$requete=$conn->query("SELECT * FROM `notation` WHERE idUtilisateur='".$_SESSION['idMembre']."'");
+			$moyenne = 0;
+			$nbNote = 0;
+			while($note = $requete->fetch_assoc()){
+				$moyenne =  $moyenne + $note['note'];
+				$nbNote++;
+			}
+			if($nbNote != 0){
+				$moyenne = round($moyenne/$nbNote,1);
+			}
+			if($moyenne == 0)
 				echo "Vous n'avez pas encore eu de note.";
 			else
-            	echo $i['noteMoyenne']."/5";
+            	echo $moyenne."/5";
         ?>
 	</div>
 	&emsp;&emsp;

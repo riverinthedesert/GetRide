@@ -28,8 +28,6 @@
 		$idVilleDepart = $i['idVilleDepart'];
 		$idVilleArrivee = $i['idVilleArrivee'];
 		$prix = $i['prix'];
-		$idEtape = $i['idEtape'];
-		$idGroupe = $i['idGroupe'];
 		$precisionLieu = $i['precisionLieu'];
 		$commentaire = $i['commentaire'];
 	}	
@@ -106,10 +104,6 @@
 		<input type="text" id="VilleArrivee" name="VilleArrivee" value="<?php echo $nomVilleArrivee?>">
 		<label for="prix">Modifier le prix de votre trajet</label><br>
 		<input type="text" id="prix" name="prix" value="<?php echo $prix?>">
-		<label for="idEtape">Modifier le numéro de l'étape</label><br>
-		<input type="text" id="idEtape" name="idEtape" value="<?php echo $idEtape?>">
-		<label for="idGroupe">Modifier l'id de groupe</label><br>
-		<input type="text" id="idGroupe" name="idGroupe" value="<?php echo $idGroupe?>">
 		<label for="precisionLieu">Modifier la précision du le lieu</label><br>
 		<input type="text" id="precisionLieu" name="precisionLieu" value="<?php echo $precisionLieu?>">
 		<label for="commentaire">Modifier votre commentaire</label><br>
