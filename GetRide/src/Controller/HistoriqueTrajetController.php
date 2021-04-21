@@ -8,5 +8,14 @@
         {
             
         }
+
+
+        public function ajouterNote()
+        {
+        	if(isset($_POST['note']))
+        	{
+        		
+        	}	
+        }
     }
 ?>

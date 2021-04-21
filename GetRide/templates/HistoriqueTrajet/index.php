@@ -86,6 +86,8 @@ use Cake\Datasource\ConnectionManager;
                                     echo "</ul>
                                 </div> 
                             </td>";
+                echo "<td> <form method='post' action='ajouterNote?idOffre=".$idOf."''><input type='number' name='note' min='0' max='5' placeholder='Indiquez une note inférieure ou égale à 5'></form>";
+                echo "</td>";      
                 echo "</tr>";
             }
 
