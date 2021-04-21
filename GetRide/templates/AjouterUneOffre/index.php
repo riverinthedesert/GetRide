@@ -196,7 +196,7 @@ if(!is_null($session_active)){
         $anne = date("Y");
 ?>
 <div class="text-center">
-		<h1>Ajouter une offre public</h1>
+		<h1>Ajouter une offre publique</h1>
 </div>
 <form method="post" action="AjouterUneOffre">
 	<div class="form-row">
@@ -310,7 +310,7 @@ if(!is_null($session_active)){
 			'idVilleArrivee' => $reqidGB[0]['ville_id'] ,
 			'idConducteur' => $session_active->idMembre , //id de la personne qui ajoute l'offre
 			'prix' => $pr ,
-			'idEtape' => 'NULL' ,
+			'idEtape' => '0' ,
 			'idGroupe' => '0' ,
 			'estPrivee' => '0' ,
 			'precisionLieu' => $Lieu ,
@@ -336,7 +336,7 @@ if(!is_null($session_active)){
             $vileE = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE1."'")->fetchAll('assoc');
 
             $e = $vileE[0]['ville_id'];
-            echo $e;
+            //echo $e;
             if($e != NULL)
                 $conn->insert('etape', [
                     'idOffre' =>  $idOf ,
@@ -350,7 +350,7 @@ if(!is_null($session_active)){
             $vileE2 = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE2."'")->fetchAll('assoc');
             $e = $vileE2[0]['ville_id'];
 
-            echo $e;
+            //echo $e;
             if($e != NULL)
                 $conn->insert('etape', [
                     'idOffre' =>  $idOf ,
@@ -365,7 +365,7 @@ if(!is_null($session_active)){
 
             $e = $vileE3[0]['ville_id'];
 
-            echo $e;
+            //echo $e;
             if($e != NULL)
                 $conn->insert('etape', [
                     'idOffre' =>  $idOf ,
