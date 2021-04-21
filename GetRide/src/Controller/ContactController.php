@@ -52,7 +52,7 @@ class ContactController extends AppController
             /* Envoi par mail */
 
             // champs du mail
-            $origine = "From: getride.noreply@gmail.com";
+            $origine = "From: infos.getride@gmail.com";
 
             $objet = $nature;
 
@@ -87,7 +87,7 @@ class ContactController extends AppController
             $contenu .= $message . "\n\n";
             $contenu .= "Cet email a été généré automatiquement, merci de ne pas y répondre.";
 
-            $envoi = mail("getride.noreply@gmail.com", $objet, $contenu, $origine);
+            $envoi = mail("infos.getride@gmail.com", $objet, $contenu, $origine);
 
             if (!$envoi)
                 $this->Flash->error(__('Echec de l\'envoi du mail'));

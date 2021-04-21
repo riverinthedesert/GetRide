@@ -378,13 +378,11 @@ class NotificationController extends AppController
         if ($this->Notification->save($notification)) {
 
             // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
-            /*if ($this->estActiveeParMail($idExpediteur)) {
-
-                // réactiver pour destinataires plus bas
+            if ($this->estActiveeParMail($idExpediteur)) {
 
                 $elements = array($idExpediteur, $messageExp);
                 $this->envoyerNotifMail($elements);
-            }*/
+            }
 
             $i = 0;
 
@@ -410,13 +408,11 @@ class NotificationController extends AppController
                     break;
 
                 // envoi de la notification par mail si l'utilisateur ne l'a pas désactivé
-                /*if ($this->estActiveeParMail($idMembre)) {
-
-                    // réactiver pour créateur plus haut
+                if ($this->estActiveeParMail($idMembre)) {
 
                     $elements = array($idMembre, $messageDest);
                     $this->envoyerNotifMail($elements);
-                }*/
+                }
             }
 
             if ($i != $nbDestinataires)
@@ -477,7 +473,7 @@ class NotificationController extends AppController
         }
 
         // champs du mail
-        $origine = 'From: getride.noreply@gmail.com';
+        $origine = 'From: infos.getride@gmail.com';
         $contenu = "Bonjour " . $prenom . " !\n\n";
         $contenu .= $message . "\n\n";
         $contenu .= "___\n\nVous pouvez retrouver le contenu de cet email dans l'onglet Notifications de notre site.\n";

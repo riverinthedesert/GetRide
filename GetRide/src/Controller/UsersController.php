@@ -281,7 +281,7 @@ class UsersController extends AppController
                     $prenom = $r['prenom'];
 
                 // champs du mail
-                $origine = 'From: getride.noreply@gmail.com';
+                $origine = 'From: infos.getride@gmail.com';
 
                 $objet = 'Récupération de votre mot de passe GetRide';
 
@@ -290,7 +290,7 @@ class UsersController extends AppController
                 $contenu .= "Par mesure de sécurité, il vous est conseillé de le changer ";
                 $contenu .= "dès votre prochaine connexion (Mon profil/Visualiser son profil/";
                 $contenu .= "Modifier votre mot de passe).\n\n";
-                $contenu .= "À bientôt !\n\n";
+                $contenu .= "À bientôt !";
                 $contenu .= "Cet email a été généré automatiquement, merci de ne pas y répondre.";
 
                 $envoi = mail($mail, $objet, $contenu, $origine);

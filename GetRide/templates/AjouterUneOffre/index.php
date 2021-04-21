@@ -374,7 +374,7 @@ if(!is_null($session_active)){
         }
 
 		
-        header('Location: Offre');
+        header('Location: VisuMesOffre');
         exit();
 
 	}
