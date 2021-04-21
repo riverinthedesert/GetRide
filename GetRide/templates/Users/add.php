@@ -88,12 +88,21 @@
                     echo "</div>";
                     echo "</td><td>";
 
+                    /* Récupération de la date du jour -18 ans pour la limite d'âge */
+                    setlocale(LC_TIME, 'fra_fra');
+
+                    $jour = date("d");
+                    $mois = date("m");
+                    $anne = date("Y")-18;
                     /* Champ pour la date de naissance */
+                    echo "<div class=\"date-naissance\">";
+                    echo "<span id=\"aide-naissance\" class=\"form__tooltip\" data-tooltip=\"Vous devez avoir minimum 18 ans.\">?</span>";
                     echo $this->Form->control('naissance', ['type' => 'date',
                                                             'autocomplete' => 'off',
                                                             'label' => 'Date de naissance *',
-                                                            'max' => '2003-04-11']);
+                                                            'max' => ''.$anne.'-'.$mois.'-'.$jour.'']);
 
+                    echo "</div>";
                     echo "</td></tr>";
                     echo "<tr><td>";
 
