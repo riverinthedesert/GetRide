@@ -20,8 +20,8 @@
 	$VilleDepart = $_GET['VilleDepart'];
 	$VilleArrivee = $_GET['VilleArrivee'];
 	$prix = $_GET['prix'];
-	$idEtape = $_GET['idEtape'];
-	$idGroupe = $_GET['idGroupe'];
+//	$idEtape = $_GET['idEtape'];
+	//$idGroupe = $_GET['idGroupe'];
 	$precisionLieu = $_GET['precisionLieu'];
 	$commentaire = $_GET['commentaire'];
 	$idOffre = $_GET['idOffre'];
@@ -64,8 +64,8 @@
 	echo $idEtape;
 	echo "</br>";
 
-	echo $idGroupe;
-	echo "</br>";
+	/*echo $idGroupe;
+	echo "</br>";*/
 
 	echo $precisionLieu;
 	echo "</br>";
@@ -88,15 +88,15 @@
 		idVilleArrivee = '".$idVilleArrivee."',
 		prix = '".$prix."' ";
 		
-	if(!($idEtape == NULL) or $idEtape != ""){
+	/*if(!($idEtape == NULL) or $idEtape != ""){
 		$queryFinale = $queryFinale.",idEtape = '".$idEtape."'";
 		$compteur = $compteur + 1;
-	} 
+	} */
 
-	if(!($idGroupe == NULL) or $idGroupe != ""){
+	/*if(!($idGroupe == NULL) or $idGroupe != ""){
 		$queryFinale = $queryFinale.",idGroupe = '".$idGroupe."'";
 			$compteur = $compteur + 1;
-	}
+	}*/
 
 	if(!($precisionLieu == NULL) or $precisionLieu != ""){
 		$queryFinale = $queryFinale.",precisionLieu = '".$precisionLieu."'";
