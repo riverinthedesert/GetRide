@@ -16,7 +16,7 @@
 	</div>
 	
 	<!-- Boutton pour ajouter un groupe d'ami !-->
-	<a href="AjoutGroupe" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Creer un nouveau groupe d'amis </a>
+	<a href="AjoutGroupe" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Créer un nouveau groupe d'amis </a>
 
 	<p1>
 	<?php
@@ -26,7 +26,15 @@
 			$admOuMembr++;
 			$tabl[] = $don['idGroupe'];
 		}
+
+
+
+		$idMembre = $this->request->getAttribute('identity')->idMembre;
 	?>
+
+
+		
+
 	</p1>
 
     <?php
@@ -64,30 +72,36 @@
 					$name="SELECT * FROM `groupe` WHERE idGroupe=".$element;
 					$nom = $conn->execute($name)->fetchAll('assoc');
 
+					// on cherche l'admin du groupe
+					$res = $conn->query("SELECT idAdmin FROM groupe 
+					WHERE idGroupe = '$element'");
+
+					foreach ($res as $r)
+						$idAdmin = $r['idAdmin'];
+					
+
 					/*$name = $conn->query("SELECT * FROM `groupe` WHERE idGroupe='".$element."'");
 					$nom = $name->fetch_assoc();*/
 			?>
 					<p><br></p>
 					
-					<div class="panel panel-default" style="width:80%">
+					<div class="panel panel-default" style="width:80%" id="main">
 						<!-- Entete :  -->
 						<div class="panel panel-success">
 							<div class="panel-heading">
 							
 								<?php 
 
-								$nomGroupe = $nom[0]['nom'];
-
-								echo "<a href='VisuGroupe/details?idGroupe=$element'><strong>$nomGroupe</strong></a>";
-								
+									$nomGroupe = $nom[0]['nom'];
+									echo "<span style='color: roaylblue'><strong>$nomGroupe</strong></span>";
+		
 								?>
-								 
 								<div class="pull-right">
 									<div class="dropdown">
 										<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-menu-hamburger"></span>
 										</button>
-										<ul class="dropdown-menu" role="menu" >
+										<ul class="dropdown-menu" role="menu">
 											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='AjoutMembreGroupe?idGroupe=$element' "?>><span class="glyphicon glyphicon-plus"></span>  Ajouter un ami</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='SupprimMembre?idGroupe=$element' "?> ><span class="glyphicon glyphicon-trash"></span>  Supprimer un ami</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" <?php echo "href='ModifierGroupe?idGroupe=$element' "?> ><span class="glyphicon glyphicon-pencil"></span>  Modifier le groupe</a></li>
@@ -97,6 +111,11 @@
 										</ul>
 									</div>
 								</div>
+
+								<?= "<a role='button' style='float: right' class='btn btn-success'
+                        href = 'ajouter-offre-privee?idGroupe=$element'>Créer un trajet privé</a>" ?>
+
+
 							</div>
 						</div>
 						<!-- Contenu du panneau : -->
@@ -115,7 +134,26 @@
 									foreach($idMemb as $idM){
 
 							?>
-										<li><?php echo $idM['nom']; echo ' '; echo $idM['prenom'];?> </li>
+										<li><?php 
+										
+										$infos = $idM['nom'] . ' ' . $idM['prenom'];
+										$id = $idM['idMembre'];
+
+										/* Liens vers les profils */
+
+										if ($id == $idAdmin)
+											$infos = "<strong>$infos (admin)</strong>";
+
+										// mise en évidence de l'admin
+										if ($id == $idMembre)
+											$infos = "<a href='visu-profil'>$infos</a>";
+
+										 else
+											$infos = "<a href='profile?id=$id'>$infos</a>";
+
+										echo $infos;
+										
+										?> </li>
 							<?php
 									}
 								}
