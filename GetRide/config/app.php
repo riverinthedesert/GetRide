@@ -263,7 +263,7 @@ return [
         'gmail' => [
             'host' => 'smtp.gmail.com',
             'port' => 587,
-            'username' => 'getride.noreply@gmail.com',
+            'username' => 'infos.getride@gmail.com',
             'password' => 'PPIL2021',
             'className' => 'Smtp',
             'tls' => true

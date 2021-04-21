@@ -340,7 +340,7 @@ class NotificationController extends AppController
 
             case 'quitterGroupePrive':
 
-                /*$idGroupe = intval($idsConcernes[2]);
+                $idGroupe = intval($idsConcernes[2]);
 
                 $messageExp = 'Vous avez quitté le groupe';
                 $messageDest = $nomComplet . ' a quitté le groupe';
@@ -355,7 +355,7 @@ class NotificationController extends AppController
                     $id = $r['idUtilisateur'];
                     array_push($destinataires, $id);
                 }
-                */
+                
                 break;
         }
 
@@ -401,6 +401,14 @@ class NotificationController extends AppController
                     $notification->set('idOffre', $idOffre);
 
                 $notification->set('idExpediteur', $idExpediteur);
+
+                $id = $this->Notification->idNotification;
+                
+                // mise à jour de la date
+                $connexion->query("UPDATE notification 
+                        SET dateCreation = NOW()
+                        WHERE idNotification = '$id'");
+                
 
                 if ($this->Notification->save($notification))
                     $i++;

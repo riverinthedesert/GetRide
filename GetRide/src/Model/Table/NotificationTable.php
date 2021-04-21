@@ -38,7 +38,7 @@ class NotificationTable extends Table
         parent::initialize($config);
 
         // actualise la date de création de la notification
-        $this->addBehavior('Timestamp', ['parent' =>'DateCreation']);
+        //$this->addBehavior('Timestamp', ['parent' =>'DateCreation']);
 
         $this->setTable('notification');
         $this->setDisplayField('idNotification');
