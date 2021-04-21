@@ -169,11 +169,11 @@ if(!is_null($session_active)){
                 }
             }
             if(!empty($_POST['Etape3'])){
-                $vE3 = $_POST['Etape1'];
+                $vE3 = $_POST['Etape3'];
 
 			    $vileE3 = $conn->execute("SELECT * FROM `villes_france_free` WHERE ville_nom_reel='".$vE3."'")->fetchAll('assoc');
 
-                if(empty($vile3)){?>
+                if(empty($vileE3)){?>
 					<div class="alert alert-danger" role="alert">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 						<span class="sr-only">Error:</span>
